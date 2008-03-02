@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+# Send amusing CDP packets
+require 'rubygems'
+require 'racket'
+
+n = Racket.new
+n.iface = "eth0"
+
+n.layers[2] = EightOTwoDotThree.new(Misc.randstring(14))
+n.layers[2].dst_mac = "01:00:0c:cc:cc:cc"
+n.layers[2].length = 0
+n.layers[3] = LLC.new()
+n.layers[4] = SNAP.new()
+n.layers[4].pid = 0x2000
+
+n.layers[5] = CDP.new()
+n.layers[5].version = 1
+n.layers[5].add_field(1, "CDP, FTW!")
+n.layers[5].add_field(3, "PetabitEthernet0/1")
+n.layers[5].add_field(5, "Some really old version of IOS that nobody, except you, uses.")
+n.layers[5].add_field(6, "Linux")
+n.layers[5].add_field(4, "\xff\xff\xff\xff") # capabilities galore!
+n.layers[5].add_field(9, "wtf.edu") # vlan management domain
+n.layers[5].add_field(10, "\x00\x20")
+
+n.layers.compact.each do |l|
+  puts l.pretty
+end
+
+n.sendpacket

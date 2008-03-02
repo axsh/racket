@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: IPv4</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">IPv4</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/l3/ipv4_rb.html">
+                lib/l3/ipv4.rb
+                </a>
+        &nbsp;(<a href="http://code.google.com/p/racket/source/browse/trunk/lib/l3/ipv4.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="RacketPart.html">
+                RacketPart
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Internet Protcol Version 4 (IPV4)
+</p>
+<p>
+RFC791 (<a
+href="http://www.ietf.org/rfc/rfc791.txt">www.ietf.org/rfc/rfc791.txt</a>)
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000022">add_option</a>&nbsp;&nbsp;
+      <a href="#M000024">checksum!</a>&nbsp;&nbsp;
+      <a href="#M000023">checksum?</a>&nbsp;&nbsp;
+      <a href="#M000025">fix!</a>&nbsp;&nbsp;
+      <a href="#M000021">new</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">Checksum</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Checksum
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">csum</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Checksum
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">dst_ip</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Destination IP address
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">flags</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Flags
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">foffset</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Fragmentation offset
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">hlen</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Header length in multiples of 4 octets (defaults to 5)
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">id</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Identifier
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">len</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Datagram length
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">payload</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Payload
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">protocol</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Protocol
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">src_ip</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Source IP address
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">tos</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Type of Service
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ttl</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Time-to-live
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">version</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Version (defaults to 4)
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="#M000021" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000021-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000021-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/l3/ipv4.rb, line 32</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+    <span class="ruby-ivar">@options</span> = []
+    <span class="ruby-keyword kw">super</span>
+  <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
+
+        <div class="method-heading">
+          <a href="#M000022" class="method-signature">
+          <span class="method-name">add_option</span><span class="method-args">(number, value)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Add an <a href="IPv4.html">IPv4</a> option to this <a
+href="IPv4.html">IPv4</a> object. All rejiggering will happen when the call
+to <a href="IPv4.html#M000025">fix!</a> happens automagically
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000022-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000022-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/l3/ipv4.rb, line 40</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_option</span>(<span class="ruby-identifier">number</span>, <span class="ruby-identifier">value</span>)
+    <span class="ruby-identifier">t</span> = <span class="ruby-constant">TLV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>)
+    <span class="ruby-identifier">t</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">number</span>
+    <span class="ruby-identifier">t</span>.<span class="ruby-identifier">value</span> = <span class="ruby-identifier">value</span>
+    <span class="ruby-identifier">t</span>.<span class="ruby-identifier">length</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">2</span>
+    <span class="ruby-ivar">@options</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">encode</span>
+  <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
+
+        <div class="method-heading">
+          <a href="#M000024" class="method-signature">
+          <span class="method-name">checksum!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Compute and set the checksum for this IP datagram
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000024-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000024-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/l3/ipv4.rb, line 54</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checksum!</span>
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> = <span class="ruby-identifier">compute_checksum</span>
+  <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
+
+        <div class="method-heading">
+          <a href="#M000023" class="method-signature">
+          <span class="method-name">checksum?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Check the checksum for this IP datagram
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000023-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000023-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/l3/ipv4.rb, line 49</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checksum?</span>
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">compute_checksum</span>
+  <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
+
+        <div class="method-heading">
+          <a href="#M000025" class="method-signature">
+          <span class="method-name">fix!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Perform all the niceties necessary prior to sending this IP datagram out.
+Append the options, update len and hlen, and fix the checksum.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000025-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000025-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/l3/ipv4.rb, line 61</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fix!</span>
+    <span class="ruby-identifier">newpayload</span> = <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">join</span>
+    
+    <span class="ruby-comment cmt"># pad to a multiple of 32 bits</span>
+    <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">newpayload</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">%</span> <span class="ruby-value">4</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>) 
+      <span class="ruby-comment cmt"># fill the beginning as needed with NOPs</span>
+      <span class="ruby-keyword kw">while</span> (<span class="ruby-identifier">newpayload</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">%</span> <span class="ruby-value">4</span> <span class="ruby-operator">!=</span> <span class="ruby-value">3</span>)
+        <span class="ruby-identifier">newpayload</span> = <span class="ruby-node">&quot;\x01#{newpayload}&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># make sure the last byte is an EOL</span>
+      <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">newpayload</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">%</span> <span class="ruby-value">4</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>)
+        <span class="ruby-identifier">newpayload</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;\x00&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">payload</span> = <span class="ruby-identifier">newpayload</span> <span class="ruby-operator">+</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">payload</span>
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">hlen</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">newpayload</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">/</span><span class="ruby-value">4</span>
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">len</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">payload</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">bit_length</span><span class="ruby-operator">/</span><span class="ruby-value">8</span>
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">checksum!</span>
+  <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

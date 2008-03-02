@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+# Given a source and destination IP address
+# and a data size, spew all 65536 possible ICMP 
+
+require 'rubygems'
+require 'racket'
+
+if (ARGV.size != 3) 
+  puts "Usage #{$0} <src_ip> <dst_ip> <icmp data size>"
+  exit!
+end
+
+
+def tick 
+  @it += 1
+  @it = 0 if @it >= @ticks.size
+  print "\r#{@ticks[@it]}"
+  STDOUT.flush
+end
+
+def rand_icmp(n)
+  n.l3 = IPv4.new
+  n.l3.src_ip= ARGV[0]
+  n.l3.dst_ip = ARGV[1]
+  n.l3.version = 0x4
+  n.l3.hlen = 0x5
+  n.l3.protocol = 0x1
+  n.l3.flags = 0x0
+  n.l3.foffset = 0x0
+  n.l4 = ICMP.new
+
+  n.l5 = IPv4.new(Misc.randstring(20))
+  n.l5.version = 4
+  n.l5.hlen = 21
+  protos = %w(6 17 1)
+  n.l5.protocol = protos[rand(4)].to_i
+  n.l5.payload = Misc.randstring(20)
+
+  srand Time.now.usec
+  n.l4.type = rand 256
+  n.l4.code = rand 256 
+  n.sendpacket
+  tick
+end
+  
+@it = 0
+@ticks = %w( / - \\ | )
+
+n = Racket.new
+n.iface = "eth0"
+
+puts "Spewing..."
+while (true)
+  rand_icmp(n)
+end
+
+# vim: set ts=2 et sw=2:

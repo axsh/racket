@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: HSRP</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">HSRP</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/l5/hsrp_rb.html">
+                lib/l5/hsrp.rb
+                </a>
+        &nbsp;(<a href="http://code.google.com/p/racket/source/browse/trunk/lib/l5/hsrp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="RacketPart.html">
+                RacketPart
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Hot Standby Router Protocol: <a href="HSRP.html">HSRP</a>
+</p>
+<p>
+RFC2281 (<a
+href="http://www.faqs.org/rfcs/rfc2281.html">www.faqs.org/rfcs/rfc2281.html</a>)
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">HSRP_INITIAL</td>
+          <td>=</td>
+          <td class="context-item-value">0</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">HSRP_LEARN</td>
+          <td>=</td>
+          <td class="context-item-value">1</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">HSRP_LISTEN</td>
+          <td>=</td>
+          <td class="context-item-value">2</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">HSRP_SPEAK</td>
+          <td>=</td>
+          <td class="context-item-value">4</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">HSRP_STANDBY</td>
+          <td>=</td>
+          <td class="context-item-value">8</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">HSPR_ACTIVE</td>
+          <td>=</td>
+          <td class="context-item-value">16</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">group</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Standby group
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">hellotime</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Time between the hello messages that this router sends. Obviously only
+useful in hello messages
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">holdtime</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Length of time that this hello message should be considered valid.
+Obviously only useful in hello messages.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">opcode</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Type of the <a href="HSRP.html">HSRP</a> message contained in this packet.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">password</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Clear-text, 8-character reused password. Defaults to &#8216;cisco&#8216;
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">payload</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Payload. Generally unused.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">priority</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Priority used to determine active and standby routers. Higher priorities
+win, but a higher IP address wins in the event of a tie.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">reserved</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">state</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Current state of the router sending the message
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">version</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Version of the <a href="HSRP.html">HSRP</a> message contained in this
+packet. Defaults to 0
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">vip</td>
+          <td class="context-item-value">&nbsp;&nbsp;</td>
+          <td class="context-item-desc">
+Virtual IP address used by this group
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

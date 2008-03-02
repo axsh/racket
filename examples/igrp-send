@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+# Send IGRP packets.  Needs work... obviously.
+require 'rubygems'
+require 'racket'
+
+n = Racket.new
+n.iface = "eth0"
+
+n.l2 = Ethernet.new(Misc.randstring(14))
+n.l2.ethertype = 0x800
+
+n.l3 = IPv4.new
+n.l3.protocol = 9
+
+n.l4 = IGRP.new()
+n.l4.version = 1
+n.l4.opcode = 1
+n.l4.add_system(0xFFFFFF, 1, 2, 3, 4, 5, 6)
+n.l4.add_exterior(0x12345,  6, 7, 8, 9, 0xa, 0xb)
+n.l4.add_interior(0x67890,  6, 7, 8, 9, 0xa, 0xb)
+n.sendpacket

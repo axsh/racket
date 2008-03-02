@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+# Send an arp packet that is VLAN tagged
+require 'rubygems'
+require 'racket'
+
+unless (ARGV.size == 6) 
+  puts "Usage: $0 <vlan> <opcode> <sha> <spa> <tpa> <tha>"
+  exit
+end
+
+n = Racket.new
+n.iface = "eth0"
+
+n.l2 = Ethernet.new(Misc.randstring(14))
+n.l2.ethertype = 0x8100
+n.l3 = VLAN.new
+n.l3.type = 0x0806
+n.l3.id = ARGV[0].to_i
+n.l4 = ARP.new
+n.l4.opcode = ARGV[1].to_i
+n.l4.sha = ARGV[2]
+n.l4.spa = ARGV[3]
+n.l4.tha = ARGV[4]
+n.l4.tpa = ARGV[5]
+
+n.sendpacket

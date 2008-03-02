@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+# Send lolcat NTP packets
+
+require 'rubygems'
+require 'racket'
+
+unless (ARGV.size == 2)
+  puts "Usage: $0 <srcip> <dstip>"
+  exit 
+end
+
+n = Racket.new
+n.iface = "eth0"
+
+n.l3 = IPv4.new
+n.l3.src_ip = ARGV[0] 
+n.l3.dst_ip = ARGV[1]
+n.l3.protocol = 0x11
+n.l3.add_option(4, "wt")
+n.l3.add_option(136, "aa")
+n.l3.add_option(130, "123456789")
+n.l3.add_option(148, "yz")
+
+n.l4 = UDP.new
+n.l4.src_port = 12345
+n.l4.dst_port = 123 
+
+n.l5 = NTP.new("I'm in your ntp, stealin ur time")
+
+n.l4.payload = n.l5
+n.l4.fix!(n.l3.src_ip, n.l3.dst_ip)
+n.l4.payload = ""
+
+f = n.sendpacket
+n.layers.compact.each do |l|
+  puts l.pretty
+end
+puts "Sent #{f}"

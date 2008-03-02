@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'racket'
+
+n = Racket.new
+n.iface = "eth0"
+
+n.l2 = Ethernet.new(Misc.randstring(14))
+n.l2.ethertype = 0x0806
+n.l3 = ARP.new
+n.l3.opcode = ARGV[0].to_i
+
+n.sendpacket

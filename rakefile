@@ -1,0 +1,19 @@
+task :default => [:test, :docs, :build]
+
+task :build do
+  sh %{gem build racket.gemspec}
+end
+
+task :docs do
+  sh %{find doc -type f -a ! -wholename \*.svn/\* -print |xargs /bin/rm -f}
+  sh %{date -d "Jan 1 1970" > doc/created.rid}
+  sh %{rdoc -A rest,octets,hex_octets,unsigned,signed,text -p -o doc -q -f html -m README -W http://code.google.com/p/racket/source/browse/trunk/%s -S lib/* README}
+end
+
+task :install do
+  sh %{sudo gem install racket.gem}
+end
+
+task :test do
+  ruby "test/ts_all.rb"
+end

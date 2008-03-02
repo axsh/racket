@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'racket'
+
+n = Racket.new
+n.iface = "eth0"
+
+n.layers[2] = EightOTwoDotThree.new
+n.layers[3] = LLC.new()
+n.layers[4] = SNAP.new()
+n.layers[4].pid = 0x010b
+
+n.layers[5] = STP.new()
+n.layers[5].version = 2
+
+n.sendpacket

