@@ -1,3 +1,5 @@
+# $Id$
+
 # Ethernet II (DIX v2.0)
 #
 # http://en.wikipedia.org/wiki/Ethernet_II_framing

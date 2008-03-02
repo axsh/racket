@@ -1,3 +1,5 @@
+# $Id$
+
 # Simple class to represent data structures that
 # consist of an arbitrary number of length value pairs.
 class LV

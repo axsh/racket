@@ -1,3 +1,5 @@
+# $Id$
+
 # Simple ordered hash. 
 #
 # XXX: todo -- add a method for moving/shifting

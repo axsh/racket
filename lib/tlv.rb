@@ -1,3 +1,5 @@
+# $Id$
+
 # Simple class for your average type, length, value datastructure.
 # Everything after the TLV is stuff into +rest+
 class TLV

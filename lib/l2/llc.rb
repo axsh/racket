@@ -1,3 +1,5 @@
+# $Id$
+
 # Logical Link Control (http://en.wikipedia.org/wiki/Logical_Link_Control)
 class LLC < RacketPart
   LLC_IBM_SNA = 0x04 

@@ -1,3 +1,5 @@
+# $Id$
+
 # CDP -- Cisco Discovery Protocol
 # http://www.cisco.biz/univercd/cc/td/doc/product/lan/trsrb/frames.htm#xtocid12
 class CDP < RacketPart

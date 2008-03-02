@@ -1,3 +1,5 @@
+# $Id$
+
 # Internet Group Management Protocol, Version 2: IGMPv2
 #
 # RFC2236 (http://www.faqs.org/rfcs/rfc2236.html)

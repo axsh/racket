@@ -1,3 +1,5 @@
+# $Id$
+
 # Bootstrap Protocol -- BOOTP
 #
 # RFC951 (http://www.faqs.org/rfcs/rfc951.html)

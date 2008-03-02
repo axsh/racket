@@ -1,3 +1,5 @@
+# $Id$
+
 require 'l2/ethernet'
 require 'l2/llc'
 require 'l2/snap'

@@ -1,3 +1,5 @@
+# $Id$
+
 # Spanning Tree Protocol
 #
 # http://en.wikipedia.org/wiki/Spanning_tree_protocol

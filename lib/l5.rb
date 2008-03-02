@@ -1,3 +1,5 @@
+# $Id$
+
 require 'l5/bootp'
 require 'l5/ntp'
 require 'l5/dns'

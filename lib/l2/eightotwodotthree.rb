@@ -1,3 +1,5 @@
+# $Id$
+
 # 802.3 Ethernet.  Should always be followed by an LLC header
 class EightOTwoDotThree < RacketPart
   # Destination MAC address

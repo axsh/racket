@@ -1,3 +1,5 @@
+# $Id$
+
 # Internet Group Management Protocol, Version 1
 #
 # RFC1112 (http://www.faqs.org/rfcs/rfc1112.html)

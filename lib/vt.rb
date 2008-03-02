@@ -1,3 +1,5 @@
+# $Id$
+
 # Simple class to represent a datastructure that is made up of a 
 # null terminted string followed by an arbitrary number of
 # arbitrarily sized values, followed by a "rest" field.

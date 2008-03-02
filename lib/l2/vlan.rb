@@ -1,3 +1,5 @@
+# $Id$
+
 # IEEE 802.1Q VLAN tag (http://en.wikipedia.org/wiki/IEEE_802.1Q)
 class VLAN < RacketPart
   ETHERTYPE_IPV4 = 0x0800

@@ -1,3 +1,5 @@
+# $Id$
+
 module Misc
   # Return a number that is at most size bits long
   def Misc.randbits(size)
