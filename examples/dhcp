@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+#
+# $Id$
+#
 # Send useless DHCP packets
 require 'rubygems'
 require 'racket'

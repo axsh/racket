@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+#
+# $Id$
+#
 # Given a source and destination IP address
 # and a data size, spew all 65536 possible ICMP 
 

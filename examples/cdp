@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+#
+# $Id$
+#
 # Send amusing CDP packets
 require 'rubygems'
 require 'racket'

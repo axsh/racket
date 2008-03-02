@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+#
+# $Id$
+#
 require 'rubygems'
 require 'racket'
 

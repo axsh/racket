@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+#
+# $Id$
+#
 # Send lolcat NTP packets
 
 require 'rubygems'

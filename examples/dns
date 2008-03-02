@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+#
+# $Id$
+#
 # Send a DNS request
 
 require 'rubygems'

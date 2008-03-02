@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 #
+# $Id$
+#
+#
 # Make all of your Cisco devices unhappy by hurling HSRP packets
 # at them.  Hot, Hot HSRP takeover.
 require 'rubygems'

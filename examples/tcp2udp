@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 #
+# $Id$
+#
+#
 # Spew TCP packets back at the source but in UDP form.  Gross.
 # Pointless.
 
