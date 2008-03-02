@@ -1,3 +1,5 @@
+# $Id$
+
 $:.unshift File.join(File.dirname(__FILE__), "..", "test")
 
 require 'ts_orderedhash'

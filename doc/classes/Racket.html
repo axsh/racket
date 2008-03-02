@@ -58,7 +58,7 @@
                 <a href="../files/lib/racket_rb.html">
                 lib/racket.rb
                 </a>
-        &nbsp;(<a href="http://code.google.com/p/racket/source/browse/trunk/lib/racket.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        &nbsp;(<a href="http://spoofed.org/files/racket/lib/racket.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
         <br />
             </td>
         </tr>
@@ -161,7 +161,7 @@
             onclick="toggleCode('M000026-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000026-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/racket.rb, line 18</span>
+<span class="ruby-comment cmt"># File lib/racket.rb, line 20</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">payload</span>=<span class="ruby-value str">&quot;&quot;</span>)
     <span class="ruby-ivar">@layers</span> = []
     <span class="ruby-ivar">@mtu</span> = <span class="ruby-value">1500</span>
@@ -199,7 +199,7 @@ string, ready for sending.
             onclick="toggleCode('M000027-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000027-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/racket.rb, line 32</span>
+<span class="ruby-comment cmt"># File lib/racket.rb, line 34</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pack</span>
     <span class="ruby-identifier">last_payload</span> = <span class="ruby-value str">&quot;&quot;</span>
     <span class="ruby-identifier">orig_payload</span> = <span class="ruby-value str">&quot;&quot;</span>
@@ -254,7 +254,7 @@ string, ready for sending.
             onclick="toggleCode('M000028-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000028-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/racket.rb, line 68</span>
+<span class="ruby-comment cmt"># File lib/racket.rb, line 70</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pretty</span>
     <span class="ruby-identifier">s</span> = <span class="ruby-value str">&quot;&quot;</span>
     <span class="ruby-ivar">@layers</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">l</span><span class="ruby-operator">|</span>
@@ -286,7 +286,7 @@ Write raw layer2 frames
             onclick="toggleCode('M000030-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000030-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/racket.rb, line 89</span>
+<span class="ruby-comment cmt"># File lib/racket.rb, line 91</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">send2</span>
     <span class="ruby-keyword kw">begin</span>
       <span class="ruby-identifier">p</span> = <span class="ruby-constant">Pcap</span><span class="ruby-operator">::</span><span class="ruby-identifier">open_live</span>(<span class="ruby-ivar">@iface</span>, <span class="ruby-ivar">@mtu</span>, <span class="ruby-keyword kw">false</span>, <span class="ruby-ivar">@timeout</span>)
@@ -325,7 +325,7 @@ Write raw layer3 frames
             onclick="toggleCode('M000031-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000031-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/racket.rb, line 107</span>
+<span class="ruby-comment cmt"># File lib/racket.rb, line 109</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">send3</span>
     <span class="ruby-keyword kw">begin</span>
       <span class="ruby-identifier">s</span> = <span class="ruby-constant">Socket</span>.<span class="ruby-identifier">open</span>(<span class="ruby-constant">Socket</span><span class="ruby-operator">::</span><span class="ruby-constant">PF_INET</span>, <span class="ruby-constant">Socket</span><span class="ruby-operator">::</span><span class="ruby-constant">SOCK_RAW</span>, <span class="ruby-constant">Socket</span><span class="ruby-operator">::</span><span class="ruby-constant">IPPROTO_RAW</span>)
@@ -360,7 +360,7 @@ Attempt to figure out which of <a href="Racket.html#M000030">send2</a> or
             onclick="toggleCode('M000029-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000029-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/racket.rb, line 80</span>
+<span class="ruby-comment cmt"># File lib/racket.rb, line 82</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sendpacket</span>
     <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@layers</span>[<span class="ruby-value">2</span>])
       <span class="ruby-identifier">send2</span>

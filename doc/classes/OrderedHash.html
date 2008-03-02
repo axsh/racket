@@ -58,7 +58,7 @@
                 <a href="../files/lib/orderedhash_rb.html">
                 lib/orderedhash.rb
                 </a>
-        &nbsp;(<a href="http://code.google.com/p/racket/source/browse/trunk/lib/orderedhash.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        &nbsp;(<a href="http://spoofed.org/files/racket/lib/orderedhash.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
         <br />
             </td>
         </tr>
@@ -137,7 +137,7 @@ XXX: todo &#8212; add a method for moving/shifting members around
             onclick="toggleCode('M000015-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000015-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/orderedhash.rb, line 6</span>
+<span class="ruby-comment cmt"># File lib/orderedhash.rb, line 8</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
     <span class="ruby-ivar">@keys</span> = []
   <span class="ruby-keyword kw">end</span>
@@ -162,7 +162,7 @@ XXX: todo &#8212; add a method for moving/shifting members around
             onclick="toggleCode('M000016-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000016-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/orderedhash.rb, line 10</span>
+<span class="ruby-comment cmt"># File lib/orderedhash.rb, line 12</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
     <span class="ruby-ivar">@keys</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">key</span> <span class="ruby-keyword kw">unless</span> (<span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">key</span>])
     <span class="ruby-keyword kw">super</span>
@@ -186,7 +186,7 @@ XXX: todo &#8212; add a method for moving/shifting members around
             onclick="toggleCode('M000017-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000017-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/orderedhash.rb, line 15</span>
+<span class="ruby-comment cmt"># File lib/orderedhash.rb, line 17</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>)
     <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>)
     <span class="ruby-keyword kw">super</span>
@@ -210,7 +210,7 @@ XXX: todo &#8212; add a method for moving/shifting members around
             onclick="toggleCode('M000018-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000018-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/orderedhash.rb, line 20</span>
+<span class="ruby-comment cmt"># File lib/orderedhash.rb, line 22</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each</span>
     <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">k</span>, <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">k</span>] }
   <span class="ruby-keyword kw">end</span>
@@ -233,7 +233,7 @@ XXX: todo &#8212; add a method for moving/shifting members around
             onclick="toggleCode('M000019-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000019-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/orderedhash.rb, line 24</span>
+<span class="ruby-comment cmt"># File lib/orderedhash.rb, line 26</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_key</span>
     <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">k</span> }
   <span class="ruby-keyword kw">end</span>
@@ -256,7 +256,7 @@ XXX: todo &#8212; add a method for moving/shifting members around
             onclick="toggleCode('M000020-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000020-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/orderedhash.rb, line 28</span>
+<span class="ruby-comment cmt"># File lib/orderedhash.rb, line 30</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_value</span>
     <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">yield</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">k</span>] }
   <span class="ruby-keyword kw">end</span>

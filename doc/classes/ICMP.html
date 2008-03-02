@@ -58,7 +58,7 @@
                 <a href="../files/lib/l4/icmp_rb.html">
                 lib/l4/icmp.rb
                 </a>
-        &nbsp;(<a href="http://code.google.com/p/racket/source/browse/trunk/lib/l4/icmp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        &nbsp;(<a href="http://spoofed.org/files/racket/lib/l4/icmp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
         <br />
             </td>
         </tr>
@@ -279,7 +279,7 @@ compute and set the checksum for this <a href="ICMP.html">ICMP</a> packet
             onclick="toggleCode('M000050-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000050-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/icmp.rb, line 40</span>
+<span class="ruby-comment cmt"># File lib/l4/icmp.rb, line 42</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checksum!</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> = <span class="ruby-identifier">compute_checksum</span>
   <span class="ruby-keyword kw">end</span>
@@ -305,7 +305,7 @@ check the checksum for this <a href="ICMP.html">ICMP</a> packet
             onclick="toggleCode('M000049-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000049-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/icmp.rb, line 35</span>
+<span class="ruby-comment cmt"># File lib/l4/icmp.rb, line 37</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checksum?</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">compute_checksum</span>
   <span class="ruby-keyword kw">end</span>
@@ -332,7 +332,7 @@ check the checksum for this <a href="ICMP.html">ICMP</a> packet
             onclick="toggleCode('M000051-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000051-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/icmp.rb, line 46</span>
+<span class="ruby-comment cmt"># File lib/l4/icmp.rb, line 48</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fix!</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">checksum!</span>
   <span class="ruby-keyword kw">end</span>

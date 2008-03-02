@@ -58,7 +58,7 @@
                 <a href="../files/lib/misc_rb.html">
                 lib/misc.rb
                 </a>
-        &nbsp;(<a href="http://code.google.com/p/racket/source/browse/trunk/lib/misc.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        &nbsp;(<a href="http://spoofed.org/files/racket/lib/misc.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
         <br />
             </td>
         </tr>
@@ -73,6 +73,12 @@
 
   <div id="contextContent">
 
+    <div id="description">
+      <p>
+$Id$
+</p>
+
+    </div>
 
 
    </div>
@@ -123,7 +129,7 @@ given a long representing a MAC address print it out in human readable form
             onclick="toggleCode('M000083-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000083-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/misc.rb, line 34</span>
+<span class="ruby-comment cmt"># File lib/misc.rb, line 36</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Misc</span>.<span class="ruby-identifier">macaddr</span>(<span class="ruby-identifier">long</span>)
     <span class="ruby-identifier">long</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value">16</span>).<span class="ruby-identifier">rjust</span>(<span class="ruby-value">12</span>, <span class="ruby-value str">'0'</span>).<span class="ruby-identifier">unpack</span>(<span class="ruby-value str">&quot;a2a2a2a2a2a2&quot;</span>).<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;:&quot;</span>)
   <span class="ruby-keyword kw">end</span>
@@ -149,7 +155,7 @@ Return a number that is at most size bits long
             onclick="toggleCode('M000080-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000080-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/misc.rb, line 3</span>
+<span class="ruby-comment cmt"># File lib/misc.rb, line 5</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Misc</span>.<span class="ruby-identifier">randbits</span>(<span class="ruby-identifier">size</span>)
     <span class="ruby-identifier">bits</span> = <span class="ruby-value">0</span>
     <span class="ruby-identifier">srand</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">usec</span>
@@ -181,7 +187,7 @@ Return a byte that is at most size bytes long
             onclick="toggleCode('M000081-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000081-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/misc.rb, line 14</span>
+<span class="ruby-comment cmt"># File lib/misc.rb, line 16</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Misc</span>.<span class="ruby-identifier">randbytes</span>(<span class="ruby-identifier">size</span>)
     <span class="ruby-identifier">bytes</span> = <span class="ruby-value">0</span>
     <span class="ruby-value">0</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-identifier">size</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>) {
@@ -212,7 +218,7 @@ Return a string that is at most size characters long
             onclick="toggleCode('M000082-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000082-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/misc.rb, line 24</span>
+<span class="ruby-comment cmt"># File lib/misc.rb, line 26</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Misc</span>.<span class="ruby-identifier">randstring</span>(<span class="ruby-identifier">size</span>)
     <span class="ruby-identifier">s</span> = <span class="ruby-value str">&quot;&quot;</span>
     <span class="ruby-value">0</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-identifier">size</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>) {

@@ -58,7 +58,7 @@
                 <a href="../files/lib/l3/ipv4_rb.html">
                 lib/l3/ipv4.rb
                 </a>
-        &nbsp;(<a href="http://code.google.com/p/racket/source/browse/trunk/lib/l3/ipv4.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        &nbsp;(<a href="http://spoofed.org/files/racket/lib/l3/ipv4.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
         <br />
             </td>
         </tr>
@@ -259,7 +259,7 @@ Version (defaults to 4)
             onclick="toggleCode('M000021-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000021-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l3/ipv4.rb, line 32</span>
+<span class="ruby-comment cmt"># File lib/l3/ipv4.rb, line 34</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
     <span class="ruby-ivar">@options</span> = []
     <span class="ruby-keyword kw">super</span>
@@ -290,7 +290,7 @@ to <a href="IPv4.html#M000025">fix!</a> happens automagically
             onclick="toggleCode('M000022-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000022-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l3/ipv4.rb, line 40</span>
+<span class="ruby-comment cmt"># File lib/l3/ipv4.rb, line 42</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_option</span>(<span class="ruby-identifier">number</span>, <span class="ruby-identifier">value</span>)
     <span class="ruby-identifier">t</span> = <span class="ruby-constant">TLV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>)
     <span class="ruby-identifier">t</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">number</span>
@@ -320,7 +320,7 @@ Compute and set the checksum for this IP datagram
             onclick="toggleCode('M000024-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000024-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l3/ipv4.rb, line 54</span>
+<span class="ruby-comment cmt"># File lib/l3/ipv4.rb, line 56</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checksum!</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> = <span class="ruby-identifier">compute_checksum</span>
   <span class="ruby-keyword kw">end</span>
@@ -346,7 +346,7 @@ Check the checksum for this IP datagram
             onclick="toggleCode('M000023-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000023-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l3/ipv4.rb, line 49</span>
+<span class="ruby-comment cmt"># File lib/l3/ipv4.rb, line 51</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checksum?</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">compute_checksum</span>
   <span class="ruby-keyword kw">end</span>
@@ -373,7 +373,7 @@ Append the options, update len and hlen, and fix the checksum.
             onclick="toggleCode('M000025-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000025-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l3/ipv4.rb, line 61</span>
+<span class="ruby-comment cmt"># File lib/l3/ipv4.rb, line 63</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fix!</span>
     <span class="ruby-identifier">newpayload</span> = <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">join</span>
     

@@ -58,7 +58,7 @@
                 <a href="../files/lib/l4/igmpv2_rb.html">
                 lib/l4/igmpv2.rb
                 </a>
-        &nbsp;(<a href="http://code.google.com/p/racket/source/browse/trunk/lib/l4/igmpv2.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        &nbsp;(<a href="http://spoofed.org/files/racket/lib/l4/igmpv2.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
         <br />
             </td>
         </tr>
@@ -189,7 +189,7 @@ Set the checksum of this <a href="IGMPv2.html">IGMPv2</a> message
             onclick="toggleCode('M000047-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000047-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/igmpv2.rb, line 22</span>
+<span class="ruby-comment cmt"># File lib/l4/igmpv2.rb, line 24</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checksum!</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> = <span class="ruby-identifier">compute_checksum</span>
   <span class="ruby-keyword kw">end</span>
@@ -215,7 +215,7 @@ Is the checksum of this <a href="IGMPv2.html">IGMPv2</a> message correct
             onclick="toggleCode('M000046-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000046-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/igmpv2.rb, line 17</span>
+<span class="ruby-comment cmt"># File lib/l4/igmpv2.rb, line 19</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checksum?</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> (<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">compute_checksum</span>)
   <span class="ruby-keyword kw">end</span>
@@ -242,7 +242,7 @@ sent
             onclick="toggleCode('M000048-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000048-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/igmpv2.rb, line 28</span>
+<span class="ruby-comment cmt"># File lib/l4/igmpv2.rb, line 30</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fix!</span>
     <span class="ruby-identifier">checksum!</span>
   <span class="ruby-keyword kw">end</span>

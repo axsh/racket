@@ -58,7 +58,7 @@
                 <a href="../files/lib/l4/udp_rb.html">
                 lib/l4/udp.rb
                 </a>
-        &nbsp;(<a href="http://code.google.com/p/racket/source/browse/trunk/lib/l4/udp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        &nbsp;(<a href="http://spoofed.org/files/racket/lib/l4/udp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
         <br />
             </td>
         </tr>
@@ -186,7 +186,7 @@ Source Port
             onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000004-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/udp.rb, line 35</span>
+<span class="ruby-comment cmt"># File lib/l4/udp.rb, line 37</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
     <span class="ruby-keyword kw">super</span>
     <span class="ruby-ivar">@autofix</span> = <span class="ruby-keyword kw">false</span>
@@ -215,7 +215,7 @@ Compute and set the checksum for this <a href="UDP.html">UDP</a> datagram
             onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000002-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/udp.rb, line 22</span>
+<span class="ruby-comment cmt"># File lib/l4/udp.rb, line 24</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checksum!</span>(<span class="ruby-identifier">src_ip</span>, <span class="ruby-identifier">dst_ip</span>)
     <span class="ruby-comment cmt"># set the checksum to 0 for usage in the pseudo header...</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> = <span class="ruby-value">0</span>
@@ -243,7 +243,7 @@ Check the checksum for this <a href="UDP.html">UDP</a> datagram
             onclick="toggleCode('M000001-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000001-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/udp.rb, line 17</span>
+<span class="ruby-comment cmt"># File lib/l4/udp.rb, line 19</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checksum?</span>(<span class="ruby-identifier">src_ip</span>, <span class="ruby-identifier">dst_ip</span>)
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> (<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">compute_checksum</span>(<span class="ruby-identifier">src_ip</span>, <span class="ruby-identifier">dst_ip</span>))
   <span class="ruby-keyword kw">end</span>
@@ -270,7 +270,7 @@ properly.
             onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000003-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/udp.rb, line 30</span>
+<span class="ruby-comment cmt"># File lib/l4/udp.rb, line 32</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fix!</span>(<span class="ruby-identifier">src_ip</span>, <span class="ruby-identifier">dst_ip</span>)
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">len</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">bit_length</span><span class="ruby-operator">/</span><span class="ruby-value">8</span> <span class="ruby-operator">+</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">payload</span>.<span class="ruby-identifier">length</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">checksum!</span>(<span class="ruby-identifier">src_ip</span>, <span class="ruby-identifier">dst_ip</span>)

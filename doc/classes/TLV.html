@@ -58,7 +58,7 @@
                 <a href="../files/lib/tlv_rb.html">
                 lib/tlv.rb
                 </a>
-        &nbsp;(<a href="http://code.google.com/p/racket/source/browse/trunk/lib/tlv.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        &nbsp;(<a href="http://spoofed.org/files/racket/lib/tlv.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
         <br />
             </td>
         </tr>
@@ -168,7 +168,7 @@ for the length field
             onclick="toggleCode('M000058-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000058-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/tlv.rb, line 8</span>
+<span class="ruby-comment cmt"># File lib/tlv.rb, line 10</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">ts</span>, <span class="ruby-identifier">ls</span>)
     <span class="ruby-ivar">@ts</span> = <span class="ruby-identifier">ts</span>
     <span class="ruby-ivar">@ls</span> = <span class="ruby-identifier">ls</span>
@@ -198,7 +198,7 @@ dictated by this instance.
             onclick="toggleCode('M000059-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000059-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/tlv.rb, line 15</span>
+<span class="ruby-comment cmt"># File lib/tlv.rb, line 17</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decode</span>(<span class="ruby-identifier">data</span>)
     <span class="ruby-identifier">s</span> = <span class="ruby-node">&quot;#{punpack_string(@ts)}#{punpack_string(@ls)}&quot;</span>
     <span class="ruby-identifier">type</span>, <span class="ruby-identifier">length</span>, <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-node">&quot;#{s}a*&quot;</span>)
@@ -224,7 +224,7 @@ dictated by this instance.
             onclick="toggleCode('M000060-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000060-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/tlv.rb, line 22</span>
+<span class="ruby-comment cmt"># File lib/tlv.rb, line 24</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decode!</span>(<span class="ruby-identifier">data</span>)
     <span class="ruby-ivar">@type</span>, <span class="ruby-ivar">@length</span>, <span class="ruby-ivar">@value</span>, <span class="ruby-ivar">@rest</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">decode</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-keyword kw">end</span>
@@ -250,7 +250,7 @@ Return a string suitable for use elswhere.
             onclick="toggleCode('M000061-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000061-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/tlv.rb, line 27</span>
+<span class="ruby-comment cmt"># File lib/tlv.rb, line 29</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">encode</span>
     <span class="ruby-identifier">s</span> = <span class="ruby-node">&quot;#{punpack_string(@ts)}#{punpack_string(@ls)}&quot;</span>
     [<span class="ruby-ivar">@type</span>, <span class="ruby-ivar">@length</span>, <span class="ruby-ivar">@value</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-node">&quot;#{s}a*&quot;</span>)
@@ -274,7 +274,7 @@ Return a string suitable for use elswhere.
             onclick="toggleCode('M000062-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000062-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/tlv.rb, line 32</span>
+<span class="ruby-comment cmt"># File lib/tlv.rb, line 34</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
     <span class="ruby-identifier">encode</span>
   <span class="ruby-keyword kw">end</span>
@@ -297,7 +297,7 @@ Return a string suitable for use elswhere.
             onclick="toggleCode('M000063-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000063-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/tlv.rb, line 36</span>
+<span class="ruby-comment cmt"># File lib/tlv.rb, line 38</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_str</span>
     <span class="ruby-identifier">encode</span>
   <span class="ruby-keyword kw">end</span>

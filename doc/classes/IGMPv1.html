@@ -58,7 +58,7 @@
                 <a href="../files/lib/l4/igmpv1_rb.html">
                 lib/l4/igmpv1.rb
                 </a>
-        &nbsp;(<a href="http://code.google.com/p/racket/source/browse/trunk/lib/l4/igmpv1.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        &nbsp;(<a href="http://spoofed.org/files/racket/lib/l4/igmpv1.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
         <br />
             </td>
         </tr>
@@ -196,7 +196,7 @@ Compute and set the checkum for this IGMP message
             onclick="toggleCode('M000033-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000033-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/igmpv1.rb, line 25</span>
+<span class="ruby-comment cmt"># File lib/l4/igmpv1.rb, line 27</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checksum!</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> = <span class="ruby-identifier">compute_checksum</span>
   <span class="ruby-keyword kw">end</span>
@@ -222,7 +222,7 @@ Check the checksum for this IGMP message
             onclick="toggleCode('M000032-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000032-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/igmpv1.rb, line 20</span>
+<span class="ruby-comment cmt"># File lib/l4/igmpv1.rb, line 22</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checksum?</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> (<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">compute_checksum</span>)
   <span class="ruby-keyword kw">end</span>
@@ -249,7 +249,7 @@ sent
             onclick="toggleCode('M000034-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000034-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/igmpv1.rb, line 31</span>
+<span class="ruby-comment cmt"># File lib/l4/igmpv1.rb, line 33</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fix!</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">checksum!</span>
   <span class="ruby-keyword kw">end</span>

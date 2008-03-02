@@ -58,7 +58,7 @@
                 <a href="../files/lib/vt_rb.html">
                 lib/vt.rb
                 </a>
-        &nbsp;(<a href="http://code.google.com/p/racket/source/browse/trunk/lib/vt.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        &nbsp;(<a href="http://spoofed.org/files/racket/lib/vt.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
         <br />
             </td>
         </tr>
@@ -173,7 +173,7 @@ sized values, as specified by <tt>args</tt>
             onclick="toggleCode('M000052-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000052-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/vt.rb, line 15</span>
+<span class="ruby-comment cmt"># File lib/vt.rb, line 17</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
     <span class="ruby-ivar">@lengths</span> = <span class="ruby-identifier">args</span>
     <span class="ruby-ivar">@types</span> = []
@@ -204,7 +204,7 @@ by this instance
             onclick="toggleCode('M000053-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000053-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/vt.rb, line 23</span>
+<span class="ruby-comment cmt"># File lib/vt.rb, line 25</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decode</span>(<span class="ruby-identifier">data</span>)
     <span class="ruby-identifier">null</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">index</span>(<span class="ruby-value">0x00</span>)
     <span class="ruby-identifier">value</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-node">&quot;a#{null}&quot;</span>)[<span class="ruby-value">0</span>]
@@ -243,7 +243,7 @@ accordingly
             onclick="toggleCode('M000054-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000054-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/vt.rb, line 41</span>
+<span class="ruby-comment cmt"># File lib/vt.rb, line 43</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decode!</span>(<span class="ruby-identifier">data</span>)
     <span class="ruby-ivar">@value</span>, <span class="ruby-ivar">@types</span>, <span class="ruby-ivar">@rest</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">decode</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-keyword kw">end</span>
@@ -269,7 +269,7 @@ Return a string suitable for use elsewhere
             onclick="toggleCode('M000055-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000055-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/vt.rb, line 46</span>
+<span class="ruby-comment cmt"># File lib/vt.rb, line 48</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">encode</span>
     <span class="ruby-identifier">s</span> = <span class="ruby-node">&quot;#{@value}\000&quot;</span>
 
@@ -299,7 +299,7 @@ Return a string suitable for use elsewhere
             onclick="toggleCode('M000056-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000056-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/vt.rb, line 57</span>
+<span class="ruby-comment cmt"># File lib/vt.rb, line 59</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
     <span class="ruby-identifier">encode</span>
   <span class="ruby-keyword kw">end</span>
@@ -322,7 +322,7 @@ Return a string suitable for use elsewhere
             onclick="toggleCode('M000057-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000057-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/vt.rb, line 61</span>
+<span class="ruby-comment cmt"># File lib/vt.rb, line 63</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_str</span>
     <span class="ruby-identifier">encode</span>
   <span class="ruby-keyword kw">end</span>

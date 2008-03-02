@@ -58,7 +58,7 @@
                 <a href="../files/lib/l4/tcp_rb.html">
                 lib/l4/tcp.rb
                 </a>
-        &nbsp;(<a href="http://code.google.com/p/racket/source/browse/trunk/lib/l4/tcp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        &nbsp;(<a href="http://spoofed.org/files/racket/lib/l4/tcp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
         <br />
             </td>
         </tr>
@@ -317,14 +317,13 @@ Window size
           <p>
 Add an <a href="TCP.html">TCP</a> option to this <a href="TCP.html">TCP</a>
 object. All rejiggering will happen when the call to <a
-href="TCP.html#M000008">fix!</a> happens automagically. XXX: currently
-broken. unclear why.
+href="TCP.html#M000008">fix!</a> happens automagically.
 </p>
           <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000005-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/tcp.rb, line 46</span>
+<span class="ruby-comment cmt"># File lib/l4/tcp.rb, line 47</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_option</span>(<span class="ruby-identifier">number</span>, <span class="ruby-identifier">value</span>)
     <span class="ruby-identifier">t</span> = <span class="ruby-constant">TLV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>)
     <span class="ruby-identifier">t</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">number</span>
@@ -354,7 +353,7 @@ Compute and set the checksum for this <a href="TCP.html">TCP</a> packet
             onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000007-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/tcp.rb, line 60</span>
+<span class="ruby-comment cmt"># File lib/l4/tcp.rb, line 61</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checksum!</span>(<span class="ruby-identifier">ip_src</span>, <span class="ruby-identifier">ip_dst</span>)
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> = <span class="ruby-identifier">compute_checksum</span>(<span class="ruby-identifier">ip_src</span>, <span class="ruby-identifier">ip_dst</span>)
   <span class="ruby-keyword kw">end</span>
@@ -380,7 +379,7 @@ Check the checksum for this <a href="TCP.html">TCP</a> packet
             onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000006-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/tcp.rb, line 55</span>
+<span class="ruby-comment cmt"># File lib/l4/tcp.rb, line 56</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checksum?</span>(<span class="ruby-identifier">ip_src</span>, <span class="ruby-identifier">ip_dst</span>)
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">csum</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">compute_checksum</span>(<span class="ruby-identifier">ip_src</span>, <span class="ruby-identifier">ip_dst</span>)
   <span class="ruby-keyword kw">end</span>
@@ -394,7 +393,7 @@ Check the checksum for this <a href="TCP.html">TCP</a> packet
 
         <div class="method-heading">
           <a href="#M000008" class="method-signature">
-          <span class="method-name">fix!</span><span class="method-args">(ip_src, ip_dst)</span>
+          <span class="method-name">fix!</span><span class="method-args">(ip_src, ip_dst, next_payload)</span>
           </a>
         </div>
       
@@ -407,8 +406,8 @@ properly.
             onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000008-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l4/tcp.rb, line 66</span>
-  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fix!</span>(<span class="ruby-identifier">ip_src</span>, <span class="ruby-identifier">ip_dst</span>)
+<span class="ruby-comment cmt"># File lib/l4/tcp.rb, line 67</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fix!</span>(<span class="ruby-identifier">ip_src</span>, <span class="ruby-identifier">ip_dst</span>, <span class="ruby-identifier">next_payload</span>)
     <span class="ruby-identifier">newpayload</span> = <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">join</span>
     
     <span class="ruby-comment cmt"># pad to a multiple of 32 bits</span>
@@ -417,13 +416,12 @@ properly.
       <span class="ruby-keyword kw">while</span> ((<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">bit_length</span><span class="ruby-operator">/</span><span class="ruby-value">8</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">newpayload</span>.<span class="ruby-identifier">length</span>) <span class="ruby-operator">%</span> <span class="ruby-value">4</span> <span class="ruby-operator">!=</span> <span class="ruby-value">4</span>)
         <span class="ruby-identifier">newpayload</span> = <span class="ruby-node">&quot;\x01#{newpayload}&quot;</span>
       <span class="ruby-keyword kw">end</span>
-
     <span class="ruby-keyword kw">end</span>
 
-    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">payload</span> = <span class="ruby-identifier">newpayload</span> <span class="ruby-operator">+</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">payload</span>
-
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">payload</span> = <span class="ruby-identifier">newpayload</span> <span class="ruby-operator">+</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">payload</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">next_payload</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">offset</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">bit_length</span><span class="ruby-operator">/</span><span class="ruby-value">32</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">newpayload</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">/</span><span class="ruby-value">4</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">checksum!</span>(<span class="ruby-identifier">ip_src</span>, <span class="ruby-identifier">ip_dst</span>)
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">payload</span> = <span class="ruby-identifier">newpayload</span>
   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>

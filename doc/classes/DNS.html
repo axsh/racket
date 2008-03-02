@@ -58,7 +58,7 @@
                 <a href="../files/lib/l5/dns_rb.html">
                 lib/l5/dns.rb
                 </a>
-        &nbsp;(<a href="http://code.google.com/p/racket/source/browse/trunk/lib/l5/dns.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        &nbsp;(<a href="http://spoofed.org/files/racket/lib/l5/dns.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
         <br />
             </td>
         </tr>
@@ -268,7 +268,7 @@ Transaction ID
             onclick="toggleCode('M000069-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000069-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l5/dns.rb, line 35</span>
+<span class="ruby-comment cmt"># File lib/l5/dns.rb, line 37</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
     <span class="ruby-keyword kw">super</span>
   <span class="ruby-keyword kw">end</span>
@@ -296,7 +296,7 @@ Add an additional record. Automatically increases <tt>additional_rr</tt>
             onclick="toggleCode('M000070-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000070-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l5/dns.rb, line 40</span>
+<span class="ruby-comment cmt"># File lib/l5/dns.rb, line 42</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_additional</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">klass</span>)
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">payload</span> <span class="ruby-operator">+=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">add_record</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">klass</span>).<span class="ruby-identifier">encode</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">additional_rr</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
@@ -323,7 +323,7 @@ Add an answer record. Automatically increases <tt>answer_rr</tt>
             onclick="toggleCode('M000071-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000071-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l5/dns.rb, line 46</span>
+<span class="ruby-comment cmt"># File lib/l5/dns.rb, line 48</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_answer</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">klass</span>)
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">payload</span> <span class="ruby-operator">+=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">add_record</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">klass</span>).<span class="ruby-identifier">encode</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">answer_rr</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
@@ -351,7 +351,7 @@ broken. authns records are much more complicated than this.
             onclick="toggleCode('M000072-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000072-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l5/dns.rb, line 53</span>
+<span class="ruby-comment cmt"># File lib/l5/dns.rb, line 55</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_authority</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">klass</span>)
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">payload</span> <span class="ruby-operator">+=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">add_record</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">klass</span>).<span class="ruby-identifier">encode</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">authority_rr</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
@@ -378,7 +378,7 @@ Add a question record. Automatically increases <tt>question_rr</tt>
             onclick="toggleCode('M000073-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000073-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l5/dns.rb, line 59</span>
+<span class="ruby-comment cmt"># File lib/l5/dns.rb, line 61</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_question</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">klass</span>)
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">payload</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">add_record</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">klass</span>).<span class="ruby-identifier">encode</span>
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">question_rr</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>

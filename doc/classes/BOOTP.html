@@ -58,7 +58,7 @@
                 <a href="../files/lib/l5/bootp_rb.html">
                 lib/l5/bootp.rb
                 </a>
-        &nbsp;(<a href="http://code.google.com/p/racket/source/browse/trunk/lib/l5/bootp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        &nbsp;(<a href="http://spoofed.org/files/racket/lib/l5/bootp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
         <br />
             </td>
         </tr>
@@ -285,7 +285,7 @@ Message type
             onclick="toggleCode('M000068-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000068-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l5/bootp.rb, line 67</span>
+<span class="ruby-comment cmt"># File lib/l5/bootp.rb, line 69</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
     <span class="ruby-ivar">@options</span> = []
     <span class="ruby-ivar">@options</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\x63\x82\x53\x63&quot;</span> <span class="ruby-comment cmt"># magic</span>
@@ -313,7 +313,7 @@ Message type
             onclick="toggleCode('M000064-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000064-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l5/bootp.rb, line 39</span>
+<span class="ruby-comment cmt"># File lib/l5/bootp.rb, line 41</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_option</span>(<span class="ruby-identifier">number</span>, <span class="ruby-identifier">value</span>)
     <span class="ruby-identifier">o</span> = <span class="ruby-constant">TLV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>)
     <span class="ruby-identifier">o</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">number</span>
@@ -340,7 +340,7 @@ Message type
             onclick="toggleCode('M000065-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000065-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l5/bootp.rb, line 47</span>
+<span class="ruby-comment cmt"># File lib/l5/bootp.rb, line 49</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fix!</span>
     <span class="ruby-comment cmt"># tack on an EOL to the options</span>
     <span class="ruby-identifier">newpayload</span> = <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">join</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\xff&quot;</span>
@@ -371,7 +371,7 @@ Message type
             onclick="toggleCode('M000066-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000066-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l5/bootp.rb, line 59</span>
+<span class="ruby-comment cmt"># File lib/l5/bootp.rb, line 61</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
     <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;to_s&quot;</span>
   <span class="ruby-keyword kw">end</span>
@@ -394,7 +394,7 @@ Message type
             onclick="toggleCode('M000067-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000067-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/l5/bootp.rb, line 63</span>
+<span class="ruby-comment cmt"># File lib/l5/bootp.rb, line 65</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_str</span>
     <span class="ruby-identifier">puts</span> <span class="ruby-identifier">to_str</span>
   <span class="ruby-keyword kw">end</span>
