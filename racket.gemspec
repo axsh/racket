@@ -19,7 +19,7 @@ SPEC = Gem::Specification.new do |s|
   s.rdoc_options << "-A rest,octets,hex_octets,unsigned,signed,text,rest"
   s.rdoc_options << "-p"
   s.rdoc_options << "-m" << "README"
-  s.rdoc_options << "-W http://code.google.com/p/racket/source/browse/trunk/%s"
+  s.rdoc_options << "-W http://spoofed.org/files/racket/%s"
   s.extra_rdoc_files = ["README"]
 end
 # vim: set ts=2 et sw=2:
