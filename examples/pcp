@@ -4,7 +4,7 @@
 #
 # Jon Hart <jhart@spoofed.org>
 #
-#  $Id: $
+# $Id: cdp 9 2008-03-02 04:44:32Z warchild $
 
 require 'gtk2'
 require 'rubygems'
