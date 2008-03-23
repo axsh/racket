@@ -1,0 +1,7 @@
+#  $Id$
+
+Racket -- Ruby Raw Packet library.  
+
+Installation is simple:
+
+  gem install --source http://spoofed.org/files/racket/ racket
