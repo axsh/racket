@@ -8,6 +8,7 @@
 
 require 'rubygems'
 require 'racket'
+include Racket
 
 unless (ARGV.size >= 1)
   puts "Usage: $0 <iface> [num fields per CDP packet]"

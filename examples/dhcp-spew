@@ -6,6 +6,7 @@
 require 'rubygems'
 require 'racket'
 
+include Racket
 unless (ARGV.size == 2) 
   puts "Usage: $0 <srcip> <dstip>"
   exit
