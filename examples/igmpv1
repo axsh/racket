@@ -11,7 +11,7 @@ if (ARGV.size != 4)
   exit!
 end
 
-n = Racket.new
+n = Racket::Racket.new
 n.l3 = IPv4.new
 
 n.l3.src_ip = ARGV[0] 

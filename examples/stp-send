@@ -6,7 +6,7 @@
 require 'rubygems'
 require 'racket'
 
-n = Racket.new
+n = Racket::Racket.new
 n.iface = "eth0"
 
 n.layers[2] = EightOTwoDotThree.new

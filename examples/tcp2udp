@@ -33,7 +33,7 @@ p.each do |pkt|
       when 0x0800:
         orig_ipv4 = IPv4.new(eth.payload)
         if (orig_ipv4.protocol == 6) 
-          n = Racket.new
+          n = Racket::Racket.new
           orig_tcp = TCP.new(orig_ipv4.payload)
           
           if (!orig_tcp.payload.nil?)

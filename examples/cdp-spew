@@ -42,7 +42,7 @@ end
 @it = 0
 @ticks = %w( / - \\ | )
 
-@n = Racket.new
+@n = Racket::Racket.new
 @n.iface = ARGV[0]
 
 puts "Spewing..."

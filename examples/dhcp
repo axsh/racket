@@ -11,7 +11,7 @@ unless (ARGV.size == 2)
   exit
 end
 
-n = Racket.new
+n = Racket::Racket.new
 n.iface = "eth0"
 
 n.layers[3] = IPv4.new

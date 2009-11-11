@@ -6,7 +6,8 @@
 require 'rubygems'
 require 'racket'
 
-n = Racket.new
+include Racket
+n = Racket::Racket.new
 n.iface = "eth0"
 
 n.layers[2] = EightOTwoDotThree.new(Misc.randstring(14))

@@ -31,7 +31,7 @@ rescue Exception => e
 end
 
 # prep our new takeover.  
-takeover = Racket.new
+takeover = Racket::Racket.new
 takeover.l3 = IPv4.new
 takeover.l3.src_ip = router 
 takeover.l3.dst_ip = "224.0.0.2"

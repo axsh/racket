@@ -5,7 +5,8 @@
 require 'rubygems'
 require 'racket'
 
-n = Racket.new
+include Racket
+n = Racket::Racket.new
 n.iface = "eth0"
 
 n.l2 = Ethernet.new(Misc.randstring(14))

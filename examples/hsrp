@@ -13,7 +13,7 @@ unless (ARGV.size == 3)
   exit
 end
 
-n = Racket.new
+n = Racket::Racket.new
 n.iface = "eth0"
 
 n.l2 = Ethernet.new(Misc.randstring(14))
