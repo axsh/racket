@@ -10,6 +10,7 @@ require 'rubygems'
 require 'racket'
 #require 'racket-all'
 
+include Racket
 pcaplet = Pcaplet.new("-s 65535" + ARGV.join)
 pcaplet.each_packet { |pkt|
   if (pkt.datalink == DLT_EN10MB)

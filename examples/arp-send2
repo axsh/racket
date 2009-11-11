@@ -7,7 +7,7 @@ require 'rubygems'
 require 'racket'
 
 unless (ARGV.size == 6) 
-  puts "Usage: $0 <vlan> <opcode> <sha> <spa> <tpa> <tha>"
+  puts "Usage: #{$0} <vlan> <opcode> <sha> <spa> <tpa> <tha>"
   exit
 end
 

@@ -7,8 +7,9 @@
 require 'rubygems'
 require 'racket'
 
+include Racket
 unless (ARGV.size == 3) 
-  puts "Usage: $0 <srcip> <dstip> <domain>"
+  puts "Usage: #{$0} <srcip> <dstip> <domain>"
   exit
 end
 

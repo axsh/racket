@@ -6,6 +6,7 @@
 require 'rubygems'
 require 'racket'
 
+include Racket
 n = Racket::Racket.new
 n.iface = "eth0"
 

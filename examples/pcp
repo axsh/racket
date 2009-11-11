@@ -10,6 +10,7 @@ require 'gtk2'
 require 'rubygems'
 require 'racket'
 
+include Racket
 button = Gtk::Button.new("Hello World")
 button.signal_connect("clicked") {
   puts "Hello World"

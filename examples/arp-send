@@ -9,7 +9,7 @@ require 'racket'
 include Racket
 
 unless (ARGV.size == 1) 
-  puts "Usage: $0 <opcode>"
+  puts "Usage: #{$0} <opcode>"
   exit
 end
 

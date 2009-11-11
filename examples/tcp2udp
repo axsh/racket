@@ -11,8 +11,11 @@ require 'rubygems'
 require 'pcaprub'
 require 'racket'
 
+include Racket
+
+
 if (ARGV.size < 1)
-  puts "Usage: $0 <iface> [filter]"
+  puts "Usage: #{$0} <iface> [filter]"
   exit
 end
 

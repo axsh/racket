@@ -12,8 +12,9 @@ require 'rubygems'
 require 'pcaprub'
 require 'racket'
 
-if (ARGV.size < 1)
-  puts "Usage: $0 <iface> [new router]"
+include Racket
+if (ARGV.size != 2)
+  puts "Usage: #{$0} <iface> <new router>"
   exit
 end
 

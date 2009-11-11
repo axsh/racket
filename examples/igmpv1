@@ -6,6 +6,7 @@
 require 'rubygems'
 require 'racket'
 
+include Racket
 if (ARGV.size != 4) 
   puts "Usage #{$0} <src_ip> <dst_ip> <igmp code> <gaddr>"
   exit!
