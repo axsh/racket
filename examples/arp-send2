@@ -11,6 +11,7 @@ unless (ARGV.size == 6)
   exit
 end
 
+include Racket
 n = Racket::Racket.new
 n.iface = "eth0"
 
