@@ -2,12 +2,12 @@
 
 $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
 
-require 'orderedhash'
+require 'racket/orderedhash'
 require 'test/unit'
 
 class TestBitField <  Test::Unit::TestCase
   def test_order
-    oh = OrderedHash.new
+    oh = Racket::OrderedHash.new
     ("a".."z").each { |c|
         oh[c] = c.unpack("c")[0]
     } 
