@@ -124,7 +124,7 @@ class Racket
   # Write raw layer2 frames
   def send2
     if(not @@loaded_pcaprub)
-      raise RuntimeError, "Could not initialize the pcaprub library (You need pcaprub (http://rubyforge.org/projects/pcaprub/))" 
+      raise RuntimeError, "Could not initialize the pcaprub library (You need pcaprub from SVN (http://rubyforge.org/projects/pcaprub/))" 
     end
     begin
 
@@ -136,7 +136,7 @@ class Racket
 
     begin
       b = p.inject(pack)
-      p.close
+      #p.pcap_close
       return b
     rescue Exception => e
       puts "Pcap: error while sending packet on '#{@iface}' (#{e})"
