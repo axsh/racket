@@ -2,10 +2,17 @@
 #
 # $Id$
 #
+# Example that just writes a simple arp packet to eth0
 require 'rubygems'
 require 'racket'
 
 include Racket
+
+unless (ARGV.size == 1) 
+  puts "Usage: $0 <opcode>"
+  exit
+end
+
 n = Racket::Racket.new
 n.iface = "eth0"
 
