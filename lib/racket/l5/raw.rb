@@ -1,6 +1,4 @@
-# $Id: l5.rb 14 2008-03-02 05:42:30Z warchild $
-#
-# Copyright (c) 2008, Jon Hart 
+# Copyright (c) 2009, Mike Kershaw
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -14,7 +12,7 @@
 #       names of its contributors may be used to endorse or promote products
 #       derived from this software without specific prior written permission.
 # 
-# THIS SOFTWARE IS PROVIDED BY Jon Hart ``AS IS'' AND ANY
+# THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY
 # EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
 # DISCLAIMED. IN NO EVENT SHALL Jon Hart BE LIABLE FOR ANY
@@ -25,10 +23,14 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-require 'racket/l5/bootp'
-require 'racket/l5/ntp'
-require 'racket/l5/dns'
-require 'racket/l5/hsrp'
-require 'racket/l5/raw'
+# Arbitrary L5 raw content
+module Racket
+class RawL5 < RacketPart
+  rest :payload
 
+  def initialize(*args)
+    super
+  end
+end
+end
 # vim: set ts=2 et sw=2:
