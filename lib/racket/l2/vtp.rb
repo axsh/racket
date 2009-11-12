@@ -29,11 +29,17 @@
 module Racket
 class VTP < RacketPart
   unsigned :version, 8 
-  unsigned :code,8 
-  unsigned :reserved,8  
+  unsigned :code, 8 
+  unsigned :reserved, 8  
   unsigned :domain_length, 8
   text :domain, 32
   rest :payload
+
+  def fix!
+    self.domain_length = self.domain.length 
+    self.domain = self.domain.ljust(32, "0")
+  end
+
 end
 end
 # vim: set ts=2 et sw=2:
