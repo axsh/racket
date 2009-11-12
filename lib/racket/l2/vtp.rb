@@ -37,7 +37,7 @@ class VTP < RacketPart
 
   def fix!
     self.domain_length = self.domain.length 
-    self.domain = self.domain.ljust(32, "0")
+    self.domain = self.domain.ljust(32, "\x00")
   end
 
 end
