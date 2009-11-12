@@ -32,7 +32,7 @@ class VTP < RacketPart
   unsigned :code, 8 
   unsigned :reserved, 8  
   unsigned :domain_length, 8
-  text :domain, 32
+  text :domain, 256
   rest :payload
 
   def fix!
