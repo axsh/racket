@@ -30,4 +30,5 @@ require 'racket/l2/llc'
 require 'racket/l2/snap'
 require 'racket/l2/vlan'
 require 'racket/l2/eightotwodotthree'
+require 'racket/l2/vtp'
 # vim: set ts=2 et sw=2:
