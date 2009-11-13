@@ -44,6 +44,10 @@ class VRRP < RacketPart
     @ips << L3::Misc.ipv42long(ip)
   end
 
+  def add_auth(authdata)
+    @authdata = authdata[0,8].ljust(32, "\x00")
+  end
+
   def checksum?
     self.csum == compute_checksum
   end
@@ -54,7 +58,7 @@ class VRRP < RacketPart
 
   # (really, just set the checksum)
   def fix!
-    self.payload = @ips.pack("N#{@ips.size}")
+    self.payload = [@ips, @authdata].flatten.pack("N#{@ips.size}a*")
     self.num_ips = @ips.size
     self.checksum!
   end
