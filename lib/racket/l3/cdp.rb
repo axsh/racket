@@ -34,7 +34,7 @@ class CDP < RacketPart
   # Time-to-live of the data in this message
   unsigned :ttl, 8
   # Checksum
-  unsigned :csum, 16
+  unsigned :checksum, 16
   # Payload of this CDP message.  Generally untouched.
   rest :payload
   
@@ -49,12 +49,12 @@ class CDP < RacketPart
 
   # Check the checksum for this IP datagram
   def checksum?# {{{
-    self.csum == compute_checksum
+    self.checksum == compute_checksum
   end# }}}
 
   # Compute and set the checksum for this IP datagram
   def checksum!# {{{
-    self.csum = compute_checksum
+    self.checksum = compute_checksum
   end# }}}
   
   # Fix this CDP message up for sending.

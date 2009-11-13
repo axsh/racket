@@ -35,7 +35,7 @@ class IGMPv2 < RacketPart
   # Max Response Time
   unsigned :time, 8
   # Checksum
-  unsigned :csum, 16
+  unsigned :checksum, 16
   # Group Address
   octets :gaddr, 32
   # Payload
@@ -43,12 +43,12 @@ class IGMPv2 < RacketPart
 
   # Is the checksum of this IGMPv2 message correct 
   def checksum?
-    self.csum == 0 || (self.csum == compute_checksum)
+    self.checksum == 0 || (self.checksum == compute_checksum)
   end
 
   # Set the checksum of this IGMPv2 message
   def checksum!
-    self.csum = compute_checksum
+    self.checksum = compute_checksum
   end
 
   # Do whatever 'fixing' is neccessary in preparation

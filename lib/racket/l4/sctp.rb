@@ -36,7 +36,7 @@ class SCTP < RacketPart
   # Verification tag
   unsigned :verification, 32
   # Checksum
-  unsigned :csum, 32
+  unsigned :checksum, 32
   rest :payload
 
   # Add a new SCTP chunk (see http://tools.ietf.org/html/rfc4960)
@@ -45,11 +45,11 @@ class SCTP < RacketPart
   end
 
   def checksum?
-    self.csum == compute_checksum
+    self.checksum == compute_checksum
   end
 
   def checksum!
-    self.csum = compute_checksum
+    self.checksum = compute_checksum
   end
 
   # (really, just set the checksum)

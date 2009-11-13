@@ -61,7 +61,7 @@ class TCP < RacketPart
   # Window size
   unsigned :window, 16
   # Checksum
-  unsigned :csum, 16
+  unsigned :checksum, 16
   # Urgent pointer
   unsigned :urg, 16
   # Payload
@@ -80,12 +80,12 @@ class TCP < RacketPart
 
   # Check the checksum for this TCP packet 
   def checksum?(ip_src, ip_dst)
-    self.csum == compute_checksum(ip_src, ip_dst)
+    self.checksum == compute_checksum(ip_src, ip_dst)
   end
 
   # Compute and set the checksum for this TCP packet
   def checksum!(ip_src, ip_dst)
-    self.csum = compute_checksum(ip_src, ip_dst)
+    self.checksum = compute_checksum(ip_src, ip_dst)
   end
 
   # Fix this packet up for proper sending.  Sets the length

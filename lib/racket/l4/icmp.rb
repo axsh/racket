@@ -51,7 +51,7 @@ class ICMP < RacketPart
   # Code
   unsigned :code, 8
   # Checksum
-  unsigned :csum, 16
+  unsigned :checksum, 16
   # ID
   unsigned :id, 16
   # Sequence number
@@ -61,12 +61,12 @@ class ICMP < RacketPart
 
   # check the checksum for this ICMP packet
   def checksum?
-    self.csum == compute_checksum
+    self.checksum == compute_checksum
   end
 
   # compute and set the checksum for this ICMP packet
   def checksum!
-    self.csum = compute_checksum
+    self.checksum = compute_checksum
   end
 
   # 'fix' this ICMP packet up for sending.

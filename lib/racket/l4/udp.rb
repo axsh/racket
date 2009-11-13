@@ -37,20 +37,20 @@ class UDP < RacketPart
   # Datagram Length
   unsigned :len, 16
   # Checksum
-  unsigned :csum, 16
+  unsigned :checksum, 16
   # Payload
   rest :payload
   
   # Check the checksum for this UDP datagram
   def checksum?(src_ip, dst_ip)
-    self.csum == 0 || (self.csum == compute_checksum(src_ip, dst_ip))
+    self.checksum == 0 || (self.checksum == compute_checksum(src_ip, dst_ip))
   end
 
   # Compute and set the checksum for this UDP datagram
   def checksum!(src_ip, dst_ip)
     # set the checksum to 0 for usage in the pseudo header...
-    self.csum = 0
-    self.csum = compute_checksum(src_ip, dst_ip)
+    self.checksum = 0
+    self.checksum = compute_checksum(src_ip, dst_ip)
   end
 
   # Fix this packet up for proper sending.  Sets the length

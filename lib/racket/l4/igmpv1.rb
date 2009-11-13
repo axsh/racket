@@ -38,7 +38,7 @@ class IGMPv1 < RacketPart
   # Unused
   unsigned :unused, 8
   # Checksum
-  unsigned :csum, 16
+  unsigned :checksum, 16
   # Group Address
   octets :gaddr, 32
   # Payload
@@ -46,12 +46,12 @@ class IGMPv1 < RacketPart
 
   # Check the checksum for this IGMP message
   def checksum?
-    self.csum == 0 || (self.csum == compute_checksum)
+    self.checksum == 0 || (self.checksum == compute_checksum)
   end
   
   # Compute and set the checkum for this IGMP message
   def checksum!
-    self.csum = compute_checksum
+    self.checksum = compute_checksum
   end
 
   # Do whatever 'fixing' is neccessary in preparation

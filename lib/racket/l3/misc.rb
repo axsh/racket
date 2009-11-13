@@ -55,21 +55,21 @@ module L3
     # complement sum of all 16 bit words
     def Misc.checksum(data)
       num_shorts = data.length / 2
-      csum = 0
+      checksum = 0
       count = data.length
       
       data.unpack("S#{num_shorts}").each { |x|
-        csum += x
+        checksum += x
         count -= 2
       }
 
       if (count == 1)
-        csum += data[data.length - 1]
+        checksum += data[data.length - 1]
       end
 
-      csum = (csum >> 16) + (csum & 0xffff)
-      csum = ~((csum >> 16) + csum) & 0xffff
-      ([csum].pack("S*")).unpack("n*")[0]
+      checksum = (checksum >> 16) + (checksum & 0xffff)
+      checksum = ~((checksum >> 16) + checksum) & 0xffff
+      ([checksum].pack("S*")).unpack("n*")[0]
     end
   end
 end

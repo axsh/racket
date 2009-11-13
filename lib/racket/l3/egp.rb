@@ -29,12 +29,15 @@
 # http://tools.ietf.org/html/rfc904
 module Racket
 class EGP < RacketPart
+  # EGP version
   unsigned :version, 8
   unsigned :type, 8
   unsigned :code, 8
   unsigned :status, 8
+  # Checksum
   unsigned :checksum, 16
   unsigned :asn, 16
+  # Sequence number
   unsigned :sequence, 16
   # Payload
   rest :payload

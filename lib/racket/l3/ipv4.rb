@@ -49,7 +49,7 @@ class IPv4 < RacketPart
   # Protocol
   unsigned :protocol, 8
   # Checksum
-  unsigned :csum, 16, "Checksum"
+  unsigned :checksum, 16, "Checksum"
   # Source IP address
   octets :src_ip, 32
   # Destination IP address
@@ -75,12 +75,12 @@ class IPv4 < RacketPart
 
   # Check the checksum for this IP datagram
   def checksum?
-    self.csum == compute_checksum
+    self.checksum == compute_checksum
   end
 
   # Compute and set the checksum for this IP datagram
   def checksum!
-    self.csum = compute_checksum
+    self.checksum = compute_checksum
   end
 
   # Perform all the niceties necessary prior to sending

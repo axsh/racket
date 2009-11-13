@@ -44,7 +44,7 @@ class VRRP < RacketPart
   # Advertisement interval
   unsigned :interval, 8
   # Checksum
-  unsigned :csum, 16
+  unsigned :checksum, 16
   rest :payload
 
   # Add a new IP to this message
@@ -58,11 +58,11 @@ class VRRP < RacketPart
   end
 
   def checksum?
-    self.csum == compute_checksum
+    self.checksum == compute_checksum
   end
 
   def checksum!
-    self.csum = compute_checksum
+    self.checksum = compute_checksum
   end
 
   # (really, just set the checksum)
