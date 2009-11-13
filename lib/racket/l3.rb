@@ -31,4 +31,5 @@ require 'racket/l3/arp'
 require 'racket/l3/stp'
 require 'racket/l3/cdp'
 require 'racket/l3/misc'
+require 'racket/l3/egp'
 # vim: set ts=2 et sw=2:
