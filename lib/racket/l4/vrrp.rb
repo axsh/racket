@@ -30,20 +30,29 @@
 # http://tools.ietf.org/html/rfc3768
 module Racket
 class VRRP < RacketPart
+  # Version
   unsigned :version, 4
+  # VRRP packet type 
   unsigned :type, 4 
+  # Virtual Router Identifier (VRID)
   unsigned :id, 8
   unsigned :priority, 8
+  # Total number of IPs contained in this VRRP message
   unsigned :num_ips, 8
+  # Authentication type (0, 1, 2)
   unsigned :auth_type, 8
+  # Advertisement interval
   unsigned :interval, 8
+  # Checksum
   unsigned :csum, 16
   rest :payload
 
+  # Add a new IP to this message
   def add_ip(ip)
     @ips << L3::Misc.ipv42long(ip)
   end
 
+  # Add authentication data
   def add_auth(authdata)
     @authdata = authdata[0,8].ljust(32, "\x00")
   end

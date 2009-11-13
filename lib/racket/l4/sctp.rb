@@ -29,12 +29,17 @@
 #  http://tools.ietf.org/html/rfc4960
 module Racket
 class SCTP < RacketPart
+  # Source port
   unsigned :src_port, 16
+  # Destination port
   unsigned :dst_port, 16
+  # Verification tag
   unsigned :verification, 32
+  # Checksum
   unsigned :csum, 32
   rest :payload
 
+  # Add a new SCTP chunk (see http://tools.ietf.org/html/rfc4960)
   def add_chunk(type, flags, length, data)
     @chunks << [ type, flags, length, data ]
   end
