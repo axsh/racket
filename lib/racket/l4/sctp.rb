@@ -1,4 +1,4 @@
-# $Id: l4.rb 14 2008-03-02 05:42:30Z warchild $
+# $Id$
 #
 # Copyright (c) 2008, Jon Hart 
 # All rights reserved.
@@ -25,14 +25,50 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-require 'racket/l4/igmpv1'
-require 'racket/l4/igmpv2'
-require 'racket/l4/igrp'
-require 'racket/l4/gre'
-require 'racket/l4/icmp'
-require 'racket/l4/sctp'
-require 'racket/l4/tcp'
-require 'racket/l4/udp'
-require 'racket/l4/vrrp'
+# Stream Control Transmission Protocol
+#  http://tools.ietf.org/html/rfc4960
+module Racket
+class SCTP < RacketPart
+  unsigned :src_port, 16
+  unsigned :dst_port, 16
+  unsigned :verification, 32
+  unsigned :csum, 32
+  rest :payload
 
+  def add_chunk(type, flags, length, data)
+    @chunks << [ type, flags, length, data ]
+  end
+
+  def checksum?
+    self.csum == compute_checksum
+  end
+
+  def checksum!
+    self.csum = compute_checksum
+  end
+
+  # (really, just set the checksum)
+  def fix!
+    self.payload = ""
+    @chunks.each do |c|
+      self.payload += c.pack("CCna*")
+    end
+    self.checksum!
+  end
+
+  def initialize(*args)
+    @chunks = []
+    super
+  end
+
+private
+  def compute_checksum
+    # XXX this is currently incorrect
+    pseudo = [ self.src_port, self.dst_port, self.verification, 0, self.payload] 
+    #L3::Misc.checksum(pseudo.pack("nnNNa*"))
+    require 'zlib'
+    Zlib.crc32(pseudo.pack("nnNNa*"))
+  end
+end
+end
 # vim: set ts=2 et sw=2:

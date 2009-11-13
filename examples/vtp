@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+#
+# $Id$
+#
+# Send amusing CDP packets
+require 'rubygems'
+require '../lib/racket'
+
+include Racket
+n = Racket::Racket.new
+n.iface = "eth0"
+
+n.layers[2] = EightOTwoDotThree.new(Misc.randstring(14))
+n.layers[2].dst_mac = "01:00:0c:cc:cc:cc"
+n.layers[3] = LLC.new()
+n.layers[4] = SNAP.new()
+n.layers[4].pid = 0x2003
+
+n.layers[5] = VTP.new()
+n.layers[5].version = 1
+n.layers[5].code = 1
+n.layers[5].domain = "lolblah"
+n.layers[5].payload = Misc.randstring(20)
+
+n.layers.compact.each do |l|
+  puts l.pretty
+end
+
+n.sendpacket
