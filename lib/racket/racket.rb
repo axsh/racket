@@ -149,7 +149,13 @@ class Racket
   def send3
     begin
       s = Socket.open(Socket::PF_INET, Socket::SOCK_RAW, Socket::IPPROTO_RAW)
-      #s.setsockopt(Socket::SOL_IP, Socket::IP_HDRINCL, true)
+
+      if (Socket.const_defined?('SOL_IP'))
+        s.setsockopt(Socket::SOL_IP, Socket::IP_HDRINCL, true)
+      else
+        # BSD
+        s.setsockopt(Socket::IPPROTO_IP, Socket::IP_HDRINCL, true)
+      end
     rescue Errno::EPERM
       $stderr.puts "Must run #{$0} as root."
       exit!
