@@ -31,11 +31,15 @@ module Racket
 class EGP < RacketPart
   # EGP version
   unsigned :version, 8
+  # Message type
   unsigned :type, 8
+  # Message code (subtype)
   unsigned :code, 8
+  # Message dependent status information
   unsigned :status, 8
   # Checksum
   unsigned :checksum, 16
+  # assigned number identifying the particular autonomous system
   unsigned :asn, 16
   # Sequence number
   unsigned :sequence, 16
