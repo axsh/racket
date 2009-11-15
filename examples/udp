@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+#
+# $Id$
+#
+# Send random garbage to a UDP port 
+
+require 'rubygems'
+require 'racket'
+
+include Racket
+unless (ARGV.size == 4) 
+  puts "Usage: #{$0} <srcip> <dstip> <dst_port> <size>"
+  exit
+end
+
+# create a new Racket object and pick an interface
+n = Racket::Racket.new
+n.iface = "eth0"
+
+# skip right to layer3, layer2 will be done automatically
+# build a new IPv4 layer, and assign src and dst ip from the command line
+n.l3 = IPv4.new
+n.l3.src_ip = ARGV[0] 
+n.l3.dst_ip = ARGV[1]
+n.l3.protocol = 0x11
+
+# tack on UDP
+n.l4 = UDP.new
+# randomize source port
+n.l4.src_port = 1024 + rand(65535-1024)
+# take destination port from the commandline
+n.l4.dst_port = ARGV[2].to_i
+# build a random amount of garbage for the payload
+n.l4.payload = Misc.randstring(ARGV[3].to_i)
+
+# fix 'er  up (checksum, length) prior to sending
+n.l4.fix!(n.l3.src_ip, n.l3.dst_ip)
+
+# off you go
+f = n.sendpacket
+
+# print out what we built
+n.layers.compact.each do |l|
+  puts l.pretty
+end
+puts "Sent #{f}"
