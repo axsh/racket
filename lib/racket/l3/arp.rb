@@ -27,8 +27,8 @@
 #
 # Address Resolution Protocol: ARP
 #
-# RFC826 (http://www.faqs.org/rfcs/rfc826.html)
 module Racket
+# RFC826 (http://www.faqs.org/rfcs/rfc826.html)
 class ARP < RacketPart
   ARPOP_REQUEST = 0x0001
   ARPOP_REPLY = 0x0002

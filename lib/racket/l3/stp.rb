@@ -25,10 +25,10 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # Spanning Tree Protocol
 #
 # http://en.wikipedia.org/wiki/Spanning_tree_protocol
-module Racket
 class STP < RacketPart
   # Protocol identifier
   unsigned :protocol, 16, { :default => 0 }

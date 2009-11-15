@@ -25,9 +25,9 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # CDP -- Cisco Discovery Protocol
 # http://www.cisco.biz/univercd/cc/td/doc/product/lan/trsrb/frames.htm#xtocid12
-module Racket
 class CDP < RacketPart
   # CDP Version (generally 1)
   unsigned :version, 8, { :default => 1 }

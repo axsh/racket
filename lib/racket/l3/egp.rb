@@ -25,9 +25,10 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # Exterior Gateway protocol (EGP)
 # http://tools.ietf.org/html/rfc904
-module Racket
+# XXX: TODO, add support for tacking on the various message types
 class EGP < RacketPart
   # EGP version
   unsigned :version, 8

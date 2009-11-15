@@ -27,8 +27,8 @@
 #
 # Internet Protcol Version 4 (IPV4)
 #
-# RFC791 (http://www.ietf.org/rfc/rfc791.txt)
 module Racket
+# RFC791 (http://www.ietf.org/rfc/rfc791.txt)
 class IPv4 < RacketPart
   # Version (defaults to 4)
   unsigned :version, 4, { :default => 4 }

@@ -25,10 +25,10 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # Internet Protocol Version 6 (IPV6)
 # RFC2460
 # XXX: not tested, incomplete.
-module Racket
 class IPv6 < RacketPart
   # IP Version (defaults to 6)
   unsigned :version, 4, { :default => 6 }

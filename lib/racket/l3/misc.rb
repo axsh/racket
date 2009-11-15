@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+# Miscelaneous L3 helper methods
 module L3
   module Misc
     # given an IPv4 address packed as an integer
@@ -39,6 +40,7 @@ module L3
       quad.join(".")
     end
 
+    # Unimplemented
     def Misc.long2ipv6(long)
     end
 
