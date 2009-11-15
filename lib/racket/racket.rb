@@ -102,6 +102,7 @@ class Racket
     payload
   end
 
+  # return a pretty interpretation of this packet
   def pretty
     s = ""
     @layers.compact.each do |l|

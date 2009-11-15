@@ -29,6 +29,7 @@ require 'rubygems'
 require 'bit-struct'
 
 module Racket
+# Every Racket object is made up of numerous sub-parts, namely layers of the OSI stack.
 class RacketPart < BitStruct
 
   # Boolean indicating whether or not this instance should be
