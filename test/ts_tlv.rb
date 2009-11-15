@@ -2,8 +2,8 @@
 
 $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
 
-require 'racket/tlv'
 require 'test/unit'
+require 'racket'
 
 class TestTLV <  Test::Unit::TestCase
   def test_init

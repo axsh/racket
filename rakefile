@@ -18,5 +18,6 @@ task :install do
 end
 
 task :test do
-  ruby "test/ts_all.rb"
+  sh %{cd test && ruby ts_all.rb}
+  #ruby "test/ts_all.rb"
 end
