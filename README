@@ -57,7 +57,7 @@ the stack:
   end
   puts "Sent #{f}"
 
-Packet reading, done through something like Pcap, is pretty straight forward to.
+Packet reading, done through something like Pcap, is pretty straight forward too:
 
   require 'rubygems'
   require 'racket'
