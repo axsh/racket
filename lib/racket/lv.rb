@@ -25,9 +25,9 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # Simple class to represent data structures that
 # consist of an arbitrary number of length value pairs.
-module Racket
 class LV
   # An array containing the values parsed from this LV
   attr_accessor :values

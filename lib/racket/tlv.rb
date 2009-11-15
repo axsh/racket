@@ -25,9 +25,9 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # Simple class for your average type, length, value datastructure.
 # Everything after the TLV is stuff into +rest+
-module Racket
 class TLV
   attr_accessor :type, :length, :value, :rest
 

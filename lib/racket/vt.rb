@@ -25,10 +25,10 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # Simple class to represent a datastructure that is made up of a 
 # null terminted string followed by an arbitrary number of
 # arbitrarily sized values, followed by a "rest" field.
-module Racket
 class VT 
   # the value for this VT object
   attr_accessor :value
