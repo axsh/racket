@@ -25,10 +25,10 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # Bootstrap Protocol -- BOOTP
 #
 # RFC951 (http://www.faqs.org/rfcs/rfc951.html)
-module Racket
 class BOOTP < RacketPart
   BOOTP_REQUEST = 1
   BOOTP_REPLY = 2

@@ -25,10 +25,10 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # Hot Standby Router Protocol: HSRP
 #
 # RFC2281 (http://www.faqs.org/rfcs/rfc2281.html)
-module Racket
 class HSRP < RacketPart
   HSRP_HELLO = 0
   HSRP_COUP = 1

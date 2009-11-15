@@ -25,8 +25,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-# Domain Name System
 module Racket
+# Domain Name System
 class DNS < RacketPart
   # Transaction ID
   unsigned :tx_id, 16
