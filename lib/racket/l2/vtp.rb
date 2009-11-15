@@ -25,16 +25,23 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-# VLAN Trunking Protocol (VTP)
 module Racket
+# VLAN Trunking Protocol (VTP)
+# http://en.wikipedia.org/wiki/VLAN_Trunking_Protocol
 class VTP < RacketPart
+  # VTP version (1-3)
   unsigned :version, 8 
+  # Message code (summary advertisement, subset advertisement, advertisement request, VTP join)
   unsigned :code, 8 
+  # Sometimes used, sometimes not, depends on the type
   unsigned :reserved, 8  
+  # Length of the management domain
   unsigned :domain_length, 8
+  # management domain name, zero padded to 32 bytes
   text :domain, 256
   rest :payload
 
+  # Adjust +domain_length+ and +domain+ accordingly prior to sending
   def fix!
     self.domain_length = self.domain.length 
     self.domain = self.domain.ljust(32, "\x00")

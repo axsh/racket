@@ -25,8 +25,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-# 802.3 Ethernet.  Should always be followed by an LLC header
 module Racket
+# 802.3 Ethernet.  Should always be followed by an LLC header
 class EightOTwoDotThree < RacketPart
   # Destination MAC address
   hex_octets :dst_mac, 48

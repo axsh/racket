@@ -25,8 +25,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-# Logical Link Control (http://en.wikipedia.org/wiki/Logical_Link_Control)
 module Racket
+# Logical Link Control (http://en.wikipedia.org/wiki/Logical_Link_Control)
 class LLC < RacketPart
   LLC_IBM_SNA = 0x04 
   LLC_IP = 0x06

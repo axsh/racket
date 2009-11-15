@@ -25,8 +25,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-# IEEE 802.1Q VLAN tag (http://en.wikipedia.org/wiki/IEEE_802.1Q)
 module Racket
+# IEEE 802.1Q VLAN tag (http://en.wikipedia.org/wiki/IEEE_802.1Q)
 class VLAN < RacketPart
   ETHERTYPE_IPV4 = 0x0800
   ETHERTYPE_ARP = 0x0806
@@ -45,7 +45,9 @@ class VLAN < RacketPart
   ETHERTYPE_ATAOE = 0x88A2
   ETHERTYPE_8021AE = 0x88E5
 
+  # Frame priority level
   unsigned :priority, 3
+  # Canonical format indicator
   unsigned :cfi, 1
   # VLAN ID
   unsigned :id, 12
