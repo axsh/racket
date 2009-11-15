@@ -25,10 +25,10 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # Virtual Router Redundancy Protocol (VRRP)
 # http://tools.ietf.org/html/rfc2338
 # http://tools.ietf.org/html/rfc3768
-module Racket
 class VRRP < RacketPart
   # Version
   unsigned :version, 4

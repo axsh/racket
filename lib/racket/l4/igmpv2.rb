@@ -25,10 +25,10 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # Internet Group Management Protocol, Version 2: IGMPv2
 #
 # RFC2236 (http://www.faqs.org/rfcs/rfc2236.html)
-module Racket
 class IGMPv2 < RacketPart
   # Type
   unsigned :type, 8

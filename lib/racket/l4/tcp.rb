@@ -25,10 +25,10 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # Transmission Control Protocol: TCP
 #
 # RFC793 (http://www.faqs.org/rfcs/rfc793.html)
-module Racket
 class TCP < RacketPart
   # Source port
   unsigned :src_port, 16

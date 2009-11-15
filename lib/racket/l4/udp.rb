@@ -25,10 +25,10 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # User Datagram Protocol: UDP
 #
 # RFC768 (http://www.faqs.org/rfcs/rfc768.html)
-module Racket
 class UDP < RacketPart
   # Source Port
   unsigned :src_port, 16

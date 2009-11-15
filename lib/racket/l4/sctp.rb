@@ -25,9 +25,9 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # Stream Control Transmission Protocol
 #  http://tools.ietf.org/html/rfc4960
-module Racket
 class SCTP < RacketPart
   # Source port
   unsigned :src_port, 16

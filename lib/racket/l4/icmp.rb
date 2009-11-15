@@ -25,10 +25,10 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # Internet Control Message Protcol.  
 #
 # RFC792 (http://www.faqs.org/rfcs/rfc792.html)
-module Racket
 class ICMP < RacketPart
   ICMP_TYPE_ECHO_REPLY = 0
   ICMP_TYPE_DESTINATION_UNREACHABLE = 3

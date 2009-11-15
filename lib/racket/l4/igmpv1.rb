@@ -25,11 +25,11 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
 # Internet Group Management Protocol, Version 1
 #
 # RFC1112 (http://www.faqs.org/rfcs/rfc1112.html)
 # 
-module Racket
 class IGMPv1 < RacketPart
   # Version (defaults to 1)
   unsigned :version, 4
