@@ -2,6 +2,71 @@
 
 Racket -- Ruby Raw Packet library.  
 
+Comments, concerns, bugs, money, food, libations to:
+
+  Jon Hart <jhart@spoofed.org>
+
 Installation is simple:
 
   gem install --source http://spoofed.org/files/racket/ racket
+
+Includes support for reading and writing most major layer 2, 3, 4 and
+5 protocols.
+
+Basic packet construction and writing is as simple (!) as walking
+the stack:
+
+  require 'rubygems'
+  require 'racket'
+
+  include Racket
+  unless (ARGV.size == 4)
+    puts "Usage: #{$0} <srcip> <dstip> <dst_port> <size>"
+    exit
+  end
+
+  # create a new Racket object and pick an interface
+  n = Racket::Racket.new
+  n.iface = "eth0"
+
+  # skip right to layer3, layer2 will be done automatically
+  # build a new IPv4 layer, and assign src and dst ip from the command line
+  n.l3 = IPv4.new
+  n.l3.src_ip = ARGV[0]
+  n.l3.dst_ip = ARGV[1]
+  n.l3.protocol = 0x11
+
+  # tack on UDP 
+  n.l4 = UDP.new
+  # randomize source port
+  n.l4.src_port = 1024 + rand(65535-1024)
+  # take destination port from the commandline
+  n.l4.dst_port = ARGV[2].to_i
+  # build a random amount of garbage for the payload
+  n.l4.payload = Misc.randstring(ARGV[3].to_i)
+
+  # fix 'er  up (checksum, length) prior to sending
+  n.l4.fix!(n.l3.src_ip, n.l3.dst_ip)
+
+  # off you go
+  f = n.sendpacket
+
+  # print out what we built
+  n.layers.compact.each do |l|
+    puts l.pretty
+  end
+  puts "Sent #{f}"
+
+Packet reading, done through something like Pcap, is pretty straight forward to.
+
+  require 'rubygems'
+  require 'racket'
+
+  # Get the raw capture data from somewhere.  In this case, I've hardcoded it
+  binary = "\x45\x10\x00\x3c\x2f\xdf\x40\x00\x40\x06\x89\x17\xc0\xa8\x00\x64\xc0\xa8\x00\x01\x99\xb7\x00\x35\x29\x39\x28\x66\x00\x00\x00\x00\xa0\x02\x16\xd0\xbc\x04\x00\x00\x02\x04\x05\xb4\x04\x02\x08\x0a\x00\x31\x07\xb9\x00\x00\x00\x00\x01\x03\x03\x07"
+  i = Racket::IPv4.new(binary)
+
+  # this will print it out all pretty like, and should show a 60 byte TCP packet from 192.168.0.100 to 192.168.0.1
+  puts i.pretty
+
+
