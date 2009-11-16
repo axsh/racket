@@ -3,7 +3,7 @@
 require 'rubygems'
 SPEC = Gem::Specification.new do |s|
   s.name = "racket"
-  s.version = "1.0.2"
+  s.version = "1.0.3"
   s.author = "Jon Hart"
   s.email = "jhart@spoofed.org"
   s.homepage = "http://spoofed.org/files/racket/"
@@ -19,7 +19,7 @@ SPEC = Gem::Specification.new do |s|
   s.rdoc_options << "-A rest,octets,hex_octets,unsigned,signed,text,rest"
   s.rdoc_options << "-p"
   s.rdoc_options << "-m" << "README"
-  s.rdoc_options << "-W http://spoofed.org/files/racket/%s"
+  s.rdoc_options << "-W http://spoofed.org/files/racket/src/%s"
   s.extra_rdoc_files = ["README"]
 end
 # vim: set ts=2 et sw=2:
