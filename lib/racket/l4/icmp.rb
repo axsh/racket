@@ -61,6 +61,12 @@ class ICMPGeneric < RacketPart
     self.checksum == compute_checksum
   end
 
+  def initialize(*args)
+    super(*args)
+    @autofix = false
+  end
+
+
   # compute and set the checksum for this ICMP packet
   def checksum!
     self.checksum = compute_checksum
