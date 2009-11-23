@@ -26,6 +26,30 @@ class TestTCP <  Test::Unit::TestCase
     assert_equal(i.checksum, 0xc217)
     assert_equal(i.payload,
     "\x02\x04\x05\xb4\x04\x02\x08\x0a\x03\x0f\xc8\x6e\x00\x00\x00\x00\x01\x03\x03\x07")
+
+  end
+
+  def test_build_no_options
+    i = Racket::TCP.new
+    assert_nothing_raised() {
+      i.src_port = 44781 
+      i.dst_port = 5190 
+      i.seq = 0x4e3e537a
+      i.ack = 0xbdca7ef8
+      i.flag_ack = 1
+      i.flag_psh = 1
+      i.offset = 5
+      i.window = 61200
+      i.payload = "\x2a\x05\x0b\xca\x00\x00"
+    }
+
+    i.checksum!("192.168.1.10", "64.12.26.128")
+    assert_equal(i.checksum, 0xccf8)
+  end
+  
+  def test_build_with_options
+    i = Racket::TCP.new
+    i.add_option(1, "blah")
   end
 end
 # vim: set ts=2 et sw=2:
