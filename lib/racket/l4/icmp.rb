@@ -81,7 +81,7 @@ class ICMPGeneric < RacketPart
 end
 
 # Send raw ICMP packets of your own design
-class ICMPRaw < ICMPGeneric
+class ICMP < ICMPGeneric
   rest :payload
 
 private
