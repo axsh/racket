@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+#
+# $Id$
+#
+
+require 'rubygems'
+require 'racket'
+
+include Racket
+unless (ARGV.size == 2) 
+  puts "Usage: #{$0} <srcip> <dstip>"
+  exit
+end
+
+n = Racket::Racket.new
+n.iface = "eth0"
+
+n.l2 = Ethernet.new(Misc.randstring(14))
+n.l2.ethertype = 0x86DD
+
+n.l3 = IPv6.new
+n.l3.src_ip = L3::Misc.ipv62long(ARGV[0])
+n.l3.dst_ip = L3::Misc.ipv62long(ARGV[1])
+n.l3.nhead = 17 
+
+n.l4 = UDP.new
+n.l4.src_port = 12345
+n.l4.dst_port = 123
+n.l4.fix!
+
+f = n.sendpacket
+n.layers.compact.each do |l|
+  puts l.pretty
+end
+#puts "Sent #{f}"
