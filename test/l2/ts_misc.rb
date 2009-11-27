@@ -7,9 +7,10 @@ require 'racket'
 
 class TestL2Misc <  Test::Unit::TestCase
   def test_convert
-    mac = Racket::L2::Misc.randommac
+    len = rand(32)
+    mac = Racket::L2::Misc.randommac(len)
     long = Racket::L2::Misc.mac2long(mac)
-    assert_equal(mac, Racket::L2::Misc.long2mac(long))
+    assert_equal(mac, Racket::L2::Misc.long2mac(long, len))
     assert_equal(long, Racket::L2::Misc.mac2long(mac))
   end
 end

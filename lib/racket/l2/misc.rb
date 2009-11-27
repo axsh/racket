@@ -41,13 +41,15 @@ module L2
   end
 
   # given a long representing a MAC address
-  # print it out in human readable form
-  def Misc.long2mac(long)
-    long.to_s(16).rjust(12, '0').unpack("a2a2a2a2a2a2").join(":")
+  # print it out in human readable form of a given length, 
+  # defaulting to 6 (ethernet)
+  def Misc.long2mac(long, len=6)
+    long.to_s(16).rjust(12, '0').unpack("a2"*len).join(":")
   end
-
-  def Misc.randommac
-    long2mac(rand(2**48))
+  
+  # Return a random MAC, defaults to 6 bytes (ethernet)
+  def Misc.randommac(len=6)
+    long2mac(rand(2**(8*len)), len)
   end
 end
 end
