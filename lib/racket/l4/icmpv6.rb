@@ -35,19 +35,17 @@ class ICMPv6Generic < RacketPart
   ICMPv6_TYPE_ECHO_REPLY = 129
   ICMPv6_TYPE_DESTINATION_UNREACHABLE = 1
   ICMPv6_TYPE_PACKET_TOO_BIG = 2
-#  ICMPv6_TYPE_SOURCE_QUENCH = 
-#  ICMPv6_TYPE_REDIRECT = 
   ICMPv6_TYPE_ECHO_REQUEST = 128
-#  ICMPv6_TYPE_MOBILE_IP_ADVERTISEMENT = 
-#  ICMPv6_TYPE_ROUTER_SOLICITATION = 
   ICMPv6_TYPE_TIME_EXCEEDED = 3
   ICMPv6_TYPE_PARAMETER_PROBLEM = 4
-#  ICMPv6_TYPE_TIMESTAMP_REQUEST = 
-#  ICMPv6_TYPE_TIMESTAMP_REPLY = 
-#  ICMPv6_TYPE_INFO_REQUEST = 
-#  ICMPv6_TYPE_INFO_REPLY = 
-#  ICMPv6_TYPE_ADDRESS_MASK_REQUEST = 
-#  ICMPv6_TYPE_ADDRESS_MASK_REPLY = 
+  ICMPv6_TYPE_MLD_QUERY = 130
+  ICMPv6_TYPE_MLD_REPORT = 131
+  ICMPv6_TYPE_MLD_DONE = 132
+  ICMPv6_TYPE_ROUTER_SOLICITATION = 133
+  ICMPv6_TYPE_ROUTER_ADVERTISEMENT = 134
+  ICMPv6_TYPE_NEIGHBOR_SOLICITATION = 135
+  ICMPv6_TYPE_NEIGHBOR_ADVERTISEMENT = 136
+  ICMPv6_TYPE_REDIRECT = 137
 
   # Type
   unsigned :type, 8
@@ -65,8 +63,16 @@ class ICMPv6Generic < RacketPart
   def initialize(*args)
     super(*args)
     @autofix = false
+    @options = []
   end
 
+  def add_option(type, value)
+    t = TLV.new(1,1)
+    t.type = type
+    t.value = value
+    t.length = (value.length + 2)
+    @options << t.encode
+  end
 
   # compute and set the checksum for this ICMP packet
   def checksum!(src_ip, dst_ip)
@@ -76,6 +82,7 @@ class ICMPv6Generic < RacketPart
   # 'fix' this ICMP packet up for sending.
   # (really, just set the checksum)
   def fix!(src_ip, dst_ip)
+    self.payload = self.payload + @options.join
     self.checksum!(src_ip, dst_ip)
   end
 
@@ -100,8 +107,6 @@ end
 class ICMPv6 < ICMPv6Generic
   rest :payload
 end
-
-# ICMP Echo
 
 # Generic ICMPv6 echo, used by request and reply
 class ICMPv6Echo < ICMPv6Generic
@@ -197,6 +202,115 @@ class ICMPv6ParameterProblem < ICMPv6Generic
   def initialize(*args)
     super(*args)
     self.type = ICMPv6_TYPE_PARAMETER_PROBLEM
+  end
+end
+
+# ICMPv6 Multicast Listener Discovery (MLD)
+# http://www.faqs.org/rfcs/rfc2710.html
+class ICMPv6MulticastListener < ICMPv6Generic
+  # maximum response delay
+  unsigned :delay, 16
+  unsigned :reserved, 16
+  # multicast address
+  unsigned :address, 128
+  rest :payload
+
+  def initialize(*args)
+    super(*args)
+  end
+end
+
+class ICMPv6MulticastListenerQuery < ICMPv6MulticastListener
+  rest :payload
+
+  def initialize(*args)
+    super(*args)
+    self.type = ICMPv6_TYPE_MLD_QUERY
+  end
+end
+
+class ICMPv6MulticastListenerReport < ICMPv6MulticastListener
+  rest :payload
+
+  def initialize(*args)
+    super(*args)
+    self.type = ICMPv6_TYPE_MLD_REPORT
+  end
+end
+
+class ICMPv6MulticastListenerDone < ICMPv6MulticastListener
+  rest :payload
+
+  def initialize(*args)
+    super(*args)
+    self.type = ICMPv6_TYPE_MLD_DONE
+  end
+end
+
+class ICMPv6RouterSolicitation < ICMPv6Generic
+  unsigned :reserved, 32
+  rest :payload
+
+  def initialize(*args)
+    super(*args)
+    self.type = ICMPv6_TYPE_ROUTER_SOLICITATION
+  end
+end
+
+class ICMPv6RouterAdvertisement < ICMPv6Generic
+  unsigned :hop_limit, 8
+  unsigned :managed_config, 1
+  unsigned :other_config, 1
+  unsigned :reserved, 6
+  # lifetime associated with the default router in seconds
+  unsigned :lifetime, 16
+  # time in milliseconds that a node assumes a neighbor is reachable after having received a reachability confirmation
+  unsigned :reachable_time, 32
+  # time in milliseconds between retransmitted neighbor solicitation messages
+  unsigned :retrans_time, 32
+  rest :payload
+
+  def initialize(*args)
+    super(*args)
+    self.type = ICMPv6_TYPE_ROUTER_ADVERTISEMENT
+  end
+end
+
+class ICMPv6NeighborSolicitation < ICMPv6Generic
+  unsigned :reserved, 32
+  unsigned :address, 128
+  rest :payload
+
+  def initialize(*args)
+    super(*args)
+    self.type = ICMPv6_TYPE_NEIGHBOR_SOLICITATION
+  end
+end
+
+# Currently busted because of bit-struct weirdness
+class ICMPv6NeighborAdvertisement < ICMPv6Generic
+  #unsigned :router, 1
+  #unsigned :solicited, 1
+  #unsigned :override, 1
+  #unsigned :reserved, 29
+  unsigned :address, 128
+  rest :payload
+
+  def initialize(*args)
+    super(*args)
+    self.type = ICMPv6_TYPE_NEIGHBOR_ADVERTISEMENT
+  end
+end
+
+class ICMPv6Redirect < ICMPv6Generic
+  unsigned :reserved, 32
+  unsigned :src_ip, 128
+  unsigned :dst_ip, 128
+  rest :payload
+
+  def initialize(*args)
+    super(*args)
+    self.type = ICMPv6_TYPE_REDIRECT
   end
 end
 end
