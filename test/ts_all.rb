@@ -1,6 +1,6 @@
 # $Id$
 
-require 'rubygems'
+#require 'rubygems'
 
 (2..5).each do |l|
   Dir.glob(File.join(File.dirname(__FILE__) + "/l#{l}", '*.rb')).each do |f|
