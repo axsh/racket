@@ -48,6 +48,17 @@ class IPv6 < RacketPart
   unsigned :dst_ip, 128
   # Payload
   rest :payload
+
+  def initialize(*args)
+    @headers = []
+    super
+    @autofix = true
+  end
+
+  def fix!
+    self.plen = self.payload.length
+  end
+
 end
 end
 # vim: set ts=2 et sw=2:
