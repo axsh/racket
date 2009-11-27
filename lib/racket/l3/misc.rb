@@ -57,7 +57,6 @@ module L3
     def Misc.ipv62long(ipv6)
       omg = ipv6.split(":")
       omg.map! { |o| o.empty? ? 0 : o.hex }
-      omg.each { |o| puts o }
 
       long = omg[0]
       (1..7).each do |o|

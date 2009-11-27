@@ -91,10 +91,7 @@ private
     d3 = (dst_ip >> 32) & 0xFFFFFFFF
     d4 = dst_ip & 0xFFFFFFFF
 
-    printf("%x %x %x %x\n", s1, s2, s3, s4)
-    printf("%x %x %x %x\n", d1, d2, d3, d4)
     # pseudo header used for checksum calculation as per RFC 768 
-
     pseudo = [ s1, s2, s3, s4, d1, d2, d3, d4, self.length, 58, self.type, self.code, 0, self.message ]
     L3::Misc.checksum(pseudo.pack("NNNNNNNNNNCCna*"))
   end
