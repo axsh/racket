@@ -111,8 +111,6 @@ class ICMPv6Echo < ICMPv6Generic
 
   def initialize(*args)
     super(*args)
-    self.type = ICMPv6_TYPE_ECHO_REQUEST
-    self.code = 0
   end
 
 end
