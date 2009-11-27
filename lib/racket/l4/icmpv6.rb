@@ -116,7 +116,9 @@ end
 
 # Generic ICMPv6 echo, used by request and reply
 class ICMPv6Echo < ICMPv6Generic
+  # identifier to aid in matching echo requests/replies
   unsigned :id, 16
+  # sequence number to aid in matching requests/replies
   unsigned :sequence, 16
   rest :payload
 
@@ -216,6 +218,7 @@ end
 class ICMPv6MulticastListener < ICMPv6Generic
   # maximum response delay
   unsigned :delay, 16
+  # should be zero.  never used.
   unsigned :reserved, 16
   # multicast address
   unsigned :address, 128
@@ -253,7 +256,9 @@ class ICMPv6MulticastListenerDone < ICMPv6MulticastListener
   end
 end
 
+# http://tools.ietf.org/html/rfc4861
 class ICMPv6RouterSolicitation < ICMPv6Generic
+  # should be 0, never used.
   unsigned :reserved, 32
   rest :payload
 
@@ -263,10 +268,16 @@ class ICMPv6RouterSolicitation < ICMPv6Generic
   end
 end
 
+# http://tools.ietf.org/html/rfc4861
 class ICMPv6RouterAdvertisement < ICMPv6Generic
+  # default value that should be placed in the hop count field of the IP header
+  # for outgoing IP packets
   unsigned :hop_limit, 8
+  # boolean, managed address configuration?
   unsigned :managed_config, 1
+  # boolean, other configuration?
   unsigned :other_config, 1
+  # set to 0, never used.
   unsigned :reserved, 6
   # lifetime associated with the default router in seconds
   unsigned :lifetime, 16
@@ -282,8 +293,11 @@ class ICMPv6RouterAdvertisement < ICMPv6Generic
   end
 end
 
+# http://tools.ietf.org/html/rfc4861
 class ICMPv6NeighborSolicitation < ICMPv6Generic
+  # set to 0, never used.
   unsigned :reserved, 32
+  # target address of the solicitation
   unsigned :address, 128
   rest :payload
 
@@ -293,21 +307,27 @@ class ICMPv6NeighborSolicitation < ICMPv6Generic
   end
 end
 
+# http://tools.ietf.org/html/rfc4861
 class ICMPv6NeighborAdvertisement < ICMPv6Generic
   # normally this would be router (1), solicited (1), override(1) and reserved (2), however
   # a bit-struct byte boundary bug bites us here
   unsigned :bigbustedfield, 32
+  # for solicited adverts, the target address field in the solicitation that prompted this.
+  # for unsolicited adverts, the address whose link-layer address has changed 
   unsigned :address, 128
   rest :payload
-
+  
+  # set solicited flag
   def solicited=(f)
     self.bigbustedfield = (f << 30) ^ self.bigbustedfield
   end
 
+  # set router flag
   def router=(f)
     self.bigbustedfield = (f << 31) ^ self.bigbustedfield
   end
 
+  # set override flag
   def override=(f)
     self.bigbustedfield = (f << 29) ^ self.bigbustedfield
   end
@@ -318,9 +338,13 @@ class ICMPv6NeighborAdvertisement < ICMPv6Generic
   end
 end
 
+# http://tools.ietf.org/html/rfc4861
 class ICMPv6Redirect < ICMPv6Generic
+  # unused, should be 0
   unsigned :reserved, 32
+  # the IP address that is a better first hop to use for the ICMP destination address
   unsigned :src_ip, 128
+  # the IP address of the destination that is redirected to the target
   unsigned :dst_ip, 128
   rest :payload
 
@@ -331,9 +355,13 @@ class ICMPv6Redirect < ICMPv6Generic
 end
 
 # Generic class that IPv6NodeInformationRequest and Reply inherit from
+# http://tools.ietf.org/html/rfc4620
 class ICMPv6NodeInformation < ICMPv6Generic
+  # type of information requested in a query or supplied in a reply
   unsigned :qtype, 16
+  # qtype-specific flags that may be defined for certain qtypes and their replies
   unsigned :flags, 16
+  # opaque field to help avoid spoofing and/or to aid in matching replies with queries
   text :nonce, 64 
   rest :payload
 
@@ -342,6 +370,7 @@ class ICMPv6NodeInformation < ICMPv6Generic
   end
 end
 
+# http://tools.ietf.org/html/rfc4620
 class ICMPv6NodeInformationRequest < ICMPv6NodeInformation
   ICMPv6_CODE_INFORMATION_REQUEST_IPv6 = 0
   ICMPv6_CODE_INFORMATION_REQUEST_NAME = 1 
@@ -352,6 +381,7 @@ class ICMPv6NodeInformationRequest < ICMPv6NodeInformation
   end
 end
 
+# http://tools.ietf.org/html/rfc4620
 class ICMPv6NodeInformationReply < ICMPv6NodeInformation
   ICMPv6_CODE_INFORMATION_REPLY_SUCCESS = 0
   ICMPv6_CODE_INFORMATION_REPLY_REFUSE = 1 
