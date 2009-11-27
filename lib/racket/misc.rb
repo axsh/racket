@@ -56,14 +56,6 @@ module Misc
     }
     s
   end
-
-  # given a long representing a MAC address
-  # print it out in human readable form
-  def Misc.macaddr(long)
-    long.to_s(16).rjust(12, '0').unpack("a2a2a2a2a2a2").join(":")
-  end
-
-
 end
 end
 # vim: set ts=2 et sw=2:
