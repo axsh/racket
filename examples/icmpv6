@@ -1,0 +1,50 @@
+#!/usr/bin/env ruby
+#
+# $Id$
+#
+
+require 'rubygems'
+require 'racket'
+
+include Racket
+unless (ARGV.size == 2) 
+  puts "Usage: #{$0} <srcip> <dstip>"
+  exit
+end
+
+n = Racket::Racket.new
+n.iface = "eth0"
+
+n.l2 = Ethernet.new(Misc.randstring(14))
+n.l2.ethertype = 0x86DD
+
+n.l3 = IPv6.new
+n.l3.src_ip = L3::Misc.ipv62long(ARGV[0])
+n.l3.dst_ip = L3::Misc.ipv62long(ARGV[1])
+n.l3.nhead = 58
+
+def build(i)
+  i.l4.payload = Misc.randstring(rand(1500))
+  i.l4.fix!(i.l3.src_ip, i.l3.dst_ip)
+  f = i.sendpacket
+  puts "Sent #{f}"
+end
+
+n.l4 = ICMPv6DestinationUnreachable.new
+build(n)
+n.l4 = ICMPv6TimeExceeded.new
+build(n)
+n.l4 = ICMPv6TimeExceeded.new
+build(n)
+n.l4 = ICMPv6EchoRequest.new
+build(n)
+n.l4 = ICMPv6EchoReply.new
+build(n)
+n.l4 = ICMPv6PacketTooBig.new
+n.l4.mtu = rand(65535)
+build(n)
+n.l4 = ICMPv6ParameterProblem.new
+build(n)
+n.l4 = ICMPv6TimeExceeded.new
+build(n)
+
