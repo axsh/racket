@@ -40,8 +40,30 @@ module L3
       quad.join(".")
     end
 
-    # Unimplemented
     def Misc.long2ipv6(long)
+      omg = []
+      omg[0] = long >> 112
+      omg[1] = (long >> 96) & (0xFFFF)
+      omg[2] = (long >> 80) & (0xFFFF)
+      omg[3] = (long >> 64) & (0xFFFF)
+      omg[4] = (long >> 48) & (0xFFFF)
+      omg[5] = (long >> 32) & (0xFFFF)
+      omg[6] = (long >> 16) & (0xFFFF)
+      omg[7] = long & (0xFFFF)
+
+      omg.map { |o| o.to_s(16) }.join(":")
+    end
+
+    def Misc.ipv62long(ipv6)
+      omg = ipv6.split(":")
+      omg.map! { |o| o.empty? ? 0 : o.hex }
+      omg.each { |o| puts o }
+
+      long = omg[0]
+      (1..7).each do |o|
+        long = (long << 16) ^ omg[o]
+      end
+      long
     end
 
     # given a "dotted quad" representing an IPv4
