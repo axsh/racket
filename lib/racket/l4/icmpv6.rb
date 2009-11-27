@@ -66,11 +66,15 @@ class ICMPv6Generic < RacketPart
     @options = []
   end
 
+  # Add an ICMPv6 option.  RFC claims that the value should be padded (with what?)
+  # to land on a 64-bit boundary, however that doesn't always appear to be the case.  so, yeah,
+  # try to pad on your own or pick strings that are multiples of 8 characters
   def add_option(type, value)
     t = TLV.new(1,1)
     t.type = type
-    t.value = value
-    t.length = (value.length + 2)
+    t.length = (value.length + 2) / 8
+    just = value.length + 2 + (8 - ((value.length + 2) % 8))
+    t.value = (value.length + 2) % 8 == 0 ? value : value.ljust(just, "\x00")
     @options << t.encode
   end
 
@@ -289,12 +293,23 @@ end
 
 # Currently busted because of bit-struct weirdness
 class ICMPv6NeighborAdvertisement < ICMPv6Generic
-  #unsigned :router, 1
-  #unsigned :solicited, 1
-  #unsigned :override, 1
-  #unsigned :reserved, 29
+  # normally this would be router (1), solicited (1), override(1) and reserved (2), however
+  # a bit-struct byte boundary bug bites us here
+  unsigned :bigbustedfield, 32
   unsigned :address, 128
   rest :payload
+
+  def solicited=(f)
+    self.bigbustedfield = (f << 30) ^ self.bigbustedfield
+  end
+
+  def router=(f)
+    self.bigbustedfield = (f << 31) ^ self.bigbustedfield
+  end
+
+  def override=(f)
+    self.bigbustedfield = (f << 29) ^ self.bigbustedfield
+  end
 
   def initialize(*args)
     super(*args)
