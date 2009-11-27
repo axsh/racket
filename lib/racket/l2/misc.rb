@@ -32,14 +32,22 @@ module L2
 
   # given a string representing a MAC address
   # print it a long form
-  def mac2long(addr)
-    addr.split(':').map{|s|s.to_i(16)}.pack("CCCCCC")
+  def Misc.mac2long(addr)
+    long = 0
+    addr.split(':').map { |s| s.to_i(16) }.each do |o|
+      long = (long << 8) ^ o
+    end
+    long
   end
 
- # given a long representing a MAC address
+  # given a long representing a MAC address
   # print it out in human readable form
-  def macaddr(long)
+  def Misc.long2mac(long)
     long.to_s(16).rjust(12, '0').unpack("a2a2a2a2a2a2").join(":")
+  end
+
+  def Misc.randommac
+    long2mac(rand(2**48))
   end
 end
 end
