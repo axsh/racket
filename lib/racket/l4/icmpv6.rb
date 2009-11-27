@@ -82,16 +82,19 @@ class ICMPv6Generic < RacketPart
 private
   def compute_checksum(src_ip, dst_ip)
     s1 = src_ip >> 96 
-    s2 = (src_ip >> 64) & 0x0000FFFF
-    s3 = (src_ip >> 32) & 0x00000000FFFF
-    s4 = src_ip & 0x000000000000FFFF
+    s2 = (src_ip >> 64) & 0xFFFFFFFF
+    s3 = (src_ip >> 32) & 0xFFFFFFFF
+    s4 = src_ip & 0xFFFFFFFF
 
     d1 = dst_ip >> 96 
-    d2 = (dst_ip >> 64) & 0x0000FFFF
-    d3 = (dst_ip >> 32) & 0x00000000FFFF
-    d4 = dst_ip & 0x000000000000FFFF
+    d2 = (dst_ip >> 64) & 0xFFFFFFFF
+    d3 = (dst_ip >> 32) & 0xFFFFFFFF
+    d4 = dst_ip & 0xFFFFFFFF
 
+    printf("%x %x %x %x\n", s1, s2, s3, s4)
+    printf("%x %x %x %x\n", d1, d2, d3, d4)
     # pseudo header used for checksum calculation as per RFC 768 
+
     pseudo = [ s1, s2, s3, s4, d1, d2, d3, d4, self.length, 58, self.type, self.code, 0, self.message ]
     L3::Misc.checksum(pseudo.pack("NNNNNNNNNNCCna*"))
   end
