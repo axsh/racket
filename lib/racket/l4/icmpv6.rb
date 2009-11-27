@@ -46,6 +46,8 @@ class ICMPv6Generic < RacketPart
   ICMPv6_TYPE_NEIGHBOR_SOLICITATION = 135
   ICMPv6_TYPE_NEIGHBOR_ADVERTISEMENT = 136
   ICMPv6_TYPE_REDIRECT = 137
+  ICMPv6_TYPE_INFORMATION_REQUEST = 139
+  ICMPv6_TYPE_INFORMATION_REPLY = 140
 
   # Type
   unsigned :type, 8
@@ -291,7 +293,6 @@ class ICMPv6NeighborSolicitation < ICMPv6Generic
   end
 end
 
-# Currently busted because of bit-struct weirdness
 class ICMPv6NeighborAdvertisement < ICMPv6Generic
   # normally this would be router (1), solicited (1), override(1) and reserved (2), however
   # a bit-struct byte boundary bug bites us here
@@ -326,6 +327,38 @@ class ICMPv6Redirect < ICMPv6Generic
   def initialize(*args)
     super(*args)
     self.type = ICMPv6_TYPE_REDIRECT
+  end
+end
+
+# Generic class that IPv6NodeInformationRequest and Reply inherit from
+class ICMPv6NodeInformation < ICMPv6Generic
+  unsigned :qtype, 16
+  unsigned :flags, 16
+  text :nonce, 64 
+  rest :payload
+
+  def initialize(*args)
+    super(*args)
+  end
+end
+
+class ICMPv6NodeInformationRequest < ICMPv6NodeInformation
+  ICMPv6_CODE_INFORMATION_REQUEST_IPv6 = 0
+  ICMPv6_CODE_INFORMATION_REQUEST_NAME = 1 
+  ICMPv6_CODE_INFORMATION_REQUEST_IPv4 = 2
+  def initialize(*args)
+    super(*args)
+    self.type = ICMPv6_TYPE_INFORMATION_REQUEST
+  end
+end
+
+class ICMPv6NodeInformationReply < ICMPv6NodeInformation
+  ICMPv6_CODE_INFORMATION_REPLY_SUCCESS = 0
+  ICMPv6_CODE_INFORMATION_REPLY_REFUSE = 1 
+  ICMPv6_CODE_INFORMATION_REPLY_UNKNOWN = 2
+  def initialize(*args)
+    super(*args)
+    self.type = ICMPv6_TYPE_INFORMATION_REPLY
   end
 end
 end

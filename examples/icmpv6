@@ -15,7 +15,10 @@ end
 n = Racket::Racket.new
 n.iface = "eth0"
 
-n.l2 = Ethernet.new(Misc.randstring(14))
+#n.l2 = Ethernet.new(Misc.randstring(14))
+n.l2 = Ethernet.new
+n.l2.src_mac = L2::Misc.randommac
+n.l2.dst_mac = L2::Misc.randommac
 n.l2.ethertype = 0x86DD
 
 n.l3 = IPv6.new
@@ -24,7 +27,6 @@ n.l3.dst_ip = L3::Misc.ipv62long(ARGV[1])
 n.l3.nhead = 58
 
 def build(i)
-  i.l4.payload = Misc.randstring(rand(1500))
   i.l4.fix!(i.l3.src_ip, i.l3.dst_ip)
   f = i.sendpacket
   puts "Sent #{f}"
@@ -47,4 +49,34 @@ n.l4 = ICMPv6ParameterProblem.new
 build(n)
 n.l4 = ICMPv6TimeExceeded.new
 build(n)
+n.l4 = ICMPv6MulticastListenerQuery.new
+build(n)
+n.l4 = ICMPv6MulticastListenerReport.new
+build(n)
+n.l4 = ICMPv6MulticastListenerDone.new
+build(n)
+n.l4 = ICMPv6RouterSolicitation.new
+build(n)
+n.l4 = ICMPv6RouterAdvertisement.new
+build(n)
+n.l4 = ICMPv6NeighborSolicitation.new
+build(n)
+n.l4 = ICMPv6NeighborAdvertisement.new
+n.l4.solicited = 1
+n.l4.add_option(1, Misc.randstring(6))
+build(n)
+n.l4 = ICMPv6Redirect.new
+n.l4.add_option(2, "\x01\x02\x03\x04\x05\x06\x07\x08\x09\x00")
+n.l4.src_ip = L3::Misc.ipv62long(ARGV[1])
+n.l4.dst_ip = L3::Misc.ipv62long(ARGV[0])
+build(n)
 
+n.l4 = ICMPv6NodeInformationRequest.new
+n.l4.payload = Misc.randstring(rand(32))
+n.l4.code = 2
+n.l4.payload = [L3::Misc.ipv42long("192.168.0.2")].pack("N")
+build(n)
+
+n.l4 = ICMPv6NodeInformationReply.new
+n.l4.payload = Misc.randstring(rand(32))
+build(n)
