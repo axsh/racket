@@ -30,7 +30,15 @@ class TestIPV4 <  Test::Unit::TestCase
     i.src_ip = "1.2.3.4"
     i.fix!
     assert_equal(i.checksum, 17950)
+  end
 
+  def test_convert
+    (0..512).each {
+      long = rand(2**32)
+      ipv4 = Racket::L3::Misc.long2ipv4(long)
+      assert_equal(long, Racket::L3::Misc.ipv42long(ipv4))
+      assert_equal(ipv4, Racket::L3::Misc.long2ipv4(long))
+    }
   end
 end
 # vim: set ts=2 et sw=2:
