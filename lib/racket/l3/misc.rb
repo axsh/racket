@@ -76,6 +76,35 @@ module L3
       (l + Array.new(rest, '0') + r).inject(0) { |i, s|  i << 16 | s.hex }
     end
 
+    # In addition to the regular multicast addresses, each unicast address
+    # has a special multicast address called its solicited-node address. This
+    # address is created through a special mapping from the device’s unicast
+    # address. Solicited-node addresses are used by the IPv6 Neighbor
+    # Discovery (ND) protocol to provide more efficient address resolution
+    # than the ARP technique used in IPv4.  
+    # From Daniele Bellucci
+    def Misc.soll_mcast_addr6(addr)
+      h = addr.split(':')[-2, 2] 
+      m = []
+      m << 'ff'
+      m << (h[0].to_i(16) & 0xff).to_s(16)
+      m << ((h[1].to_i(16) & (0xff << 8)) >> 8).to_s(16)
+      m << (h[1].to_i(16) & 0xff).to_s(16)
+      'ff02::1:' + [m[0,2].join, m[2,2].join].join(':')
+    end
+    
+    # 
+    def Misc.soll_mcast_mac(addr)
+      h = addr.split(':')[-2, 2] 
+      m = []
+      m << 'ff'
+      m << (h[0].to_i(16) & 0xff).to_s(16)
+      m << ((h[1].to_i(16) & (0xff << 8)) >> 8).to_s(16)
+      m << (h[1].to_i(16) & 0xff).to_s(16)   
+      '33:33:' + m.join(':') 
+    end
+
+
     # given a "dotted quad" representing an IPv4
     # address, return the integer representation
     def Misc.ipv42long(ip)
