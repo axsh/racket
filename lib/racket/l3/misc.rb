@@ -54,15 +54,26 @@ module L3
       omg.map { |o| o.to_s(16) }.join(":")
     end
 
-    def Misc.ipv62long(ipv6)
-      omg = ipv6.split(":")
-      omg.map! { |o| o.empty? ? 0 : o.hex }
-
-      long = omg[0]
-      (1..7).each do |o|
-        long = (long << 16) ^ omg[o]
+    # given a string representing an IPv6
+    # address, return the integer representation
+    def Misc.ipv62long(ip)
+      case ip
+        when /^::ffff:(\d+\.\d+\.\d+\.\d+)$/i
+          return Misc.ipv42long($1) + 0xffff00000000
+        when /^::(\d+\.\d+\.\d+\.\d+)$/i
+          return Misc.ipv42long($1)
+        when /^(.*)::(.*)$/
+          left, right = $1, $2
+        else
+          left, right = ip, ''
+        end
+      l = left.split(':')
+      r = right.split(':')
+      rest = 8 - l.size - r.size
+      if rest < 0
+        return nil
       end
-      long
+      (l + Array.new(rest, '0') + r).inject(0) { |i, s|  i << 16 | s.hex }
     end
 
     # given a "dotted quad" representing an IPv4
