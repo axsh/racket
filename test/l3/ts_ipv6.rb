@@ -18,6 +18,9 @@ class TestIPV6 <  Test::Unit::TestCase
     assert_equal(long, Racket::L3::Misc.ipv62long(ipv6))
     assert_equal(ipv6, Racket::L3::Misc.long2ipv6(long))
     assert_nothing_raised { Racket::IPv6.new("a:b:c::1") }
+    assert_nothing_raised { Racket::L3::Misc.soll_mcast_addr6(ipv6) }
+    mac = Racket::L2::Misc.randommac
+    assert_nothing_raised { Racket::L3::Misc.soll_mcast_mac(mac) }
   end
 end
 # vim: set ts=2 et sw=2:
