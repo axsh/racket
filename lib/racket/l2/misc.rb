@@ -44,7 +44,7 @@ module L2
   # print it out in human readable form of a given length, 
   # defaulting to 6 (ethernet)
   def Misc.long2mac(long, len=6)
-    long.to_s(16).rjust(12, '0').unpack("a2"*len).join(":")
+    long.to_s(16).rjust(len*2, '0').unpack("a2"*len).join(":")
   end
   
   # Return a random MAC, defaults to 6 bytes (ethernet)
