@@ -54,7 +54,7 @@ class ICMPGeneric < RacketPart
   unsigned :code, 8
   # Checksum
   unsigned :checksum, 16
-  rest :payload
+  rest :message
 
   # check the checksum for this ICMP packet
   def checksum?
@@ -78,23 +78,24 @@ class ICMPGeneric < RacketPart
     self.checksum!
   end
 
+private
+  def compute_checksum
+    # pseudo header used for checksum calculation as per RFC 768 
+    pseudo = [ self.type, self.code, 0, self.message ]
+    L3::Misc.checksum(pseudo.pack("CCna*"))
+  end
 end
 
 # Send raw ICMP packets of your own design
 class ICMP < ICMPGeneric
   rest :payload
-
-private
-  def compute_checksum
-    # pseudo header used for checksum calculation as per RFC 768 
-    pseudo = [ self.type, self.code, 0, self.payload ]
-    L3::Misc.checksum(pseudo.pack("CCna*"))
-  end
 end
 
-# ICMP Echo
+# ICMP Echo.  Generic class that ICMPEchoRequest and ICMPEchoReply inherit
 class ICMPEcho < ICMPGeneric
+  # ID for tracking requests/replies
   unsigned :id, 16
+  # sequence number for tracking request/replies
   unsigned :sequence, 16
   rest :payload
 
@@ -103,32 +104,27 @@ class ICMPEcho < ICMPGeneric
     self.type = 8 
     self.code = 0
   end
+end
 
-private
-  def compute_checksum
-    # pseudo header used for checksum calculation as per RFC 768 
-    pseudo = [ self.type, self.code, 0,  self.id, self.sequence, self.payload ]
-    L3::Misc.checksum(pseudo.pack("CCnnna*"))
+# ICMP Echo Request
+class ICMPEchoRequest < ICMPEcho
+  rest :payload
+
+  def initialize(*args)
+    super(*args)
+    self.type = 8 
+    self.code = 0
   end
 end
 
 # ICMP Echo Reply
-class ICMPEchoReply < ICMPGeneric
-  unsigned :id, 16
-  unsigned :sequence, 16
+class ICMPEchoReply < ICMPEcho
   rest :payload
 
   def initialize(*args)
     super(*args)
     self.type = 0 
     self.code = 0
-  end
-
-private
-  def compute_checksum
-    # pseudo header used for checksum calculation as per RFC 768 
-    pseudo = [ self.type, self.code, 0,  self.id, self.sequence, self.payload ]
-    L3::Misc.checksum(pseudo.pack("CCnnna*"))
   end
 end
 
@@ -149,13 +145,6 @@ class ICMPDestinationUnreachable < ICMPGeneric
     super(*args)
     self.type = 3 
   end
-
-private
-  def compute_checksum
-    # pseudo header used for checksum calculation as per RFC 768 
-    pseudo = [ self.type, self.code, 0,  self.unused, self.payload ]
-    L3::Misc.checksum(pseudo.pack("CCnNa*"))
-  end
 end
 
 # ICMP Time Exceeded Message 
@@ -171,14 +160,6 @@ class ICMPTimeExceeded < ICMPGeneric
     super(*args)
     self.type = 11 
   end
-
-private
-  def compute_checksum
-    # pseudo header used for checksum calculation as per RFC 768 
-    pseudo = [ self.type, self.code, 0,  self.unused, self.payload ]
-    L3::Misc.checksum(pseudo.pack("CCnNa*"))
-  end
-
 end
 
 # ICMP Parameter Problem Message 
@@ -195,14 +176,6 @@ class ICMPParameterProblem < ICMPGeneric
     self.type = 12
     self.code = 0
   end
-
-private
-  def compute_checksum
-    # pseudo header used for checksum calculation as per RFC 768 
-    pseudo = [ self.type, self.code, 0,  (self.pointer << 24) | self.unused, self.payload ]
-    L3::Misc.checksum(pseudo.pack("CCnNa*"))
-  end
-
 end
 
 # ICMP Source Quench Message 
@@ -216,13 +189,6 @@ class ICMPSourceQuench < ICMPGeneric
     super(*args)
     self.type = 4 
     self.code = 0
-  end
-
-private
-  def compute_checksum
-    # pseudo header used for checksum calculation as per RFC 768 
-    pseudo = [ self.type, self.code, 0,  self.unused, self.payload ]
-    L3::Misc.checksum(pseudo.pack("CCnNa*"))
   end
 end
 
@@ -243,59 +209,39 @@ class ICMPRedirect < ICMPGeneric
     self.type = 5 
     self.code = 0
   end
-
-private
-  def compute_checksum
-    # pseudo header used for checksum calculation as per RFC 768 
-    pseudo = [ self.type, self.code, 0,  L3::Misc.ipv42long(self.gateway_ip), self.payload ]
-    L3::Misc.checksum(pseudo.pack("CCnNa*"))
-  end
 end
 
-# ICMP Timestamp Message
+# Generic ICMP Timestamp Message from which ICMPTimestampRequest and
+# ICMPTimestampReply inherit
 class ICMPTimestamp < ICMPGeneric
   # an identifier to add in matching timestamp and replies
   unsigned :id, 16
   # a sequence number to aid in matching timestamp and replies
   unsigned :sequence, 16
+  # time the sender last touched the message before sending it in number of milliseconds since midnight UT
   unsigned :originate_timestamp, 32
+  # time the echoer first touched it on receipt in number of milliseconds since midnight UT
   unsigned :receive_timestamp, 32
+  # time the echoers last touched the message on sending it in number of milliseconds since midnight UT
   unsigned :transmit_timestamp, 32
+  # probably never used ...
+  rest :payload
+end
+
+# ICMP Timestamp Request Message
+class ICMPTimestampReqeust < ICMPTimestamp
   # probably never used ...
   rest :payload
 
   def initialize(*args)
     super(*args)
-    self.type = 13 
+    self.type = 13
     self.code = 0
-  end
-
-private
-  def compute_checksum
-    # pseudo header used for checksum calculation as per RFC 768 
-    pseudo = []
-    pseudo << self.type
-    pseudo << self.code
-    pseudo << 0
-    pseudo << self.id
-    pseudo << self.sequence
-    pseudo << self.originate_timestamp
-    pseudo << self.receive_timestamp
-    pseudo << self.transmit_timestamp
-    pseudo << self.payload
-    L3::Misc.checksum(pseudo.pack("CCnnnNNNa*"))
   end
 end
 
 # ICMP Timestamp Reply Message
-class ICMPTimestampReply < ICMPGeneric
-  # an identifier to add in matching timestamp and replies
-  unsigned :id, 16
-  # a sequence number to aid in matching timestamp and replies
-  unsigned :sequence, 16
-  unsigned :originate_timestamp, 32
-  unsigned :receive_timestamp, 32
-  unsigned :transmit_timestamp, 32
+class ICMPTimestampReply < ICMPTimestamp
   # probably never used ...
   rest :payload
 
@@ -303,22 +249,6 @@ class ICMPTimestampReply < ICMPGeneric
     super(*args)
     self.type = 14 
     self.code = 0
-  end
-
-private
-  def compute_checksum
-    # pseudo header used for checksum calculation as per RFC 768 
-    pseudo = []
-    pseudo << self.type
-    pseudo << self.code
-    pseudo << 0
-    pseudo << self.id
-    pseudo << self.sequence
-    pseudo << self.originate_timestamp
-    pseudo << self.receive_timestamp
-    pseudo << self.transmit_timestamp
-    pseudo << self.payload
-    L3::Misc.checksum(pseudo.pack("CCnnnNNNa*"))
   end
 end
 
@@ -337,18 +267,6 @@ class ICMPInformationRequest < ICMPGeneric
     self.code = 0
   end
 
-private
-  def compute_checksum
-    # pseudo header used for checksum calculation as per RFC 768 
-    pseudo = []
-    pseudo << self.type
-    pseudo << self.code
-    pseudo << 0
-    pseudo << self.id
-    pseudo << self.sequence
-    pseudo << self.payload
-    L3::Misc.checksum(pseudo.pack("CCnnna*"))
-  end
 end
 
 # ICMP Information Reply Message
@@ -364,19 +282,6 @@ class ICMPInformationReply < ICMPGeneric
     super(*args)
     self.type = 16 
     self.code = 0
-  end
-
-private
-  def compute_checksum
-    # pseudo header used for checksum calculation as per RFC 768 
-    pseudo = []
-    pseudo << self.type
-    pseudo << self.code
-    pseudo << 0
-    pseudo << self.id
-    pseudo << self.sequence
-    pseudo << self.payload
-    L3::Misc.checksum(pseudo.pack("CCnnna*"))
   end
 end
 end
