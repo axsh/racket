@@ -114,7 +114,7 @@ class ICMPv6 < ICMPv6Generic
   rest :payload
 end
 
-# Generic ICMPv6 echo, used by request and reply
+# Generic ICMPv6 echo, used by ICMPv6EchoRequest and ICMPv6EchoReply 
 class ICMPv6Echo < ICMPv6Generic
   # identifier to aid in matching echo requests/replies
   unsigned :id, 16
@@ -128,6 +128,7 @@ class ICMPv6Echo < ICMPv6Generic
 
 end
 
+# ICMPv6Echo Request
 class ICMPv6EchoRequest < ICMPv6Echo
   rest :payload
 
@@ -139,7 +140,7 @@ class ICMPv6EchoRequest < ICMPv6Echo
 
 end
 
-# ICMP Echo Reply
+# ICMPv6Echo Reply
 class ICMPv6EchoReply < ICMPv6Echo
   rest :payload
 
@@ -375,6 +376,7 @@ class ICMPv6NodeInformationRequest < ICMPv6NodeInformation
   ICMPv6_CODE_INFORMATION_REQUEST_IPv6 = 0
   ICMPv6_CODE_INFORMATION_REQUEST_NAME = 1 
   ICMPv6_CODE_INFORMATION_REQUEST_IPv4 = 2
+
   def initialize(*args)
     super(*args)
     self.type = ICMPv6_TYPE_INFORMATION_REQUEST
@@ -386,6 +388,7 @@ class ICMPv6NodeInformationReply < ICMPv6NodeInformation
   ICMPv6_CODE_INFORMATION_REPLY_SUCCESS = 0
   ICMPv6_CODE_INFORMATION_REPLY_REFUSE = 1 
   ICMPv6_CODE_INFORMATION_REPLY_UNKNOWN = 2
+
   def initialize(*args)
     super(*args)
     self.type = ICMPv6_TYPE_INFORMATION_REPLY
