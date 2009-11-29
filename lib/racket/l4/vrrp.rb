@@ -36,6 +36,8 @@ class VRRP < RacketPart
   unsigned :type, 4 
   # Virtual Router Identifier (VRID)
   unsigned :id, 8
+  # the sending VRRP router's priority for the virtual router.
+  # Higher values equal higher priority.
   unsigned :priority, 8
   # Total number of IPs contained in this VRRP message
   unsigned :num_ips, 8
@@ -57,10 +59,12 @@ class VRRP < RacketPart
     @authdata = authdata[0,8].ljust(32, "\x00")
   end
 
+  # Validate the checksum
   def checksum?
     self.checksum == compute_checksum
   end
 
+  # compute and set the checksum
   def checksum!
     self.checksum = compute_checksum
   end
