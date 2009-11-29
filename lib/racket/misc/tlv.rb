@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module Misc
 # Simple class for your average type, length, value datastructure.
 # Everything after the TLV is stuff into +rest+
 class TLV
@@ -83,6 +84,7 @@ private
     s
   end
   
+end
 end
 end
 # vim: set ts=2 et sw=2:

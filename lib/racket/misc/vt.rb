@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module Misc
 # Simple class to represent a datastructure that is made up of a 
 # null terminted string followed by an arbitrary number of
 # arbitrarily sized values, followed by a "rest" field.
@@ -108,6 +109,7 @@ private
     s
   end
 
+end
 end
 end
 # vim: set ts=2 et sw=2:

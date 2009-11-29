@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module Misc
 # Simple class to represent data structures that
 # consist of an arbitrary number of length value pairs.
 class LV
@@ -102,6 +103,7 @@ private
       end
     s
   end
+end
 end
 end
 # vim: set ts=2 et sw=2:
