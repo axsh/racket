@@ -41,7 +41,7 @@ class CDP < RacketPart
   
   # Add a new field to this CDP message.
   def add_field(type, value)# {{{
-    t = TLV.new(2,2)
+    t = Misc::TLV.new(2,2)
     t.type = type
     t.value = value
     t.length = 4 + value.length

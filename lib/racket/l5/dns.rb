@@ -92,9 +92,9 @@ class DNS < RacketPart
 
 private
   def add_record(name, type, klass)
-    q = VT.new(2,2)
+    q = Misc::VT.new(2,2)
     name.split(/\./).each do |p|
-      lv = LV.new(1)
+      lv = Misc::LV.new(1)
       lv.values << p
       lv.lengths << p.length
       q.value << lv.encode 
