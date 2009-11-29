@@ -28,7 +28,6 @@
 module Racket
 # Internet Protocol Version 6 (IPV6)
 # RFC2460
-# XXX: not tested, incomplete.
 class IPv6 < RacketPart
   # IP Version (defaults to 6)
   unsigned :version, 4, { :default => 6 }
@@ -42,9 +41,9 @@ class IPv6 < RacketPart
   unsigned :nhead, 8
   # Hop limit
   unsigned :ttl, 8
-  # Source IP address
+  # Source IP address.  Must be passed as an integer
   unsigned :src_ip, 128
-  # Destination IP address
+  # Destination IP address.  Must be passed as an integer
   unsigned :dst_ip, 128
   # Payload
   rest :payload
@@ -55,6 +54,7 @@ class IPv6 < RacketPart
     @autofix = true
   end
 
+  # Adjust plen to match the payload
   def fix!
     self.plen = self.payload.length
   end

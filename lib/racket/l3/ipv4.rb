@@ -50,9 +50,11 @@ class IPv4 < RacketPart
   unsigned :protocol, 8
   # Checksum
   unsigned :checksum, 16, "Checksum"
-  # Source IP address
+  # Source IP address, passed as four octets separated by periods
+  # (192.168.1.2)
   octets :src_ip, 32
-  # Destination IP address
+  # Destination IP address, passed as four octets separated by periods
+  # (192.168.1.2)
   octets :dst_ip, 32
   # Payload
   rest :payload
