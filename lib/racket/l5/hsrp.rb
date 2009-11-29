@@ -58,6 +58,7 @@ class HSRP < RacketPart
   unsigned :priority, 8
   # Standby group
   unsigned :group, 8
+  # reserved, never used, should be 0
   unsigned :reserved, 8
   # Clear-text, 8-character reused password.  Defaults to 'cisco'
   text :password, 64, { :default => 'cisco' }
