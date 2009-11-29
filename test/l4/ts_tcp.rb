@@ -7,15 +7,15 @@ require 'racket'
 
 class TestTCP <  Test::Unit::TestCase
   def test_init
-    assert_nothing_raised() { Racket::TCP.new }
-    assert_nothing_raised() { Racket::TCP.new(Racket::Misc.randstring(20)) }
+    assert_nothing_raised() { Racket::L4::TCP.new }
+    assert_nothing_raised() { Racket::L4::TCP.new(Racket::Misc.randstring(20)) }
   end
 
   def test_attrs
     binary="\x90\xef\x08\xae\x47\x87\xa0\x34\x00\x00\x00\x00\xa0\x02\x16\xd0\xc2\x17\x00\x00\x02\x04\x05\xb4\x04\x02\x08\x0a\x03\x0f\xc8\x6e\x00\x00\x00\x00\x01\x03\x03\x07"
    
-    assert_nothing_raised() { i = Racket::TCP.new(binary) }
-    i = Racket::TCP.new(binary)
+    assert_nothing_raised() { i = Racket::L4::TCP.new(binary) }
+    i = Racket::L4::TCP.new(binary)
     assert_equal(i.dst_port, 2222)
     assert_equal(i.src_port, 37103)
     assert_equal(i.flag_syn, 1)
@@ -30,7 +30,7 @@ class TestTCP <  Test::Unit::TestCase
   end
 
   def test_build_no_options
-    i = Racket::TCP.new
+    i = Racket::L4::TCP.new
     assert_nothing_raised() {
       i.src_port = 44781 
       i.dst_port = 5190 
@@ -48,7 +48,7 @@ class TestTCP <  Test::Unit::TestCase
   end
   
   def test_build_with_options
-    i = Racket::TCP.new
+    i = Racket::L4::TCP.new
     i.add_option(1, "blah")
   end
 end

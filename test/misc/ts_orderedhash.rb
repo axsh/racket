@@ -7,10 +7,10 @@ require 'racket'
 
 class TestBitField <  Test::Unit::TestCase
   def test_init
-    assert_nothing_raised() { Racket::OrderedHash.new }
+    assert_nothing_raised() { Racket::Misc::OrderedHash.new }
   end
   def test_order
-    oh = Racket::OrderedHash.new
+    oh = Racket::Misc::OrderedHash.new
     ("a".."z").each { |c|
         oh[c] = c.unpack("c")[0]
     } 

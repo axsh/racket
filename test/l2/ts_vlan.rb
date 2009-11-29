@@ -7,8 +7,8 @@ require 'racket'
 
 class TestVLAN <  Test::Unit::TestCase
   def test_init
-    assert_nothing_raised() { Racket::VLAN.new }
-    assert_nothing_raised() { Racket::VLAN.new(Racket::Misc.randstring(30)) }
+    assert_nothing_raised() { Racket::L2::VLAN.new }
+    assert_nothing_raised() { Racket::L2::VLAN.new(Racket::Misc.randstring(30)) }
   end
 
 end

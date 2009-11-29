@@ -7,14 +7,14 @@ require 'racket'
 
 class TestUDP <  Test::Unit::TestCase
   def test_init
-    assert_nothing_raised() { Racket::UDP.new }
-    assert_nothing_raised() { Racket::UDP.new(Racket::Misc.randstring(20)) }
+    assert_nothing_raised() { Racket::L4::UDP.new }
+    assert_nothing_raised() { Racket::L4::UDP.new(Racket::Misc.randstring(20)) }
   end
 
   def test_raw
     binary="\x9e\x96\x00\x35\x00\x0c\x69\x4f\x66\x6f\x6f\x0a"
-    assert_nothing_raised() { i = Racket::UDP.new(binary) }
-    i = Racket::UDP.new(binary)
+    assert_nothing_raised() { i = Racket::L4::UDP.new(binary) }
+    i = Racket::L4::UDP.new(binary)
     assert_equal(i.dst_port, 53)
     assert_equal(i.src_port, 40598)
     assert_equal(i.checksum, 0x694f)
@@ -23,7 +23,7 @@ class TestUDP <  Test::Unit::TestCase
   end
 
   def test_build
-    i = Racket::UDP.new
+    i = Racket::L4::UDP.new
     assert_nothing_raised() {
       i.src_port = 50243 
       i.dst_port = 53
