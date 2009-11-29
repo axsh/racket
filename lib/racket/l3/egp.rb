@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L3
 # Exterior Gateway protocol (EGP)
 # http://tools.ietf.org/html/rfc904
 # XXX: TODO, add support for tacking on the various message types
@@ -46,6 +47,7 @@ class EGP < RacketPart
   unsigned :sequence, 16
   # Payload
   rest :payload
+end
 end
 end
 # vim: set ts=2 et sw=2:

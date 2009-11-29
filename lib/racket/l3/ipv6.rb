@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L3
 # Internet Protocol Version 6 (IPV6)
 # RFC2460
 class IPv6 < RacketPart
@@ -59,6 +60,7 @@ class IPv6 < RacketPart
     self.plen = self.payload.length
   end
 
+end
 end
 end
 # vim: set ts=2 et sw=2:

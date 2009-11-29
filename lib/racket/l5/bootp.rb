@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L5
 # Bootstrap Protocol -- BOOTP
 #
 # RFC951 (http://www.faqs.org/rfcs/rfc951.html)
@@ -99,6 +100,7 @@ class BOOTP < RacketPart
     @autofix = false
   end
 
+end
 end
 end
 # vim: set ts=2 et sw=2:

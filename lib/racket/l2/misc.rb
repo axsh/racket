@@ -26,8 +26,8 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
-# Miscelaneous L2 helper methods
 module L2
+  # Miscelaneous L2 helper methods
   module Misc
 
   # given a string representing a MAC address

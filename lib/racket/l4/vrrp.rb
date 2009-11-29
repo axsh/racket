@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L4
 # Virtual Router Redundancy Protocol (VRRP)
 # http://tools.ietf.org/html/rfc2338
 # http://tools.ietf.org/html/rfc3768
@@ -88,6 +89,7 @@ private
     pseudo = [ ((self.version << 4) | self.type), self.id, self.priority, self.num_ips, self.auth_type, self.interval, 0, self.payload ] 
     L3::Misc.checksum(pseudo.pack("CCCCCCna*"))
   end
+end
 end
 end
 # vim: set ts=2 et sw=2:

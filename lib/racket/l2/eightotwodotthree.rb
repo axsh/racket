@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L2
 # 802.3 Ethernet.  Should always be followed by an LLC header
 class EightOTwoDotThree < RacketPart
   # Destination MAC address
@@ -41,6 +42,7 @@ class EightOTwoDotThree < RacketPart
   def fix!
     self.length = self.payload.length
   end
+end
 end
 end
 # vim: set ts=2 et sw=2:

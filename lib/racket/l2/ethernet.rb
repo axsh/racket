@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L2
 # Ethernet II (DIX v2.0)
 #
 # http://en.wikipedia.org/wiki/Ethernet_II_framing
@@ -55,6 +56,7 @@ class Ethernet < RacketPart
   unsigned :ethertype, 16, { :default => ETHERTYPE_IPV4 }
   # Payload
   rest :payload
+end
 end
 end
 #set ts=2 et sw=2: vim

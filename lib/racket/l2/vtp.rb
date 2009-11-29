@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L2
 # VLAN Trunking Protocol (VTP)
 # http://en.wikipedia.org/wiki/VLAN_Trunking_Protocol
 # http://www.cisco.com/en/US/tech/tk389/tk689/technologies_tech_note09186a0080094c52.shtml
@@ -118,5 +119,6 @@ class VTPJoin < VTPGeneric
   end
 end
 
+end
 end
 # vim: set ts=2 et sw=2:

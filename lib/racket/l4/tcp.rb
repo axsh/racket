@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L4
 # Transmission Control Protocol: TCP
 #
 # RFC793 (http://www.faqs.org/rfcs/rfc793.html)
@@ -134,6 +135,7 @@ private
               self.window, 0, self.urg, self.payload]
     L3::Misc.checksum((pseudo << header).flatten.pack("NNnnnnNNnnnna*"))
   end
+end
 end
 end
 # vim: set ts=2 et sw=2:

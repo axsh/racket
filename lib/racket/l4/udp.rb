@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L4
 # User Datagram Protocol: UDP
 #
 # RFC768 (http://www.faqs.org/rfcs/rfc768.html)
@@ -74,6 +75,7 @@ private
     L3::Misc.checksum((pseudo << header).flatten.pack("NNnnnnnna*"))
   end
 
+end
 end
 end
 # vim: set ts=2 et sw=2:

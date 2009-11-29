@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L3
 # CDP -- Cisco Discovery Protocol
 # http://www.cisco.biz/univercd/cc/td/doc/product/lan/trsrb/frames.htm#xtocid12
 class CDP < RacketPart
@@ -73,6 +74,7 @@ private
     L3::Misc.checksum(pseudo.pack("nna*"))
   end# }}}
 
+end
 end
 end
 # vim: set ts=2 et sw=2:

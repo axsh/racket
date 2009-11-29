@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L4
 # Internet Group Management Protocol, Version 1
 #
 # RFC1112 (http://www.faqs.org/rfcs/rfc1112.html)
@@ -72,6 +73,7 @@ private
     tmp << self.payload
     L3::Misc.checksum(tmp.pack("nnNa*"))
   end
+end
 end
 end
 # vim: set ts=2 et sw=2:

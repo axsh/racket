@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L4
 # Internet Control Message Protcol.  
 #
 # RFC792 (http://www.faqs.org/rfcs/rfc792.html)
@@ -283,6 +284,7 @@ class ICMPInformationReply < ICMPGeneric
     self.type = 16 
     self.code = 0
   end
+end
 end
 end
 # vim: set ts=2 et sw=2:

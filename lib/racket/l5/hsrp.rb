@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L5
 # Hot Standby Router Protocol: HSRP
 #
 # RFC2281 (http://www.faqs.org/rfcs/rfc2281.html)
@@ -66,6 +67,7 @@ class HSRP < RacketPart
   octets :vip, 32
   # Payload.  Generally unused.
   rest :payload
+end
 end
 end
 # vim: set ts=2 et sw=2:

@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L4
 # Stream Control Transmission Protocol
 #  http://tools.ietf.org/html/rfc4960
 class SCTP < RacketPart
@@ -156,6 +157,7 @@ private
              (byte2 << 8)  |
              byte3)
   end
+end
 end
 end
 # vim: set ts=2 et sw=2:

@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L4
 # Internet Gateway Routing Protocol: IGRP
 #
 # http://www.cisco.com/warp/public/103/5.html
@@ -130,6 +131,7 @@ private
     tmp << payload
     L3::Misc.checksum(tmp.pack("Cnnnnnna*"))
   end
+end
 end
 end
 

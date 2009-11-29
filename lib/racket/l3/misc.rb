@@ -26,8 +26,8 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
-# Miscelaneous L3 helper methods
 module L3
+  # Miscelaneous L3 helper methods
   module Misc
     # given an IPv4 address packed as an integer
     # return the friendly "dotted quad"

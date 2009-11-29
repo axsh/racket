@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L5
 # Domain Name System
 class DNS < RacketPart
   # Transaction ID
@@ -103,6 +104,7 @@ private
     q
   end
 
+end
 end
 end
 # vim: set ts=2 et sw=2:

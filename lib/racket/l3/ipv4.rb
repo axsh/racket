@@ -25,9 +25,10 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+module Racket
+module L3
 # Internet Protcol Version 4 (IPV4)
 #
-module Racket
 # RFC791 (http://www.ietf.org/rfc/rfc791.txt)
 class IPv4 < RacketPart
   # Version (defaults to 4)
@@ -125,6 +126,7 @@ private
     pseudo << L3::Misc.ipv42long(self.dst_ip)
     L3::Misc.checksum(pseudo.pack("nnnnnnNN"))
   end
+end
 end
 end
 # vim: set ts=2 et sw=2:

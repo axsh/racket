@@ -26,6 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
+module L4
 # Internet Control Message Protcol, v6
 #
 # http://en.wikipedia.org/wiki/ICMPv6
@@ -393,6 +394,7 @@ class ICMPv6NodeInformationReply < ICMPv6NodeInformation
     super(*args)
     self.type = ICMPv6_TYPE_INFORMATION_REPLY
   end
+end
 end
 end
 # vim: set ts=2 et sw=2:

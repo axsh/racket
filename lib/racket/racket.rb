@@ -28,10 +28,6 @@
 
 require 'socket'
 require 'racket/racketpart'
-require 'racket/tlv'
-require 'racket/lv'
-require 'racket/vt'
-require 'racket/orderedhash'
 require 'racket/misc'
 require 'racket/l2'
 require 'racket/l3'
