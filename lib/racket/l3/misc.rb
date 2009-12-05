@@ -39,6 +39,14 @@ module L3
       quad[3] = long & 255
       quad.join(".")
     end
+    
+    # Compute link local address for a given mac address
+    # From Daniele Bellucci
+    def Misc.linklocaladdr(mac)
+      mac = mac.split(":")
+      mac[0] = (mac[0].to_i(16) ^ (1 << 1)).to_s(16)
+      ["fe80", "", mac[0,2].join, mac[2,2].join("ff:fe"), mac[4,2].join].join(":")
+    end
 
     def Misc.long2ipv6(long)
       omg = []
