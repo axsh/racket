@@ -52,19 +52,21 @@ module L3
       ["fe80", "", mac[0,2].join, mac[2,2].join("ff:fe"), mac[4,2].join].join(":")
     end
     
-    # Given a long, convert it to an IPv6 address,
-    def Misc.long2ipv6(long, compact=true)
-      omg = []
-      omg[0] = long >> 112
-      omg[1] = (long >> 96) & (0xFFFF)
-      omg[2] = (long >> 80) & (0xFFFF)
-      omg[3] = (long >> 64) & (0xFFFF)
-      omg[4] = (long >> 48) & (0xFFFF)
-      omg[5] = (long >> 32) & (0xFFFF)
-      omg[6] = (long >> 16) & (0xFFFF)
-      omg[7] = long & (0xFFFF)
+    # Given a long, convert it to an IPv6 address, 
+    # optionally compressing the address returned
+    def Misc.long2ipv6(long, compress=true)
+      ipv6 = []
+      ipv6[0] = long >> 112
+      ipv6[1] = (long >> 96) & (0xFFFF)
+      ipv6[2] = (long >> 80) & (0xFFFF)
+      ipv6[3] = (long >> 64) & (0xFFFF)
+      ipv6[4] = (long >> 48) & (0xFFFF)
+      ipv6[5] = (long >> 32) & (0xFFFF)
+      ipv6[6] = (long >> 16) & (0xFFFF)
+      ipv6[7] = long & (0xFFFF)
 
-      omg.map { |o| o.to_s(16) }.join(":")
+      ipv6 = ipv6.map { |o| o.to_s(16) }.join(":")
+      compress ? Misc.compressipv6(ipv6) : ipv6
     end
 
     # Compress an IPv6 address
