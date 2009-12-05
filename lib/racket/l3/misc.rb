@@ -39,6 +39,10 @@ module L3
       quad[3] = long & 255
       quad.join(".")
     end
+
+    def Misc.randomipv4
+      Misc.long2ipv4(rand(2**32))
+    end
     
     # Compute link local address for a given mac address
     # From Daniele Bellucci
@@ -47,8 +51,9 @@ module L3
       mac[0] = (mac[0].to_i(16) ^ (1 << 1)).to_s(16)
       ["fe80", "", mac[0,2].join, mac[2,2].join("ff:fe"), mac[4,2].join].join(":")
     end
-
-    def Misc.long2ipv6(long)
+    
+    # Given a long, convert it to an IPv6 address,
+    def Misc.long2ipv6(long, compact=true)
       omg = []
       omg[0] = long >> 112
       omg[1] = (long >> 96) & (0xFFFF)
@@ -60,6 +65,21 @@ module L3
       omg[7] = long & (0xFFFF)
 
       omg.map { |o| o.to_s(16) }.join(":")
+    end
+
+    # Compress an IPv6 address
+    # Inspired by Daniele Bellucci
+    def Misc.compressipv6(ipv6)
+      clean = ipv6
+      while (clean != nil)
+        clean = ipv6.gsub!(/:0{1,}:/, '::')
+      end
+      ipv6.gsub!(/:{3,}/, '::')
+      ipv6
+    end
+
+    def Misc.randomipv6
+      Misc.long2ipv6(rand(2**128))
     end
 
     # given a string representing an IPv6
