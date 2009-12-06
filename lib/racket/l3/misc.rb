@@ -72,12 +72,26 @@ module L3
     # Compress an IPv6 address
     # Inspired by Daniele Bellucci
     def Misc.compressipv6(ipv6)
-      clean = ipv6
-      while (clean != nil)
-        clean = ipv6.gsub!(/:0{1,}:/, '::')
+      ipv6.gsub!(/\b0{1,3}([\da-f]+)\b/i, '\1')
+      loop do
+        break if ipv6.sub!(/\A0:0:0:0:0:0:0:0\Z/, '::')
+        break if ipv6.sub!(/\b0:0:0:0:0:0:0\b/, ':')
+        break if ipv6.sub!(/\b0:0:0:0:0:0\b/, ':')
+        break if ipv6.sub!(/\b0:0:0:0:0\b/, ':')
+        break if ipv6.sub!(/\b0:0:0:0\b/, ':')
+        break if ipv6.sub!(/\b0:0:0\b/, ':')
+        break if ipv6.sub!(/\b0:0\b/, ':')
+        break
       end
-      ipv6.gsub!(/:{3,}/, '::')
+
+      ipv6.sub!(/:{3,}/, '::')
       ipv6
+#      clean = ipv6
+#      while (clean != nil)
+#        clean = ipv6.gsub!(/:0{1,}:/, '::')
+#      end
+#      ipv6.gsub!(/:{3,}/, '::')
+#      ipv6
     end
 
     def Misc.randomipv6

@@ -24,7 +24,7 @@ class TestL3Misc <  Test::Unit::TestCase
     assert_equal(ipv6, Racket::L3::Misc.long2ipv6(lipv6))
 
     ipv6 = "a:0:0:0f:0:1"
-    zipv6 = "a::0f::1"
+    zipv6 = "a::f:0:1"
     assert_equal(zipv6, Racket::L3::Misc.compressipv6(ipv6))
   end
 end
