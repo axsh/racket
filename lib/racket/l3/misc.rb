@@ -86,12 +86,6 @@ module L3
 
       ipv6.sub!(/:{3,}/, '::')
       ipv6
-#      clean = ipv6
-#      while (clean != nil)
-#        clean = ipv6.gsub!(/:0{1,}:/, '::')
-#      end
-#      ipv6.gsub!(/:{3,}/, '::')
-#      ipv6
     end
 
     def Misc.randomipv6
