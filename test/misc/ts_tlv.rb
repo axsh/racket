@@ -19,6 +19,13 @@ class TestTLV <  Test::Unit::TestCase
     assert_equal(t.length, 11)
     assert_equal(t.value, "spoofed.org")
     assert_equal(t.rest, "\xff\x00\xba")
+
+    t2 = Racket::Misc::TLV.new(1,1,8)
+    s2 = "\x02\x01\xaa\xbb\xcc\xdd\xee\xff"
+    t2.decode!(s2)
+    assert_equal(t2.type, 2)
+    assert_equal(t2.length, 1)
+    assert_equal(t2.value, "\xaa\xbb\xcc\xdd\xee\xff")
   end
 
   def test_encode

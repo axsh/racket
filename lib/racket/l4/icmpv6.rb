@@ -81,6 +81,17 @@ class ICMPv6Generic < RacketPart
     @options << t.encode
   end
 
+  def get_options
+    p = self.payload
+    options = []
+    while (1)
+      o =  Misc::TLV.new(1,1,8).decode(p)
+      options << o
+      break if (o[3].empty?)
+    end
+    options
+  end
+
   # compute and set the checksum for this ICMP packet
   def checksum!(src_ip, dst_ip)
     self.checksum = compute_checksum(src_ip, dst_ip)

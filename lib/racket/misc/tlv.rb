@@ -30,13 +30,15 @@ module Misc
 # Simple class for your average type, length, value datastructure.
 # Everything after the TLV is stuff into +rest+
 class TLV
-  attr_accessor :type, :length, :value, :rest
+  attr_accessor :type, :length, :value, :rest, :lbytes
 
   # Create a new TLV which requires +ts+ bytes for the type field
-  # and +ls+ bytes for the length field
-  def initialize(ts, ls)
+  # and +ls+ bytes for the length field, where (optionally) the value
+  # in +length+ is a multiple of +lbytes+
+  def initialize(ts, ls, lbytes=1)
     @ts = ts
     @ls = ls
+    @lbytes = lbytes
   end 
 
   # Given +data+, return the type, length, value and rest 
@@ -44,7 +46,8 @@ class TLV
   def decode(data)
     s = "#{punpack_string(@ts)}#{punpack_string(@ls)}"
     type, length, tmp = data.unpack("#{s}a*")
-    value, rest = tmp.unpack("a#{length}a*")
+    elength = length * lbytes
+    value, rest = tmp.unpack("a#{elength}a*")
     [type, length, value, rest]
   end
 
