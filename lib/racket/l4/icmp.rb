@@ -230,7 +230,7 @@ class ICMPTimestamp < ICMPGeneric
 end
 
 # ICMP Timestamp Request Message
-class ICMPTimestampReqeust < ICMPTimestamp
+class ICMPTimestampRequest < ICMPTimestamp
   # probably never used ...
   rest :payload
 
