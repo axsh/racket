@@ -227,6 +227,11 @@ class ICMPTimestamp < ICMPGeneric
   unsigned :transmit_timestamp, 32
   # probably never used ...
   rest :payload
+
+  def initialize(*args)
+    super(*args)
+  end
+
 end
 
 # ICMP Timestamp Request Message
