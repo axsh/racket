@@ -26,6 +26,14 @@ class TestTLV <  Test::Unit::TestCase
     assert_equal(t2.type, 2)
     assert_equal(t2.length, 1)
     assert_equal(t2.value, "\xaa\xbb\xcc\xdd\xee\xff")
+
+    t3 = Racket::Misc::TLV.new(1,1,8,false)
+    s3 = "\x02\x01\xaa\xbb\xcc\xdd\xee\xff\x11\x22"
+    t3.decode!(s3)
+    assert_equal(t3.type, 2)
+    assert_equal(t3.length, 1)
+    assert_equal(t3.value, "\xaa\xbb\xcc\xdd\xee\xff\x11\x22")
+
   end
 
   def test_encode
