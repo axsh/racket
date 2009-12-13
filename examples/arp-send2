@@ -6,25 +6,25 @@
 require 'rubygems'
 require 'racket'
 
-unless (ARGV.size == 6) 
-  puts "Usage: #{$0} <vlan> <opcode> <sha> <spa> <tpa> <tha>"
+unless (ARGV.size == 7) 
+  puts "Usage: #{$0} <interface> <vlan> <opcode> <sha> <spa> <tha> <tpa>"
   exit
 end
 
 include Racket
 n = Racket::Racket.new
-n.iface = "eth0"
+n.iface = ARGV[0] 
 
-n.l2 = Ethernet.new(Misc.randstring(14))
+n.l2 = L2::Ethernet.new(Misc.randstring(14))
 n.l2.ethertype = 0x8100
-n.l3 = VLAN.new
+n.l3 = L2::VLAN.new
 n.l3.type = 0x0806
-n.l3.id = ARGV[0].to_i
-n.l4 = ARP.new
-n.l4.opcode = ARGV[1].to_i
-n.l4.sha = ARGV[2]
-n.l4.spa = ARGV[3]
-n.l4.tha = ARGV[4]
-n.l4.tpa = ARGV[5]
+n.l3.id = ARGV[1].to_i
+n.l4 = L3::ARP.new
+n.l4.opcode = ARGV[2].to_i
+n.l4.sha = ARGV[3]
+n.l4.spa = ARGV[4]
+n.l4.tha = ARGV[5]
+n.l4.tpa = ARGV[6]
 
 n.sendpacket

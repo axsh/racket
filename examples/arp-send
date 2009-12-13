@@ -8,17 +8,17 @@ require 'racket'
 
 include Racket
 
-unless (ARGV.size == 1) 
-  puts "Usage: #{$0} <opcode>"
+unless (ARGV.size == 2) 
+  puts "Usage: #{$0} <interface> <opcode>"
   exit
 end
 
 n = Racket::Racket.new
-n.iface = "eth0"
+n.iface = ARGV[0] 
 
-n.l2 = Ethernet.new(Misc.randstring(14))
+n.l2 = L2::Ethernet.new(Misc.randstring(14))
 n.l2.ethertype = 0x0806
-n.l3 = ARP.new
-n.l3.opcode = ARGV[0].to_i
+n.l3 = L3::ARP.new
+n.l3.opcode = ARGV[1].to_i
 
 n.sendpacket
