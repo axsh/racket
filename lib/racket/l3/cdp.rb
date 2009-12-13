@@ -39,40 +39,45 @@ class CDP < RacketPart
   # Payload of this CDP message.  Generally untouched.
   rest :payload
   
+
+  def initialize(*args)
+    super(*args)
+  end
+
   # Add a new field to this CDP message.
-  def add_field(type, value)# {{{
-    t = Misc::TLV.new(2,2)
+  def add_field(type, value) 
+    t = Racket::Misc::TLV.new(2,2)
     t.type = type
     t.value = value
     t.length = 4 + value.length
     self.payload += t.encode   
-  end# }}}
+  end 
 
   # Check the checksum for this IP datagram
-  def checksum?# {{{
+  def checksum? 
     self.checksum == compute_checksum
-  end# }}}
+  end 
 
   # Compute and set the checksum for this IP datagram
-  def checksum!# {{{
+  def checksum! 
     self.checksum = compute_checksum
-  end# }}}
+  end 
   
   # Fix this CDP message up for sending.
-  def fix!# {{{
+  def fix! 
     self.checksum!
-  end# }}}
+  end 
 
 private
 
   # Compute the checksum for this IP datagram
-  def compute_checksum# {{{
+  def compute_checksum
     pseudo = []
     pseudo << ((self.version << 8) | self.ttl)
     pseudo << 0
     pseudo << self.payload
     L3::Misc.checksum(pseudo.pack("nna*"))
-  end# }}}
+  end 
 
 end
 end
