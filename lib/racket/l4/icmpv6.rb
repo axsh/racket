@@ -66,7 +66,6 @@ class ICMPv6Generic < RacketPart
   def initialize(*args)
     super(*args)
     @autofix = false
-    @options = []
   end
 
   # Add an ICMPv6 option.  RFC claims that the value should be padded (with what?)
@@ -78,7 +77,7 @@ class ICMPv6Generic < RacketPart
     t.length = (value.length + 2) / 8
     just = value.length + 2 + (8 - ((value.length + 2) % 8))
     t.value = (value.length + 2) % 8 == 0 ? value : value.ljust(just, "\x00")
-    @options << t.encode
+    self.payload = t.encode + self.payload 
   end
 
   def get_options
@@ -100,9 +99,44 @@ class ICMPv6Generic < RacketPart
   # 'fix' this ICMP packet up for sending.
   # (really, just set the checksum)
   def fix!(src_ip, dst_ip)
-    self.payload = self.payload + @options.join
     self.checksum!(src_ip, dst_ip)
   end
+
+  # get the source link layer address of this message, if found
+  def slla
+    addr = nil
+    self.get_options.each do |o|
+      type, length, value, rest = o.flatten
+      if (type == 1)
+        addr = value
+      end
+    end
+    addr
+  end
+
+  # set the source link layer address of this message
+  def slla=(addr)
+    self.add_option(1, addr)
+  end
+
+  # get the target link layer address of this message, if found
+  def tlla
+    addr = nil
+    self.get_options.each do |o|
+      type, length, value, rest = o.flatten
+      if (type == 2)
+        addr = value
+      end
+    end
+    addr
+  end
+
+  # set the target link layer address of this message
+  def tlla=(addr)
+    self.add_option(2, addr)
+  end
+
+
 
 private
   def compute_checksum(src_ip, dst_ip)
