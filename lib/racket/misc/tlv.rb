@@ -48,7 +48,13 @@ class TLV
     type, length, tmp = data.unpack("#{s}a*")
     elength = length * lbytes
     value, rest = tmp.unpack("a#{elength}a*")
-    [type, length, value, rest]
+    if (type.nil? or length.nil?)
+      nil
+    elsif (value.empty? and length > 0)
+      nil
+    else
+      [type, length, value, rest]
+    end
   end
 
   def decode!(data)
