@@ -7,6 +7,7 @@ SPEC = Gem::Specification.new do |s|
   s.author = "Jon Hart"
   s.email = "jhart@spoofed.org"
   s.homepage = "http://spoofed.org/files/racket/"
+  s.description = "Ruby Gem for reading and writing raw packets"
   s.platform = Gem::Platform::RUBY
   s.summary = "Packet foo"
   candidates =  Dir.glob("{bin,docs,examples,lib,test}/**/*")
