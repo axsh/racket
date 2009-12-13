@@ -53,7 +53,6 @@ class TLV
       nil
     else
       elength = (length * lbytes) - (@tlinclude ? (@ls + @ts) : 0) 
-      puts "length=#{length} tinclude=#{@tlinclude} ls=#{@ls} ts=#{@ts} lbytes=#{@lbytes} elength=#{elength}"
       value, rest = tmp.unpack("a#{elength}a*")
       if (value.empty? and length > 0)
         nil
@@ -93,8 +92,7 @@ private
         when 4
           s << "N"
         else
-          puts "Size #{s} not supported"
-          exit
+         raise ArgumentError, "Size #{s} is not a supported conversion size"
       end
     s
   end
