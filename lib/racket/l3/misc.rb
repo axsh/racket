@@ -85,6 +85,11 @@ module L3
       end
 
       ipv6.sub!(/:{3,}/, '::')
+
+      if /\A::(ffff:)?([\da-f]{1,4}):([\da-f]{1,4})\Z/i =~ ipv6
+        ipv6 = sprintf('::%s%d.%d.%d.%d', $1, $2.hex / 256, $2.hex % 256, $3.hex / 256, $3.hex % 256)
+      end
+
       ipv6
     end
 
