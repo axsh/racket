@@ -85,7 +85,7 @@ class ICMPv6Generic < RacketPart
   def get_options
     p = self.payload
     options = []
-    until ((o = Misc::TLV.new(1,1,8).decode(p)).nil?)
+    until ((o = Misc::TLV.new(1,1,8,true).decode(p)).nil?)
       options << o[0..2]
       p = o[3]
     end
