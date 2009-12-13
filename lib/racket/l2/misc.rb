@@ -30,8 +30,18 @@ module L2
   # Miscelaneous L2 helper methods
   module Misc
 
-  # given a string representing a MAC address
-  # print it a long form
+  # given a string representing a MAC address, return the
+  # human readable form
+  def Misc.string2mac(string)
+    string.unpack("C*").map { |i| i.to_s(16).ljust(2,"0") }.join(":")
+  end
+
+  # given a MAC address, return the string representation
+  def Misc.mac2string(mac)
+    mac.split(":").map { |i| i.hex.chr }.join
+  end
+
+  # given a MAC address, return the long representation
   def Misc.mac2long(addr)
     long = 0
     addr.split(':').map { |s| s.to_i(16) }.each do |o|

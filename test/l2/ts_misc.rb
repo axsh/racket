@@ -14,6 +14,9 @@ class TestL2Misc <  Test::Unit::TestCase
       long = Racket::L2::Misc.mac2long(mac)
       assert_equal(mac, Racket::L2::Misc.long2mac(long, len))
       assert_equal(long, Racket::L2::Misc.mac2long(mac))
+      mac = "00:11:22:33:44:55"
+      string = Racket::L2::Misc.mac2string(mac)
+      assert_equal(mac, Racket::L2::Misc.string2mac(string))
     }
   end
 end
