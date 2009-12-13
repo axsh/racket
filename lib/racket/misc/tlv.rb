@@ -46,14 +46,16 @@ class TLV
   def decode(data)
     s = "#{punpack_string(@ts)}#{punpack_string(@ls)}"
     type, length, tmp = data.unpack("#{s}a*")
-    elength = length * lbytes
-    value, rest = tmp.unpack("a#{elength}a*")
     if (type.nil? or length.nil?)
       nil
-    elsif (value.empty? and length > 0)
-      nil
     else
-      [type, length, value, rest]
+      elength = length * lbytes
+      value, rest = tmp.unpack("a#{elength}a*")
+      if (value.empty? and length > 0)
+        nil
+      else
+        [type, length, value, rest]
+      end
     end
   end
 
