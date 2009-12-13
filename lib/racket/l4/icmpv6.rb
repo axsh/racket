@@ -80,13 +80,14 @@ class ICMPv6Generic < RacketPart
     self.payload = t.encode + self.payload 
   end
 
+  # ignorantly assume the first parts of the payload contain ICMPv6 options
+  # and find a return an array of +TLV+ representing the options
   def get_options
     p = self.payload
     options = []
-    while (1)
-      o =  Misc::TLV.new(1,1,8).decode(p)
-      options << o
-      break if (o[3].empty?)
+    until ((o = Misc::TLV.new(1,1,8).decode(p)).nil?)
+      options << o[0..2]
+      p = o[3]
     end
     options
   end
@@ -108,15 +109,16 @@ class ICMPv6Generic < RacketPart
     self.get_options.each do |o|
       type, length, value, rest = o.flatten
       if (type == 1)
-        addr = value
+        addr = L2::Misc.string2mac(value)
       end
     end
     addr
   end
 
-  # set the source link layer address of this message
+  # set the source link layer address of this message.
+  # expects +addr+ in de:ad:ba:dc:af:e0 form
   def slla=(addr)
-    self.add_option(1, addr)
+    self.add_option(1, L2::Misc.mac2string(addr))
   end
 
   # get the target link layer address of this message, if found
@@ -125,18 +127,17 @@ class ICMPv6Generic < RacketPart
     self.get_options.each do |o|
       type, length, value, rest = o.flatten
       if (type == 2)
-        addr = value
+        addr = L2::Misc.string2mac(value)
       end
     end
     addr
   end
 
   # set the target link layer address of this message
+  # expects +addr+ in de:ad:ba:dc:af:e0 form
   def tlla=(addr)
-    self.add_option(2, addr)
+    self.add_option(2, L2::Misc.mac2string(addr))
   end
-
-
 
 private
   def compute_checksum(src_ip, dst_ip)
