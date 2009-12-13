@@ -7,23 +7,23 @@ require 'rubygems'
 require 'racket'
 
 include Racket
-unless (ARGV.size == 2) 
-  puts "Usage: #{$0} <srcip> <dstip>"
+unless (ARGV.size == 3) 
+  puts "Usage: #{$0} <interface> <srcip> <dstip>"
   exit
 end
 
 n = Racket::Racket.new
-n.iface = "eth0"
+n.iface = ARGV[0]
 
 #n.l2 = Ethernet.new(Misc.randstring(14))
-n.l2 = Ethernet.new
+n.l2 = L2::Ethernet.new
 n.l2.src_mac = L2::Misc.randommac
 n.l2.dst_mac = L2::Misc.randommac
 n.l2.ethertype = 0x86DD
 
-n.l3 = IPv6.new
-n.l3.src_ip = L3::Misc.ipv62long(ARGV[0])
-n.l3.dst_ip = L3::Misc.ipv62long(ARGV[1])
+n.l3 = L3::IPv6.new
+n.l3.src_ip = L3::Misc.ipv62long(ARGV[1])
+n.l3.dst_ip = L3::Misc.ipv62long(ARGV[2])
 n.l3.nhead = 58
 
 def build(i)
@@ -32,51 +32,54 @@ def build(i)
   puts "Sent #{f}"
 end
 
-n.l4 = ICMPv6DestinationUnreachable.new
+n.l4 = L4::ICMPv6DestinationUnreachable.new
+n.l4.payload = L3::IPv6.new(Misc.randstring(40))
 build(n)
-n.l4 = ICMPv6TimeExceeded.new
+n.l4 = L4::ICMPv6TimeExceeded.new
+n.l4.payload = L3::IPv6.new(Misc.randstring(40))
 build(n)
-n.l4 = ICMPv6TimeExceeded.new
+n.l4 = L4::ICMPv6EchoRequest.new
 build(n)
-n.l4 = ICMPv6EchoRequest.new
+n.l4 = L4::ICMPv6EchoReply.new
 build(n)
-n.l4 = ICMPv6EchoReply.new
-build(n)
-n.l4 = ICMPv6PacketTooBig.new
+n.l4 = L4::ICMPv6PacketTooBig.new
 n.l4.mtu = rand(65535)
+n.l4.payload = L3::IPv6.new(Misc.randstring(40))
 build(n)
-n.l4 = ICMPv6ParameterProblem.new
+n.l4 = L4::ICMPv6ParameterProblem.new
+payload = L3::IPv6.new(Misc.randstring(40))
+n.l4.payload = payload
+n.l4.pointer = 0x20
 build(n)
-n.l4 = ICMPv6TimeExceeded.new
+n.l4 = L4::ICMPv6MulticastListenerQuery.new
 build(n)
-n.l4 = ICMPv6MulticastListenerQuery.new
+n.l4 = L4::ICMPv6MulticastListenerReport.new
 build(n)
-n.l4 = ICMPv6MulticastListenerReport.new
+n.l4 = L4::ICMPv6MulticastListenerDone.new
 build(n)
-n.l4 = ICMPv6MulticastListenerDone.new
+n.l4 = L4::ICMPv6RouterSolicitation.new
 build(n)
-n.l4 = ICMPv6RouterSolicitation.new
+n.l4 = L4::ICMPv6RouterAdvertisement.new
 build(n)
-n.l4 = ICMPv6RouterAdvertisement.new
+n.l4 = L4::ICMPv6NeighborSolicitation.new
 build(n)
-n.l4 = ICMPv6NeighborSolicitation.new
-build(n)
-n.l4 = ICMPv6NeighborAdvertisement.new
+n.l4 = L4::ICMPv6NeighborAdvertisement.new
 n.l4.solicited = 1
-n.l4.add_option(1, Misc.randstring(6))
+n.l4.slla = "01:02:03:04:aa:bb"
 build(n)
-n.l4 = ICMPv6Redirect.new
-n.l4.add_option(2, "\x01\x02\x03\x04\x05\x06\x07\x08\x09\x00")
-n.l4.src_ip = L3::Misc.ipv62long(ARGV[1])
-n.l4.dst_ip = L3::Misc.ipv62long(ARGV[0])
+n.l4 = L4::ICMPv6Redirect.new
+n.l4.slla = "01:02:03:04:aa:bb"
+n.l4.src_ip = L3::Misc.ipv62long(ARGV[2])
+n.l4.dst_ip = L3::Misc.ipv62long(ARGV[1])
 build(n)
 
-n.l4 = ICMPv6NodeInformationRequest.new
+n.l4 = L4::ICMPv6NodeInformationRequest.new
 n.l4.payload = Misc.randstring(rand(32))
 n.l4.code = 2
-n.l4.payload = [L3::Misc.ipv42long("192.168.0.2")].pack("N")
+n.l4.payload = [L3::Misc.ipv42long("192.168.1.10")].pack("N")
+n.l4.qtype = 2
 build(n)
 
-n.l4 = ICMPv6NodeInformationReply.new
+n.l4 = L4::ICMPv6NodeInformationReply.new
 n.l4.payload = Misc.randstring(rand(32))
 build(n)
