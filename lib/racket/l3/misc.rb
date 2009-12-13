@@ -25,6 +25,7 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+require 'ipaddr'
 module Racket
 module L3
   # Miscelaneous L3 helper methods
@@ -70,7 +71,7 @@ module L3
     end
 
     # Compress an IPv6 address
-    # Inspired by Daniele Bellucci
+    # Inspired by Daniele Bellucci and jacked from ipaddr
     def Misc.compressipv6(ipv6)
       ipv6.gsub!(/\b0{1,3}([\da-f]+)\b/i, '\1')
       loop do
@@ -100,23 +101,7 @@ module L3
     # given a string representing an IPv6
     # address, return the integer representation
     def Misc.ipv62long(ip)
-      case ip
-        when /^::ffff:(\d+\.\d+\.\d+\.\d+)$/i
-          return Misc.ipv42long($1) + 0xffff00000000
-        when /^::(\d+\.\d+\.\d+\.\d+)$/i
-          return Misc.ipv42long($1)
-        when /^(.*)::(.*)$/
-          left, right = $1, $2
-        else
-          left, right = ip, ''
-        end
-      l = left.split(':')
-      r = right.split(':')
-      rest = 8 - l.size - r.size
-      if rest < 0
-        return nil
-      end
-      (l + Array.new(rest, '0') + r).inject(0) { |i, s|  i << 16 | s.hex }
+      IPAddr.new(ip).to_i
     end
 
     # In addition to the regular multicast addresses, each unicast address
@@ -151,10 +136,7 @@ module L3
     # given a "dotted quad" representing an IPv4
     # address, return the integer representation
     def Misc.ipv42long(ip)
-      quad = ip.split(/\./)
-      quad.collect! {|s| s.to_i}
-      # XXX: replace this with an inject
-      quad[3] + (256 * quad[2]) + ((256**2) * quad[1]) + ((256**3) * quad[0])
+      IPAddr.new(ip).to_i
     end
 
     # Calculate the checksum.  16 bit one's complement of the one's
