@@ -81,7 +81,7 @@ class ICMPv6Generic < RacketPart
   end
 
   # ignorantly assume the first parts of the payload contain ICMPv6 options
-  # and find a return an array of +TLV+ representing the options
+  # and find a return an array of Racket::Misc::TLV representing the options
   def get_options
     p = self.payload
     options = []
