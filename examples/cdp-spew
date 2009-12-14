@@ -23,13 +23,13 @@ def tick
 end
 
 def randcdp
-  @n.layers[2] = EightOTwoDotThree.new(Misc.randstring(14))
+  @n.layers[2] = L2::EightOTwoDotThree.new(Misc.randstring(14))
   @n.layers[2].dst_mac = "01:00:0c:cc:cc:cc"
   @n.layers[2].length = 0
-  @n.layers[3] = LLC.new()
-  @n.layers[4] = SNAP.new()
+  @n.layers[3] = L2::LLC.new()
+  @n.layers[4] = L2::SNAP.new()
   @n.layers[4].pid = 0x2000
-  @n.layers[5] = CDP.new()
+  @n.layers[5] = L3::CDP.new()
   @n.layers[5].version = 1
 
   limit = ARGV[1].to_i || 100
