@@ -33,7 +33,7 @@ module L4
 # 
 class IGMPv1 < RacketPart
   # Version (defaults to 1)
-  unsigned :version, 4
+  unsigned :version, 4, { :default => 1 }
   # Type
   unsigned :type, 4
   # Unused
