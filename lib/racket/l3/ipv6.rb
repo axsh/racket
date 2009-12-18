@@ -41,7 +41,7 @@ class IPv6 < RacketPart
   # Next header type
   unsigned :nhead, 8
   # Hop limit
-  unsigned :ttl, 8
+  unsigned :ttl, 8, { :default => 200 }
   # Source IP address.  Must be passed as an integer
   unsigned :src_ip, 128
   # Destination IP address.  Must be passed as an integer
