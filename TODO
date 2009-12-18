@@ -1,0 +1,11 @@
+#  $Id$
+
+Stuff that needs to get done:
+
+* Support "packet math" more cleanly.  packet = l2 + l3 + l4.  (yes, this works, but is contrary to how pack is used
+
+* Implement inter-layer knowledge, so that, for example, you can build a UDP datagram and it will know that IPv4 is typically its parent and that the checksum can automatically pull in the parent source and destination IP addresses
+
+* SCTP checksum
+
+* Better error handling, argument raising and checking
