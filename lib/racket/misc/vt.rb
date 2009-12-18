@@ -103,8 +103,7 @@ private
         when 4
           s << "N"
         else
-          puts "Size #{s} not supported"
-          exit
+          raise ArgumentError, "Size #{s} not supported"
       end
     s
   end

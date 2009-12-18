@@ -44,8 +44,9 @@ class RacketPart < BitStruct
 
   def initialize(*args)
     @autofix = true
-    super
+    super(*args)
   end
+
 
   # Print out all of the fields and all of their values
   def pretty

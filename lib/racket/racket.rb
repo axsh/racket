@@ -153,8 +153,7 @@ class Racket
         s.setsockopt(Socket::IPPROTO_IP, Socket::IP_HDRINCL, true)
       end
     rescue Errno::EPERM
-      $stderr.puts "Must run #{$0} as root."
-      exit!
+      raise ArgumentError, "Must run #{$0} as root."
     end
 
     return s.send(pack, 0, Socket.pack_sockaddr_in(1024, @layers[3].dst_ip))
