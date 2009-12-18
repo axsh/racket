@@ -15,12 +15,12 @@ end
 n = Racket::Racket.new
 n.iface = "eth0"
 
-n.l3 = IPv4.new
+n.l3 = L3::IPv4.new
 n.l3.src_ip = ARGV[0] 
 n.l3.dst_ip = ARGV[2]
 n.l3.protocol = 132
 
-n.l4 = SCTP.new
+n.l4 = L4::SCTP.new
 n.l4.src_port = ARGV[1].to_i
 n.l4.dst_port = ARGV[3].to_i
 n.l4.add_chunk(1, 2, 8, "blah")
