@@ -26,7 +26,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 module Racket
-module L3
+module L5
   # Miscelaneous L3 helper methods
   module Misc
   end
