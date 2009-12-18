@@ -136,12 +136,9 @@ private
       0xBE2DA0A5, 0x4C4623A6, 0x5F16D052, 0xAD7D5351
       ]
 
-    puts self.length
-
     crc32 = ~0
     header = [ self.src_port, self.dst_port, self.verification, 0 ].pack("CCnn")
     (0..header.length-1).each do |b|
-      puts "header[#{b}] = #{header[b]}"
       crc32 = (crc32 >> 8) ^ crc_c[(crc32^header[b]) & 0xFF] 
     end
 
