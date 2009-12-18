@@ -72,7 +72,7 @@ class TCP < RacketPart
   # All rejiggering will happen when the call to fix! 
   # happens automagically. 
   def add_option(number, value)
-    t = Misc::TLV.new(1,1)
+    t = Racket::Misc::TLV.new(1,1)
     t.type = number
     t.value = value
     t.length = value.length + 2
