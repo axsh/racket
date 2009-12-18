@@ -25,11 +25,11 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-module Racket
-module L4
-  # Miscelaneous L3 helper methods
-  module Misc
-  end
-end
-end
+#module Racket
+#module L4
+#  # Miscelaneous L3 helper methods
+#  module Misc
+#  end
+#end
+#end
 # vim: set ts=2 et sw=2:
