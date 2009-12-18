@@ -9,3 +9,7 @@ Stuff that needs to get done:
 * SCTP checksum
 
 * Better error handling, argument raising and checking
+
+* Better versioning system for gems
+
+* Better generic support for dynamic/optional fields
