@@ -73,7 +73,7 @@ class TCP < RacketPart
   # happens automagically. 
   # If the result is not on a 32-bit boundry, pad with NOPs.
   def add_option(number, value)
-    t = Racket::Misc::TLV.new(1,1)
+    t = Misc::TLV.new(1,1)
     t.type = number
     t.value = value
     t.length = value.length + 2

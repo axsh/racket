@@ -29,6 +29,7 @@ module Racket
 module L4
 # Stream Control Transmission Protocol
 #  http://tools.ietf.org/html/rfc4960
+require 'zlib'
 class SCTP < RacketPart
   # Source port
   unsigned :src_port, 16
@@ -137,17 +138,19 @@ private
       ]
 
     crc32 = ~0
-    header = [ self.src_port, self.dst_port, self.verification, 0 ].pack("CCnn")
-    (0..header.length-1).each do |b|
-      crc32 = (crc32 >> 8) ^ crc_c[(crc32^header[b]) & 0xFF] 
+    header = [ self.src_port, self.dst_port, self.verification, 0 ].pack("nnNN")
+    puts "Header is #{header.length} bytes long, table is #{crc_c.size} big"
+    header.each_byte do |b|
+      crc32 = (crc32 >> 8) ^ crc_c[(crc32^b) & 0xFF] 
+      puts "crc32 is now #{crc32}"
     end
 
-    result = ~crc32
+    crc32 = ~crc32
 
-    byte0 = result & 0xff
-    byte1 = (result >> 8) & 0xff
-    byte2 = (result >> 16) & 0xff
-    byte3 = (result >> 24) & 0xff
+    byte0 = crc32 & 0xff
+    byte1 = (crc32 >> 8) & 0xff
+    byte2 = (crc32 >> 16) & 0xff
+    byte3 = (crc32 >> 24) & 0xff
 
     crc32 = ((byte0 << 24) |
              (byte1 << 16) |

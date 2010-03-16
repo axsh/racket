@@ -23,7 +23,7 @@ n.l3.protocol = 132
 n.l4 = L4::SCTP.new
 n.l4.src_port = ARGV[1].to_i
 n.l4.dst_port = ARGV[3].to_i
-n.l4.add_chunk(1, 2, 8, "blah")
+#n.l4.add_chunk(1, 2, 8, "blah")
 
 f = n.sendpacket
 n.layers.compact.each do |l|

@@ -66,7 +66,7 @@ class BOOTP < RacketPart
   rest :payload
 
   def add_option(number, value)
-    o = Misc::TLV.new(1,1)
+    o = Racket::Misc::TLV.new(1,1)
     o.type = number
     o.value = value
     o.length = value.length

@@ -72,7 +72,7 @@ class ICMPv6Generic < RacketPart
   # to land on a 64-bit boundary, however that doesn't always appear to be the case.  so, yeah,
   # try to pad on your own or pick strings that are multiples of 8 characters
   def add_option(type, value)
-    t = Misc::TLV.new(1,1)
+    t = Racket::Misc::TLV.new(1,1)
     t.type = type
     t.length = (value.length + 2) / 8
     just = value.length + 2 + (8 - ((value.length + 2) % 8))
@@ -85,7 +85,7 @@ class ICMPv6Generic < RacketPart
   def get_options
     p = self.payload
     options = []
-    until ((o = Misc::TLV.new(1,1,8,true).decode(p)).nil?)
+    until ((o = Racket::Misc::TLV.new(1,1,8,true).decode(p)).nil?)
       options << o[0..2]
       p = o[3]
     end
