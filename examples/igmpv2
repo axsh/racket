@@ -13,13 +13,13 @@ if (ARGV.size != 4)
 end
 
 n = Racket::Racket.new
-n.l3 = IPv4.new
+n.l3 = L3::IPv4.new
 
 n.l3.src_ip = ARGV[0] 
 n.l3.dst_ip = ARGV[1]
 n.l3.protocol = 2 
 
-n.l4 = IGMPv1.new
+n.l4 = L4::IGMPv1.new
 n.l4.type = ARGV[2].to_i
 n.l4.gaddr = ARGV[3]
 

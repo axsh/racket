@@ -15,12 +15,12 @@ end
 n = Racket::Racket.new
 n.iface = "eth0"
 
-n.l3 = IPv4.new
+n.l3 = L3::IPv4.new
 n.l3.src_ip = ARGV[0] 
 n.l3.dst_ip = ARGV[1]
 n.l3.protocol = 0x8
 
-n.l4 = EGP.new
+n.l4 = L3::EGP.new
 n.l4.code = ARGV[2].to_i
 
 f = n.sendpacket

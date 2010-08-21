@@ -10,13 +10,13 @@ include Racket
 n = Racket::Racket.new
 n.iface = "eth0"
 
-n.layers[2] = EightOTwoDotThree.new(Misc.randstring(14))
+n.layers[2] = L2::EightOTwoDotThree.new(Misc.randstring(14))
 n.layers[2].dst_mac = "01:00:0c:cc:cc:cc"
-n.layers[3] = LLC.new()
-n.layers[4] = SNAP.new()
+n.layers[3] = L2::LLC.new()
+n.layers[4] = L2::SNAP.new()
 n.layers[4].pid = 0x2003
 
-n.layers[5] = VTPSubsetAdvertisement.new
+n.layers[5] = L2::VTPSubsetAdvertisement.new
 n.layers[5].version = 1
 n.layers[5].revision = 12345
 n.layers[5].add_vlan_info(0xFF, 3, 5, 6, 7, "blafadfadsfasdf")

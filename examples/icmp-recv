@@ -14,14 +14,14 @@ include Racket
 pcaplet = Pcaplet.new("-s 65535" + ARGV.join)
 pcaplet.each_packet { |pkt|
   if (pkt.datalink == DLT_EN10MB)
-    l2 = Ethernet.new(pkt.raw_data)
+    l2 = L2::Ethernet.new(pkt.raw_data)
     puts l2.pretty
     if (l2.ethertype == 0x0800)
-      l3 = IPv4.new(l2.payload)
+      l3 = L3::IPv4.new(l2.payload)
       puts l3.pretty 
       case l3.protocol
         when 1
-          l4 = ICMP.new(l3.payload)
+          l4 = L4::ICMP.new(l3.payload)
           puts l4.pretty
         else
           next

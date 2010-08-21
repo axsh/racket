@@ -15,7 +15,7 @@ end
 n = Racket::Racket.new
 n.iface = ARGV[0]
 
-#n.l2 = Ethernet.new(Misc.randstring(14))
+#n.l2 = L2::Ethernet.new(Misc.randstring(14))
 n.l2 = L2::Ethernet.new
 n.l2.src_mac = L2::Misc.randommac
 n.l2.dst_mac = L2::Misc.randommac

@@ -31,17 +31,17 @@ end
 
 p.each do |pkt|
   if (p.datalink == Pcap::DLT_EN10MB) 
-    eth = Ethernet.new(pkt)
+    eth = L2::Ethernet.new(pkt)
     case eth.ethertype
       when 0x0800:
-        orig_ipv4 = IPv4.new(eth.payload)
+        orig_ipv4 = L3::IPv4.new(eth.payload)
         if (orig_ipv4.protocol == 6) 
           n = Racket::Racket.new
-          orig_tcp = TCP.new(orig_ipv4.payload)
+          orig_tcp = L4::TCP.new(orig_ipv4.payload)
           
           if (!orig_tcp.payload.nil?)
-            n.l3 = IPv4.new
-            n.l4 = UDP.new
+            n.l3 = L3::IPv4.new
+            n.l4 = L4::UDP.new
             n.l4.src_port = orig_tcp.dst_port
             n.l4.dst_port = orig_tcp.src_port
             n.l3.src_ip = orig_ipv4.dst_ip

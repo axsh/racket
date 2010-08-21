@@ -15,7 +15,7 @@ end
 n = Racket::Racket.new
 n.iface = "eth0"
 
-n.layers[3] = IPv4.new
+n.layers[3] = L3::IPv4.new
 n.layers[3].src_ip = ARGV[0]
 n.layers[3].dst_ip = ARGV[1]
 n.layers[3].version = 4
@@ -23,11 +23,11 @@ n.layers[3].hlen = 0x5 #
 n.layers[3].ttl = 44
 n.layers[3].protocol = 0x11
 
-n.layers[4] = UDP.new
+n.layers[4] = L4::UDP.new
 n.layers[4].src_port = 68
 n.layers[4].dst_port = 67
 
-n.layers[5] = BOOTP.new
+n.layers[5] = L5::BOOTP.new
 n.layers[5].type = 1
 n.layers[5].id = 0x12345
 n.layers[5].yip = "192.168.0.4"

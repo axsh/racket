@@ -17,20 +17,20 @@ end
 n = Racket::Racket.new
 n.iface = "eth0"
 
-n.l2 = Ethernet.new(Misc.randstring(14))
+n.l2 = L2::Ethernet.new(Misc.randstring(14))
 n.l2.ethertype = 0x0800
 n.l2.dst_mac = "01:00:5e:00:00:02"
 
-n.l3 = IPv4.new
+n.l3 = L3::IPv4.new
 n.l3.protocol = 17
 n.l3.dst_ip = "224.0.0.2"
 n.l3.src_ip = ARGV[0]
 
-n.l4 = UDP.new
+n.l4 = L4::UDP.new
 n.l4.src_port = 1985
 n.l4.dst_port = 1985
 
-n.l5 = HSRP.new
+n.l5 = L5::HSRP.new
 n.l5.vip = ARGV[2]
 n.l5.group = ARGV[1].to_i
 

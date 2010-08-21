@@ -23,7 +23,7 @@ def tick
 end
 
 def rand_icmp(n)
-  n.l3 = IPv4.new
+  n.l3 = L3::IPv4.new
   n.l3.src_ip= ARGV[0]
   n.l3.dst_ip = ARGV[1]
   n.l3.version = 0x4
@@ -31,7 +31,7 @@ def rand_icmp(n)
   n.l3.protocol = 0x1
   n.l3.flags = 0x0
   n.l3.foffset = 0x0
-  n.l4 = ICMPRaw.new(Misc.randstring(20))
+  n.l4 = L4::ICMP.new(Misc.randstring(20))
   n.sendpacket
   tick
 end

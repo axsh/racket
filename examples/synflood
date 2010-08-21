@@ -78,12 +78,12 @@ end
 @p = Racket::Racket.new
 @p.iface = "eth0"
 
-@p.l3 = IPv4.new
+@p.l3 = L3::IPv4.new
 @p.l3.src_ip = @options.srcip.nil? ? "0.0.0.0" : @options.srcip
 @p.l3.dst_ip = @options.dstip.nil? ? "0.0.0.0" : @options.dstip
 @p.l3.protocol = 6
 
-@p.l4 = TCP.new
+@p.l4 = L4::TCP.new
 @p.l4.dst_port = @options.dstport.nil? ? 0 : @options.dstport
 @p.l4.src_port = @options.srcport.nil? ? 0 : @options.srcport
 @p.l4.flag_syn = 1

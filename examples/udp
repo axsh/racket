@@ -19,13 +19,13 @@ n.iface = "eth0"
 
 # skip right to layer3, layer2 will be done automatically
 # build a new IPv4 layer, and assign src and dst ip from the command line
-n.l3 = IPv4.new
+n.l3 = L3::IPv4.new
 n.l3.src_ip = ARGV[0] 
 n.l3.dst_ip = ARGV[1]
 n.l3.protocol = 0x11
 
 # tack on UDP
-n.l4 = UDP.new
+n.l4 = L4::UDP.new
 # randomize source port
 n.l4.src_port = 1024 + rand(65535-1024)
 # take destination port from the commandline
