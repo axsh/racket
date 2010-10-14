@@ -82,6 +82,10 @@ class TCP < RacketPart
     @options << opts
   end
 
+  def add_raw_option(value)
+    @options << value
+  end
+
   # Check the checksum for this TCP packet 
   def checksum?(ip_src, ip_dst)
     self.checksum == compute_checksum(ip_src, ip_dst)
@@ -101,6 +105,7 @@ class TCP < RacketPart
     if ((self.class.bit_length/8 + newpayload.length) % 4 != 0) 
       # fill the beginning as needed with NOPs
       while ((self.class.bit_length/8 + newpayload.length) % 4 != 4)
+        puts (self.class.bit_length/8 + newpayload.length) % 4
         newpayload = "\x01#{newpayload}"
       end
     end
