@@ -82,6 +82,9 @@ class TCP < RacketPart
     @options << opts
   end
 
+  # Add a raw TCP option to this packet.  It is entirely your
+  # responsibility (or irresponsibility, as the case may be) to
+  # properly pad or otherwise define this
   def add_raw_option(value)
     @options << value
   end
