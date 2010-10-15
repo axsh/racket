@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: Racket</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">Racket</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/racket/l5/dns_rb.html">
+                lib/racket/l5/dns.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l5/dns.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l5/bootp_rb.html">
+                lib/racket/l5/bootp.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l5/bootp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l5/ntp_rb.html">
+                lib/racket/l5/ntp.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l5/ntp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l5/hsrp_rb.html">
+                lib/racket/l5/hsrp.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l5/hsrp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l5/misc_rb.html">
+                lib/racket/l5/misc.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l5/misc.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l3/stp_rb.html">
+                lib/racket/l3/stp.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l3/stp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l3/cdp_rb.html">
+                lib/racket/l3/cdp.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l3/cdp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l3/ipv6_rb.html">
+                lib/racket/l3/ipv6.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l3/ipv6.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l3/egp_rb.html">
+                lib/racket/l3/egp.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l3/egp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l3/ipv4_rb.html">
+                lib/racket/l3/ipv4.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l3/ipv4.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l3/arp_rb.html">
+                lib/racket/l3/arp.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l3/arp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l3/misc_rb.html">
+                lib/racket/l3/misc.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l3/misc.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/misc/lv_rb.html">
+                lib/racket/misc/lv.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/misc/lv.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/misc/raw_rb.html">
+                lib/racket/misc/raw.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/misc/raw.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/misc/misc_rb.html">
+                lib/racket/misc/misc.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/misc/misc.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/misc/vt_rb.html">
+                lib/racket/misc/vt.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/misc/vt.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/misc/orderedhash_rb.html">
+                lib/racket/misc/orderedhash.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/misc/orderedhash.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/misc/tlv_rb.html">
+                lib/racket/misc/tlv.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/misc/tlv.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/racket_rb.html">
+                lib/racket/racket.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/racket.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/racketpart_rb.html">
+                lib/racket/racketpart.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/racketpart.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l2/ethernet_rb.html">
+                lib/racket/l2/ethernet.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l2/ethernet.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l2/eightotwodotthree_rb.html">
+                lib/racket/l2/eightotwodotthree.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l2/eightotwodotthree.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l2/vtp_rb.html">
+                lib/racket/l2/vtp.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l2/vtp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l2/snap_rb.html">
+                lib/racket/l2/snap.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l2/snap.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l2/vlan_rb.html">
+                lib/racket/l2/vlan.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l2/vlan.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l2/misc_rb.html">
+                lib/racket/l2/misc.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l2/misc.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l2/llc_rb.html">
+                lib/racket/l2/llc.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l2/llc.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l4/sctp_rb.html">
+                lib/racket/l4/sctp.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l4/sctp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l4/vrrp_rb.html">
+                lib/racket/l4/vrrp.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l4/vrrp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l4/igrp_rb.html">
+                lib/racket/l4/igrp.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l4/igrp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l4/icmp_rb.html">
+                lib/racket/l4/icmp.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l4/icmp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l4/icmpv6_rb.html">
+                lib/racket/l4/icmpv6.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l4/icmpv6.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l4/igmpv1_rb.html">
+                lib/racket/l4/igmpv1.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l4/igmpv1.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l4/tcp_rb.html">
+                lib/racket/l4/tcp.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l4/tcp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l4/igmpv2_rb.html">
+                lib/racket/l4/igmpv2.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l4/igmpv2.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l4/gre_rb.html">
+                lib/racket/l4/gre.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l4/gre.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket/l4/udp_rb.html">
+                lib/racket/l4/udp.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket/l4/udp.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+                <a href="../files/lib/racket_rb.html">
+                lib/racket.rb
+                </a>
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/lib/racket.rb"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+$Id: udp.rb 14 2008-03-02 05:42:30Z warchild $
+</p>
+<p>
+Copyright (c) 2008, Jon Hart All rights reserved.
+</p>
+<p>
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+</p>
+<pre>
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the &lt;organization&gt; nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+</pre>
+<p>
+THIS SOFTWARE IS PROVIDED BY Jon Hart ``AS IS&#8217;&#8217; AND ANY EXPRESS
+OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL Jon Hart BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Module <a href="Racket/L2.html" class="link">Racket::L2</a><br />
+Module <a href="Racket/L3.html" class="link">Racket::L3</a><br />
+Module <a href="Racket/L4.html" class="link">Racket::L4</a><br />
+Module <a href="Racket/L5.html" class="link">Racket::L5</a><br />
+Module <a href="Racket/Misc.html" class="link">Racket::Misc</a><br />
+Class <a href="Racket/Racket.html" class="link">Racket::Racket</a><br />
+Class <a href="Racket/RacketPart.html" class="link">Racket::RacketPart</a><br />
+Class <a href="Racket/Raw.html" class="link">Racket::Raw</a><br />
+
+    </div>
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

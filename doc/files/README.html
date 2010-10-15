@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README
+        &nbsp;(<a href="http://spoofed.org/files/racket/src/README"><acronym title="Concurrent Versioning System">CVS</acronym></a>)
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Thu Oct 14 23:29:49 -0700 2010</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+# $Id: README 179 2010-10-15 06:29:49Z jhart $
+</p>
+<p>
+<a href="../classes/Racket.html">Racket</a> &#8212; Ruby Raw Packet
+library.
+</p>
+<p>
+Comments, concerns, bugs, money, food, libations to:
+</p>
+<pre>
+  Jon Hart &lt;jhart@spoofed.org&gt;
+</pre>
+<p>
+Installation is simple:
+</p>
+<pre>
+  gem install --source http://spoofed.org/files/racket/ racket
+</pre>
+<p>
+If you desire the source:
+</p>
+<pre>
+  svn co http://spoofed.org/racket/svn racket
+</pre>
+<p>
+Includes support for reading and writing most major layer 2, 3, 4 and 5
+protocols.
+</p>
+<p>
+Basic packet construction and writing is as simple (!) as walking the
+stack:
+</p>
+<pre>
+  require 'rubygems'
+  require 'racket'
+
+  include Racket
+  unless (ARGV.size == 4)
+    puts &quot;Usage: #{$0} &lt;srcip&gt; &lt;dstip&gt; &lt;dst_port&gt; &lt;size&gt;&quot;
+    exit
+  end
+
+  # create a new Racket object and pick an interface
+  n = Racket::Racket.new
+  n.iface = &quot;eth0&quot;
+
+  # skip right to layer3, layer2 will be done automatically
+  # build a new IPv4 layer, and assign src and dst ip from the command line
+  n.l3 = IPv4.new
+  n.l3.src_ip = ARGV[0]
+  n.l3.dst_ip = ARGV[1]
+  n.l3.protocol = 0x11
+
+  # tack on UDP
+  n.l4 = UDP.new
+  # randomize source port
+  n.l4.src_port = 1024 + rand(65535-1024)
+  # take destination port from the commandline
+  n.l4.dst_port = ARGV[2].to_i
+  # build a random amount of garbage for the payload
+  n.l4.payload = Misc.randstring(ARGV[3].to_i)
+
+  # fix 'er  up (checksum, length) prior to sending
+  n.l4.fix!(n.l3.src_ip, n.l3.dst_ip)
+
+  # off you go
+  f = n.sendpacket
+
+  # print out what we built
+  n.layers.compact.each do |l|
+    puts l.pretty
+  end
+  puts &quot;Sent #{f}&quot;
+</pre>
+<p>
+Packet reading, done through something like Pcap, is pretty straight
+forward too:
+</p>
+<pre>
+  require 'rubygems'
+  require 'racket'
+
+  # Get the raw capture data from somewhere.  In this case, I've hardcoded it
+  binary = &quot;\x45\x10\x00\x3c\x2f\xdf\x40\x00\x40\x06\x89\x17\xc0\xa8\x00\x64\xc0\xa8\x00\x01\x99\xb7\x00\x35\x29\x39\x28\x66\x00\x00\x00\x00\xa0\x02\x16\xd0\xbc\x04\x00\x00\x02\x04\x05\xb4\x04\x02\x08\x0a\x00\x31\x07\xb9\x00\x00\x00\x00\x01\x03\x03\x07&quot;
+  i = Racket::IPv4.new(binary)
+
+  # this will print it out all pretty like, and should show a 60 byte TCP packet from 192.168.0.100 to 192.168.0.1
+  puts i.pretty
+</pre>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
