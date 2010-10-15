@@ -6,6 +6,8 @@ task :build do
   sh %{gem build racket.gemspec}
 end
 
+task :doc => [:docs]
+
 task :docs do
   sh %{test -d doc || mkdir doc}
   sh %{find doc -type f -a ! -wholename \*.svn/\* -print |xargs /bin/rm -f}
