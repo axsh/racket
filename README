@@ -10,6 +10,11 @@ Installation is simple:
 
   gem install --source http://spoofed.org/files/racket/ racket
 
+If you desire the source code, get it from subversion:
+  
+  svn co http://spoofed.org/racket/svn
+
+
 Includes support for reading and writing most major layer 2, 3, 4 and
 5 protocols.
 
