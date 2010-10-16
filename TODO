@@ -2,9 +2,13 @@
 
 Stuff that needs to get done:
 
-* Support "packet math" more cleanly.  packet = l2 + l3 + l4.  (yes, this works, but is contrary to how pack is used
+* Support "packet math" more cleanly.  packet = l2 + l3 + l4.  (yes, this
+works, but is contrary to how pack is used
 
-* Implement inter-layer knowledge, so that, for example, you can build a UDP datagram and it will know that IPv4 is typically its parent and that the checksum can automatically pull in the parent source and destination IP addresses
+* Implement inter-layer knowledge, so that, for example, you can build a UDP
+datagram and it will know that IPv4 is typically its parent and that the
+checksum can automatically pull in the parent source and destination IP
+addresses
 
 * SCTP checksum
 
@@ -13,3 +17,7 @@ Stuff that needs to get done:
 * Better versioning system for gems
 
 * Better generic support for dynamic/optional fields
+
+* Update all examples so that they use the files relative to their directory if
+the gem is not installed so that users do not have to install the gem to try
+the examples
