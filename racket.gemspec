@@ -3,7 +3,7 @@
 require 'rubygems'
 SPEC = Gem::Specification.new do |s|
   s.name = "racket"
-  s.version = "1.0.9"
+  s.version = "1.0.10"
   s.author = "Jon Hart"
   s.email = "jhart@spoofed.org"
   s.homepage = "http://spoofed.org/files/racket/"
@@ -15,6 +15,8 @@ SPEC = Gem::Specification.new do |s|
               item.include?("CVS") || item.include?("rdoc") || item.include?(".svn")
             end
   s.require_path = "lib"
+  s.add_dependency("pcaprub")
+  s.add_dependency("bit-struct")
   s.test_files = Dir.glob("test/ts_*.rb")
   s.has_rdoc = true
   s.rdoc_options << "-A rest,octets,hex_octets,unsigned,signed,text,rest"
