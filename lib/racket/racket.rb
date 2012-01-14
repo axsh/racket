@@ -122,7 +122,7 @@ class Racket
   # Write raw layer2 frames
   def send2
     if(not @@loaded_pcaprub)
-      raise RuntimeError, "Could not initialize the pcaprub library (You need pcaprub from SVN (http://rubyforge.org/projects/pcaprub/))" 
+      raise RuntimeError, "Could not initialize the pcaprub library (You need the pcaprub gem)" 
     end
     begin
 
