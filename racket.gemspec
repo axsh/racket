@@ -3,7 +3,7 @@
 require 'rubygems'
 SPEC = Gem::Specification.new do |s|
   s.name = "racket"
-  s.version = "1.0.11"
+  s.version = "1.0.12"
   s.author = "Jon Hart"
   s.email = "jhart@spoofed.org"
   s.homepage = "http://spoofed.org/files/racket/"

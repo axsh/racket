@@ -34,13 +34,13 @@ class EightOTwoDotThree < RacketPart
   # Source MAC address
   hex_octets :src_mac, 48
   # Length of the payload 
-  unsigned :length, 16
+  unsigned :payload_length, 16
   # Payload
   rest :payload
 
   # Fix this layer up prior to sending.  For 802.3, just adjusts +length+
   def fix!
-    self.length = self.payload.length
+    self.payload_length = self.payload.length
   end
 end
 end

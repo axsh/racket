@@ -142,18 +142,12 @@ module L3
     # Calculate the checksum.  16 bit one's complement of the one's
     # complement sum of all 16 bit words
     def Misc.checksum(data)
-      num_shorts = data.length / 2
       checksum = 0
-      count = data.length
-      
-      data.unpack("S#{num_shorts}").each { |x|
-        checksum += x
-        count -= 2
-      }
+      unpack = "S#{data.length / 2}#{data.length % 2 == 1 ? 'C' : ''}"
 
-      if (count == 1)
-        checksum += data[data.length - 1]
-      end
+      data.unpack(unpack).each { |x|
+        checksum += x
+      }
 
       checksum = (checksum >> 16) + (checksum & 0xffff)
       checksum = ~((checksum >> 16) + checksum) & 0xffff

@@ -8,7 +8,7 @@ require 'racket'
 class TestIPV6 <  Test::Unit::TestCase
   def test_init
     assert_nothing_raised() { Racket::L3::IPv6.new }
-    assert_nothing_raised() { Racket::L3::IPv6.new(Racket::Misc.randstring(30)) }
+    assert_nothing_raised() { Racket::L3::IPv6.new(Racket::Misc.randstring(30).force_encoding('BINARY')) }
   end
 
   def test_convert
