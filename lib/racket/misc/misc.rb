@@ -54,6 +54,7 @@ module Misc
     0.upto(size-1) {
       s += sprintf("%c", randbytes(1))
     }
+    s.force_encoding("BINARY") if s.respond_to?(:force_encoding)
     s
   end
 end

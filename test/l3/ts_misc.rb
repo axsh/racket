@@ -8,7 +8,7 @@ require 'racket'
 class TestL3Misc <  Test::Unit::TestCase
   def test_misc 
     assert_nothing_raised {
-      Racket::L3::Misc.checksum(Racket::Misc.randstring(rand(2048)).force_encoding('BINARY'))
+      Racket::L3::Misc.checksum(Racket::Misc.randstring(rand(2048)))
     }
 
     mac = "6e:f1:eb:b7:c8:72"

@@ -50,7 +50,7 @@ class VT
   # Given +data+, return the value and an array
   # of the types as dictated by this instance
   def decode(data)
-    null = data.index(0x00)
+    null = data.index("\x0")
     value = data.unpack("a#{null}")[0]
     data = data.slice(null+1, data.length)
   

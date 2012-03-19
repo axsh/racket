@@ -8,7 +8,7 @@ require 'racket'
 class TestICMP <  Test::Unit::TestCase
   def test_init
     assert_nothing_raised() { Racket::L4::ICMP.new }
-    assert_nothing_raised() { Racket::L4::ICMP.new(Racket::Misc.randstring(20).force_encoding('BINARY')) }
+    assert_nothing_raised() { Racket::L4::ICMP.new(Racket::Misc.randstring(20)) }
   end
 
   def test_raw

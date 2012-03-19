@@ -83,7 +83,7 @@ private
   def compute_checksum
     # pseudo header used for checksum calculation as per RFC 768 
     pseudo = [ self.type, self.code, 0, self.message ]
-    L3::Misc.checksum(pseudo.pack("CCnA*"))
+    L3::Misc.checksum(pseudo.pack("CCna*"))
   end
 end
 
